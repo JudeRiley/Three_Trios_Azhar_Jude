@@ -12,6 +12,9 @@ public class ThreeTriosCell implements Cell {
 
   public void setCard(Card card, Player owner) {
     disallowHoleCells();
+    if (this.card != null) {
+      throw new IllegalArgumentException("The card cannot be changed once set.");
+    }
     this.card = card;
     this.owner = owner;
   }
