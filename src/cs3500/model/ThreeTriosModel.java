@@ -116,8 +116,10 @@ public class ThreeTriosModel implements ThreeTrios {
 
     if (this.grid.getScoreOf(Player.RED) > this.grid.getScoreOf(Player.BLUE)) {
       return Player.RED;
-    } else {
+    } else if (this.grid.getScoreOf(Player.RED) < this.grid.getScoreOf(Player.BLUE)) {
       return Player.BLUE;
+    } else { // if tie
+      return null;
     }
   }
 

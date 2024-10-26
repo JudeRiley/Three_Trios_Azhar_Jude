@@ -1,6 +1,6 @@
 package cs3500.model;
 
-public class ThreeTriosCard {
+public class ThreeTriosCard implements Card {
 
   //INVARIANT: values will always contain four integers between 1 and 10
   private final int[] values;

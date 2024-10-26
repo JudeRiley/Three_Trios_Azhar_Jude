@@ -11,6 +11,6 @@ public interface Card {
    * @param d the direction to check
    * @return the value in the given direction.
    */
-  public int getValueOf(Direction d);
+  int getValueOf(Direction d);
 
 }
