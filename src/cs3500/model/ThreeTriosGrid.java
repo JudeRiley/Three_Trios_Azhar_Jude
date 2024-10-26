@@ -1,13 +1,18 @@
 package cs3500.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class ThreeTriosGrid implements Grid{
+public class ThreeTriosGrid implements Grid {
 
   private final Cell[][] grid;
 
   public ThreeTriosGrid(int width, int height) {
+    if ((width * height) % 2 == 0) {
+      throw new IllegalArgumentException("All cells will be card cells, "
+              + "so total AREA must be odd.");
+    }
     this.grid = new Cell[width][height];
 
     for (int x = 0; x < width; x++) {
@@ -17,7 +22,40 @@ public class ThreeTriosGrid implements Grid{
     }
   }
 
-  //TODO : Constructor where you pass in a layout
+  public ThreeTriosGrid(Cell[][] grid) {
+    if (grid == null) {
+      throw new IllegalArgumentException("Grid cannot be null!");
+    }
+
+    int cardCellCount = 0;
+    for (Cell[] cells : grid) {
+      for (Cell cell : cells) {
+        if (cell.isCardCell()) {
+          cardCellCount++;
+        }
+      }
+    }
+    if (cardCellCount % 2 == 0) {
+      throw new IllegalArgumentException("Number of card cells must be odd.");
+    }
+
+    this.grid = grid;
+  }
+
+  public int getNumCardCells() {
+    int cardCellCount = 0;
+    for (Cell[] cells : this.grid) {
+      for (Cell cell : cells) {
+        if (cell.isCardCell()) {
+          cardCellCount++;
+        }
+      }
+    }
+    if (cardCellCount % 2 == 0) {
+      throw new IllegalArgumentException("Number of card cells must be odd.");
+    }
+    return cardCellCount;
+  }
 
   public void playCard(GridPos pos, Card card, Player owner) {
     grid(pos).setCard(card, owner);
@@ -39,7 +77,7 @@ public class ThreeTriosGrid implements Grid{
       try {
         targetCell = grid(targetPos);
       } catch (IllegalArgumentException e) {
-        break;
+        continue;
       }
 
       try {
@@ -47,7 +85,7 @@ public class ThreeTriosGrid implements Grid{
           losingNeighbors.add(targetPos);
         }
       } catch (IllegalArgumentException e) {
-        break;
+        continue;
       }
     }
 
@@ -73,13 +111,23 @@ public class ThreeTriosGrid implements Grid{
     int score = 0;
     for (Cell[] cells : this.grid) {
       for (Cell cell : cells) {
-          if (cell.hasCard() && !cell.getOwnerName().equals(player.name())) {
-            score++;
-          }
+        if (cell.hasCard() && !cell.getOwnerName().equals(player.name())) {
+          score++;
         }
       }
-    return score;
     }
+    return score;
+  }
+
+  public Cell[][] getCurrentGrid() {
+    int rowLength = this.grid.length;
+    int colLength = this.grid[0].length;
+    Cell[][] ret = new Cell[rowLength][colLength];
+    for (int x = 0; x < rowLength; x++) {
+      ret[x] = Arrays.copyOf(this.grid[x], colLength);
+    }
+    return ret;
+  }
 
   private Cell grid(GridPos pos) {
     try {

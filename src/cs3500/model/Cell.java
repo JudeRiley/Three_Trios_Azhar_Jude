@@ -46,4 +46,6 @@ public interface Cell {
 
   public boolean hasCard();
 
+  public boolean isCardCell();
+
 }

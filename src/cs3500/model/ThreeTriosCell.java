@@ -31,7 +31,7 @@ public class ThreeTriosCell implements Cell {
   public String getOwnerName() {
     disallowHoleCells();
     disallowEmptyCells();
-    return owner.name();
+    return owner.toString();
   }
 
   public int getCardValueOf(Direction d) {
@@ -41,6 +41,7 @@ public class ThreeTriosCell implements Cell {
     return this.card.getValueOf(d);
   }
 
+  //TODO : return zero instead of excpetions?
   //Takes color into account
   //Returns 0 if owners are the same ELSE:
   //returns 0 if number is the same, -1 if it is less and 1 if it is more
@@ -55,12 +56,18 @@ public class ThreeTriosCell implements Cell {
     return Integer.signum(this.getCardValueOf(d) - other.getCardValueOf(d.opposite()));
   }
 
+
+  //TODO : Consolidate into one function with some sort of switch case?
   public boolean isFilled() {
     return this.isHole || this.card != null;
   }
 
   public boolean hasCard() {
     return this.card != null;
+  }
+
+  public boolean isCardCell() {
+    return !this.isHole;
   }
 
   private void argumentException(Card card) {

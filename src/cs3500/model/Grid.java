@@ -13,4 +13,8 @@ public interface Grid {
   public boolean isSaturated();
 
   public int getScoreOf(Player player);
+
+  public int getNumCardCells();
+
+  public Cell[][] getCurrentGrid();
 }

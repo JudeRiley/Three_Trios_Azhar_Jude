@@ -1,7 +1,9 @@
 package cs3500.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class ThreeTriosModel implements ThreeTrios {
 
@@ -10,19 +12,62 @@ public class ThreeTriosModel implements ThreeTrios {
   private final List<Card> redHand;
   private final List<Card> blueHand;
 
-  //Temporary Constructor
-  public ThreeTriosModel(Grid grid) {
+// total number of cards needs to be AT LEAST grid.numberOfCardCells + 1
+
+  public ThreeTriosModel(List<Card> deck, Grid grid) {
+    if (deck == null || grid == null) {
+      throw new IllegalArgumentException("Arguments cannot be null");
+    }
+    if (!(deck.size() >= grid.getNumCardCells() + 1)) {
+      throw new IllegalArgumentException("Deck size must be at least equal to the "
+              + "number of card cells in the grid plus one.");
+    }
+    if (deck.size() % 2 != 0) {
+      throw new IllegalArgumentException("Deck size must be even.");
+    }
+
+    this.redHand = deck.subList(0, deck.size() / 2);
+    this.blueHand = deck.subList(deck.size() / 2, deck.size());
     this.grid = grid;
-    this.redHand = new ArrayList<>();
-    this.blueHand = new ArrayList<>();
     this.turn = Player.RED;
   }
 
-  //TODO : Constructor that correctly initializes the game OR a startGame() method
-  /*
-  A startGame() method would require changing fields to be not final UNLESS we create another
-  class that only represents a started game, which I think could be an option to explore.
-  */
+  public ThreeTriosModel(List<Card> deck, Grid grid, Random rand) {
+    if (deck == null || grid == null) {
+      throw new IllegalArgumentException("Arguments cannot be null");
+    }
+    if (deck.size() % 2 != 0) {
+      throw new IllegalArgumentException("Deck size must be even.");
+    }
+    if (!(deck.size() >= grid.getNumCardCells() + 1)) {
+      throw new IllegalArgumentException("Deck size must be at least equal to the "
+              + "number of card cells in the grid plus one.");
+    }
+
+    Collections.shuffle(deck, rand);
+    this.redHand = deck.subList(0, deck.size() / 2);
+    this.blueHand = deck.subList(deck.size() / 2, deck.size());
+    this.grid = grid;
+    this.turn = Player.RED;
+  }
+
+  public ThreeTriosModel(List<Card> redHand, List<Card> blueHand, Grid grid) {
+    if (redHand == null || blueHand == null || grid == null) {
+      throw new IllegalArgumentException("Arguments cannot be null");
+    }
+    if (redHand.size() != blueHand.size()) {
+      throw new IllegalArgumentException("Both hands must be the same size.");
+    }
+    if (!(redHand.size() * 2 >= grid.getNumCardCells() + 1)) {
+      throw new IllegalArgumentException("Deck size must be at least equal to the "
+              + "number of card cells in the grid plus one.");
+    }
+
+    this.redHand = redHand;
+    this.blueHand = blueHand;
+    this.grid = grid;
+    this.turn = Player.RED;
+  }
 
   public void placeCard(GridPos pos, int cardIdx) {
     Card cardToPlay;
@@ -76,9 +121,41 @@ public class ThreeTriosModel implements ThreeTrios {
     }
   }
 
+  //Test to make sure that a call to getTurn() does to return a MUTABLE reference to turn
+  public Player getTurn() {
+    return this.turn;
+  }
 
+  @Override
+  public Cell[][] getCurrentGrid() {
+    return this.grid.getCurrentGrid();
+  }
 
-
+  public List<Card> getHand(Player player) {
+    List<Card> targetHand;
+    switch (player) {
+      case RED:
+        targetHand = new ArrayList<>(this.redHand);
+        break;
+      case BLUE:
+        targetHand = new ArrayList<>(this.blueHand);
+        break;
+      default:
+        throw new IllegalStateException(player + "is an unsupported value of player!");
+    }
+    return targetHand;
+  }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
