@@ -1,23 +1,31 @@
-package model;
+package cs3500.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThreeTriosGrid {
+public class ThreeTriosGrid implements Grid{
 
   private final Cell[][] grid;
 
   public ThreeTriosGrid(int width, int height) {
     this.grid = new Cell[width][height];
+
+    for (int x = 0; x < width; x++) {
+      for (int y = 0; y < height; y++) {
+        this.grid[x][y] = new ThreeTriosCell(true);
+      }
+    }
   }
+
+  //TODO : Constructor where you pass in a layout
 
   public void playCard(GridPos pos, Card card, Player owner) {
     grid(pos).setCard(card, owner);
   }
 
-  public List<GridPos> returnLosingNeighbors(GridPos pos) {
+  public List<GridPos> getLosingNeighbors(GridPos pos) {
     List<GridPos> losingNeighbors = new ArrayList<>();
-    Cell startCell = grid(pos);
+    Cell startCell = this.grid(pos);
     GridPos targetPos;
     Cell targetCell;
 
@@ -46,13 +54,38 @@ public class ThreeTriosGrid {
     return losingNeighbors;
   }
 
+  public void flipCardCellTo(GridPos pos, Player owner) {
+    grid(pos).setOwner(owner);
+  }
+
+  public boolean isSaturated() {
+    for (Cell[] cells : this.grid) {
+      for (Cell cell : cells) {
+        if (!cell.isFilled()) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  public int getScoreOf(Player player) {
+    int score = 0;
+    for (Cell[] cells : this.grid) {
+      for (Cell cell : cells) {
+          if (cell.hasCard() && !cell.getOwnerName().equals(player.name())) {
+            score++;
+          }
+        }
+      }
+    return score;
+    }
+
   private Cell grid(GridPos pos) {
     try {
-      return grid[pos.getX()][pos.getY()];
+      return this.grid[pos.getX()][pos.getY()];
     } catch (ArrayIndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Given position is out of bounds!");
     }
   }
-
-
 }

@@ -1,4 +1,4 @@
-package model;
+package cs3500.model;
 
 /**
  * A generic card with values that correspond to directions

@@ -1,4 +1,4 @@
-package model;
+package cs3500.model;
 
 /**
  * A generic game cell with teh ability to contain a card and to be owned by a player.
@@ -41,5 +41,9 @@ public interface Cell {
    * @return
    */
   public int directionalCompareTo(Direction d, Cell other);
+
+  public boolean isFilled();
+
+  public boolean hasCard();
 
 }

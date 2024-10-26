@@ -1,4 +1,4 @@
-package model;
+package cs3500.model;
 
 public class ThreeTriosCell implements Cell {
 
@@ -6,12 +6,14 @@ public class ThreeTriosCell implements Cell {
   private Card card;
   private Player owner;
 
-  public ThreeTriosCell(boolean isHole) {
-    this.isHole = true;
+  public ThreeTriosCell(boolean playable) {
+    this.isHole = !playable;
   }
 
   public void setCard(Card card, Player owner) {
     disallowHoleCells();
+    argumentException(card);
+    argumentException(owner);
     if (this.card != null) {
       throw new IllegalArgumentException("The card cannot be changed once set.");
     }
@@ -22,6 +24,7 @@ public class ThreeTriosCell implements Cell {
   public void setOwner(Player owner) {
     disallowHoleCells();
     disallowEmptyCells();
+    argumentException(owner);
     this.owner = owner;
   }
 
@@ -34,6 +37,7 @@ public class ThreeTriosCell implements Cell {
   public int getCardValueOf(Direction d) {
     disallowHoleCells();
     disallowEmptyCells();
+    argumentException(d);
     return this.card.getValueOf(d);
   }
 
@@ -43,10 +47,44 @@ public class ThreeTriosCell implements Cell {
   public int directionalCompareTo(Direction d, Cell other) {
     disallowHoleCells();
     disallowEmptyCells();
+    argumentException(d);
+    argumentException(other);
     if (this.getOwnerName().equals(other.getOwnerName())) {
       return 0;
     }
     return Integer.signum(this.getCardValueOf(d) - other.getCardValueOf(d.opposite()));
+  }
+
+  public boolean isFilled() {
+    return this.isHole || this.card != null;
+  }
+
+  public boolean hasCard() {
+    return this.card != null;
+  }
+
+  private void argumentException(Card card) {
+    if (card == null) {
+      throw new IllegalArgumentException("Card cannot be null!");
+    }
+  }
+
+  private void argumentException(Player owner) {
+    if (owner == null) {
+      throw new IllegalArgumentException("Owner cannot be null!");
+    }
+  }
+
+  private void argumentException(Cell other) {
+    if (other == null) {
+      throw new IllegalArgumentException("Other cell cannot be null!");
+    }
+  }
+
+  private void argumentException(Direction d) {
+    if (d == null) {
+      throw new IllegalArgumentException("Direction cannot be null!");
+    }
   }
 
   private void disallowHoleCells() {
