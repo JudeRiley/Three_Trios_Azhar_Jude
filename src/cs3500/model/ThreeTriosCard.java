@@ -2,10 +2,8 @@ package cs3500.model;
 
 public class ThreeTriosCard {
 
-  //TODO : Is this an invariant???
   //INVARIANT: values will always contain four integers between 1 and 10
   private final int[] values;
-  //TODO : Do we really have to implement name?
   private final String name;
 
   public ThreeTriosCard(String name, int[] values) {

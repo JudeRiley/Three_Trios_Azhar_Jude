@@ -12,7 +12,7 @@ public class ThreeTriosModel implements ThreeTrios {
   private final List<Card> redHand;
   private final List<Card> blueHand;
 
-// total number of cards needs to be AT LEAST grid.numberOfCardCells + 1
+  // total number of cards needs to be AT LEAST grid.numberOfCardCells + 1
 
   public ThreeTriosModel(List<Card> deck, Grid grid) {
     if (deck == null || grid == null) {

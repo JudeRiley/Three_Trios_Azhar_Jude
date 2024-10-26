@@ -7,7 +7,7 @@ import cs3500.model.Cell;
 import cs3500.model.Player;
 import cs3500.model.ThreeTrios;
 
-public class ThreeTriosTextView implements ThreeTriosView {
+public class ThreeTriosTextView {
 
   private final ThreeTrios model;
 
