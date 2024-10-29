@@ -26,8 +26,8 @@ public class ThreeTriosModel implements ThreeTrios {
       throw new IllegalArgumentException("Deck size must be even.");
     }
 
-    this.redHand = deck.subList(0, deck.size() / 2);
-    this.blueHand = deck.subList(deck.size() / 2, deck.size());
+    this.redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
+    this.blueHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
     this.grid = grid;
     this.turn = Player.RED;
   }
@@ -45,8 +45,8 @@ public class ThreeTriosModel implements ThreeTrios {
     }
 
     Collections.shuffle(deck, rand);
-    this.redHand = deck.subList(0, deck.size() / 2);
-    this.blueHand = deck.subList(deck.size() / 2, deck.size());
+    this.redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
+    this.blueHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
     this.grid = grid;
     this.turn = Player.RED;
   }
@@ -92,20 +92,20 @@ public class ThreeTriosModel implements ThreeTrios {
   public Player battleStep(GridPos pos) {
     List<GridPos> neighborsList;
 
-    //gets a list of neighbors that need to be flipped
+    // gets a list of neighbors that need to be flipped
     neighborsList = new ArrayList<>(this.grid.getLosingNeighbors(pos));
 
-    //flips all of those neighbors
+    // flips all of those neighbors
     for (GridPos neighbor : neighborsList) {
       grid.flipCardCellTo(neighbor, turn);
     }
 
-    //recursively calls battleStep on each neighbor
+    // recursively calls battleStep on each neighbor
     for (GridPos neighbor : neighborsList) {
       this.battleStep(neighbor);
     }
 
-    //returns the next player. Only the return value of the first call to battleStep is used;
+    // returns the next player. Only the return value of the first call to battleStep is used;
     return turn.nextPlayer();
   }
 
