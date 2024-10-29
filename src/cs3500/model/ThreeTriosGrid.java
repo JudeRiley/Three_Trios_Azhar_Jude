@@ -71,12 +71,14 @@ public class ThreeTriosGrid implements Grid {
       try {
         targetPos = pos.getAdjacent(d);
       } catch (IllegalArgumentException e) {
-        throw new IllegalStateException("Direction is not functioning as expected!");
+        // if invalid direction then we skip
+        continue;
       }
 
       try {
         targetCell = grid(targetPos);
       } catch (IllegalArgumentException e) {
+        // if it's out of bounds then we skip
         continue;
       }
 
@@ -85,7 +87,7 @@ public class ThreeTriosGrid implements Grid {
           losingNeighbors.add(targetPos);
         }
       } catch (IllegalArgumentException e) {
-        continue;
+        // we continue in this case
       }
     }
 
@@ -135,5 +137,16 @@ public class ThreeTriosGrid implements Grid {
     } catch (ArrayIndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Given position is out of bounds!");
     }
+  }
+
+  /**
+   * Returns the cell at the specified GridPos.
+   *
+   * @param pos the position of the cell to retrieve
+   * @return the Cell at the given position
+   * @throws IllegalArgumentException if the position is out of bounds
+   */
+  public Cell getCell(GridPos pos) {
+    return grid(pos);
   }
 }

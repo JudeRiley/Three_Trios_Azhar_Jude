@@ -17,4 +17,13 @@ public interface Grid {
   public int getNumCardCells();
 
   public Cell[][] getCurrentGrid();
+
+  /**
+   * Returns the cell at the specified GridPos.
+   *
+   * @param pos the position of the cell to retrieve
+   * @return the Cell at the given position
+   * @throws IllegalArgumentException if the position is out of bounds
+   */
+  Cell getCell(GridPos pos);
 }
