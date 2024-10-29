@@ -27,7 +27,7 @@ public class ThreeTriosModel implements ThreeTrios {
     }
 
     this.redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
-    this.blueHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
+    this.blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
     this.grid = grid;
     this.turn = Player.RED;
   }
@@ -46,7 +46,7 @@ public class ThreeTriosModel implements ThreeTrios {
 
     Collections.shuffle(deck, rand);
     this.redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
-    this.blueHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
+    this.blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
     this.grid = grid;
     this.turn = Player.RED;
   }
