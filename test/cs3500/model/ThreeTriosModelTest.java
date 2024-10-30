@@ -10,10 +10,12 @@ import org.junit.Test;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.Assert.*;
 
+/**
+ * This class tests the ThreeTriosModel.
+ */
 public class ThreeTriosModelTest {
 
   private ThreeTriosModel game;
@@ -21,6 +23,10 @@ public class ThreeTriosModelTest {
   private Grid grid;
   private List<Card> deck;
 
+  /**
+   * Sets up the deck and the grid configuration before each test.
+   * @throws IOException when config is a bad file
+   */
   @Before
   public void setUp() throws IOException {
     // Define the paths to the configuration files
@@ -38,6 +44,10 @@ public class ThreeTriosModelTest {
     game = new ThreeTriosModel(deck, grid);
   }
 
+  /**
+   * Testing the battle step so that the adjacent cards that are smaller
+   * get flipped.
+   */
   @Test
   public void testBattleStepInternal() {
     // Place a card for Red at a position
@@ -54,6 +64,9 @@ public class ThreeTriosModelTest {
     assertEquals("Blue should have flipped Red's card at (2,2)", "BLUE", cellAt22.getOwnerName());
   }
 
+  /**
+   * Testing the battle step so that the chaining behavior is happening.
+   */
   @Test
   public void testBattleStepChainBehavior() {
     // Red is the weaker card and we set up the board like
@@ -73,6 +86,7 @@ public class ThreeTriosModelTest {
     System.out.println(new ThreeTriosTextView(game));
 
     game.placeCard(new GridPos(2, 2), 0);
+    System.out.println(grid.getCell(new GridPos(2, 1)).getCardValueOf(Direction.WEST));
     // should be RRRRR in middle row but is RBBBR
     System.out.println(new ThreeTriosTextView(game));
     // make sure the ends are blue
@@ -80,6 +94,9 @@ public class ThreeTriosModelTest {
     assertEquals(grid.getCell(new GridPos(2, 0)).getOwnerName(), "BLUE");
   }
 
+  /**
+   * Makes sure that the score is properly calculated.
+   */
   @Test
   public void testGetScoreOf() {
     // Place cards and check scores
@@ -93,6 +110,9 @@ public class ThreeTriosModelTest {
     assertEquals(1, blueScore);
   }
 
+  /**
+   * Makes sure that the grid is returning true when it's saturated.
+   */
   @Test
   public void testIsSaturated() {
     assertFalse(grid.isSaturated());
@@ -127,6 +147,9 @@ public class ThreeTriosModelTest {
     assertTrue(grid.isSaturated());
   }
 
+  /**
+   * Testing if the card is getting flipped to the proper color.
+   */
   @Test
   public void testFlipCardCellTo() {
     // Place a card for Red
@@ -141,6 +164,9 @@ public class ThreeTriosModelTest {
     assertEquals("BLUE", cell.getOwnerName());
   }
 
+  /**
+   * Test if we properly get the losing neighbor of the current cell.
+   */
   @Test
   public void testGetLosingNeighbors() {
     GridPos posRed = new GridPos(0, 0);

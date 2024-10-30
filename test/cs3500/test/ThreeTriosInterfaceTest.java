@@ -21,12 +21,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * Testing class for the ThreeTriosInterface.
+ */
 public class ThreeTriosInterfaceTest {
 
   private ThreeTrios game;
   private Grid grid;
   private List<Card> deck;
 
+  /**
+   * Sets up the board and deck with the configuration files before the tests.
+   * @throws IOException when the configuration files are invalid
+   */
   @Before
   public void setUp() throws IOException {
     // Define the paths to the configuration files
@@ -45,6 +52,9 @@ public class ThreeTriosInterfaceTest {
     game = new ThreeTriosModel(deck, grid);
   }
 
+  /**
+   * Tests if a card is properly getting placed on the grid.
+   */
   @Test
   public void testPlaceCard() {
     GridPos pos = new GridPos(0, 0);
@@ -61,6 +71,10 @@ public class ThreeTriosInterfaceTest {
     assertEquals(Player.BLUE, game.getTurn());
   }
 
+  /**
+   * Makes sure that an IllegalArgumentException is thrown when you place
+   * a card in an invalid index.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testPlaceCardInvalidIndex() {
     GridPos pos = new GridPos(0, 0);
@@ -68,6 +82,10 @@ public class ThreeTriosInterfaceTest {
     game.placeCard(pos, invalidCardIdx);
   }
 
+  /**
+   * Makes sure that an IllegalArgumentException is thrown when you try
+   * to place a card in an occupied cell.
+   */
   @Test(expected = IllegalArgumentException.class)
   public void testPlaceCardOnOccupiedCell() {
     GridPos pos = new GridPos(0, 0);
@@ -77,6 +95,9 @@ public class ThreeTriosInterfaceTest {
     game.placeCard(pos, 0);
   }
 
+  /**
+   * Testing if the BattleStep is properly calculated.
+   */
   @Test
   public void testBattleStep() {
     GridPos posRed = new GridPos(0, 0);
@@ -92,6 +113,10 @@ public class ThreeTriosInterfaceTest {
     assertEquals(Player.RED, nextPlayer);
   }
 
+  /**
+   * Makes sure an IllegalStateException is thrown when we try to get
+   * a winner before the game is over.
+   */
   @Test
   public void testGetWinnerBeforeGameOver() {
     try {
@@ -101,6 +126,9 @@ public class ThreeTriosInterfaceTest {
     }
   }
 
+  /**
+   * Makes sure that we can get a winner once the game is over.
+   */
   @Test
   public void testGetWinnerAfterGameOver() {
     // Simulate a full game
@@ -128,6 +156,9 @@ public class ThreeTriosInterfaceTest {
     assertTrue(winner == Player.RED || winner == Player.BLUE || winner == null);
   }
 
+  /**
+   * Makes sure that the turns are alternating.
+   */
   @Test
   public void testGetTurn() {
     assertEquals(Player.RED, game.getTurn());
@@ -135,6 +166,9 @@ public class ThreeTriosInterfaceTest {
     assertEquals(Player.BLUE, game.getTurn());
   }
 
+  /**
+   * Tests that we properly get the current grid.
+   */
   @Test
   public void testGetCurrentGrid() {
     Cell[][] currentGrid = game.getCurrentGrid();
@@ -143,6 +177,9 @@ public class ThreeTriosInterfaceTest {
     assertEquals(grid.getCurrentGrid()[0].length, currentGrid[0].length);
   }
 
+  /**
+   * Makes sure that we are getting the correct hand when we call getHand().
+   */
   @Test
   public void testGetHand() {
     List<Card> redHand = game.getHand(Player.RED);
@@ -152,7 +189,7 @@ public class ThreeTriosInterfaceTest {
     assertEquals(deckSize / 2, redHand.size());
     assertEquals(deckSize / 2, blueHand.size());
 
-    // After RED places a card
+    // After Red places a card
     game.placeCard(new GridPos(0, 0), 0);
     redHand = game.getHand(Player.RED);
     assertEquals(deckSize / 2 - 1, redHand.size());
