@@ -75,6 +75,9 @@ public class ThreeTriosModelTest {
     game.placeCard(new GridPos(2, 2), 0);
     // should be RRRRR in middle row but is RBBBR
     System.out.println(new ThreeTriosTextView(game));
+    // make sure the ends are blue
+    assertEquals(grid.getCell(new GridPos(2, 4)).getOwnerName(), "BLUE");
+    assertEquals(grid.getCell(new GridPos(2, 0)).getOwnerName(), "BLUE");
   }
 
   @Test
