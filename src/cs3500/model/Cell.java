@@ -8,44 +8,63 @@ public interface Cell {
   /**
    * Sets the card of the cell permanently.
    *
-   * @param card The card to be played.
-   * @param owner The player that owns the card being played.
-   * @exception IllegalArgumentException If this cell is a hole cell.
-   * @exception IllegalArgumentException If this cell already has a card.
+   * @param card The card to be played
+   * @param owner The player that owns the card being played
+   * @exception IllegalArgumentException If this cell is a hole cell
+   * @exception IllegalArgumentException If this cell already has a card
    */
   public void setCard(Card card, Player owner);
 
   /**
+   * Sets the owner of the card.
    *
-   * @param owner
+   * @param owner The owner to set the card to
    */
   public void setOwner(Player owner);
 
   /**
+   * Gets the name of the current owner of the card (Red or Blue).
    *
-   * @return
+   * @return the name of the current owner
    */
   public String getOwnerName();
 
   /**
+   * Gets the value of the specified direction.
    *
-   * @param d
+   * @param d The direction to get the value of
    * @return
    */
   public int getCardValueOf(Direction d);
 
   /**
+   * Compares the direction of the current cell in the specified direction towards another cell.
    *
-   * @param d
-   * @param other
-   * @return
+   * @param d The direction specified
+   * @param other The other cell to compare to
+   * @return 1 if this cell is bigger, 0 if they are equal, -1 if this is smaller
    */
   public int directionalCompareTo(Direction d, Cell other);
 
+  /**
+   * Gets whether this cell is currently filled or not.
+   *
+   * @return true if filled, false otherwise
+   */
   public boolean isFilled();
 
+  /**
+   * Gets if the current cell has a card or not.
+   *
+   * @return true if it has a card, false otherwise
+   */
   public boolean hasCard();
 
+  /**
+   * Gets if the cell is a card cell or not.
+   *
+   * @return true if it is a card cell, false otherwise
+   */
   public boolean isCardCell();
 
 }
