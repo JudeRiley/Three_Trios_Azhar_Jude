@@ -41,7 +41,7 @@ public class ThreeTriosCell implements Cell {
     return this.card.getValueOf(d);
   }
 
-  //TODO : return zero instead of excpetions?
+  //TODO : return zero instead of exceptions?
   //Takes color into account
   //Returns 0 if owners are the same ELSE:
   //returns 0 if number is the same, -1 if it is less and 1 if it is more

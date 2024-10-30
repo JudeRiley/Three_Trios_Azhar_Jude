@@ -2,6 +2,7 @@ package cs3500.model;
 
 import cs3500.model.config.GridConfigReader;
 import cs3500.model.config.CardConfigReader;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -64,6 +65,51 @@ public class ThreeTriosModelTest {
 
     assertEquals("Blue should own cell at (2,3)", "BLUE", cellAt23.getOwnerName());
     assertEquals("Blue should have flipped Red's card at (2,2)", "BLUE", cellAt22.getOwnerName());
+  }
+
+  @Test
+  public void testBattleStepChainBehavior() {
+    // red places cards like CC (EMPTY) CC so that blue can place the middle card
+    // to trigger the chain effect
+    game.placeCard(new GridPos(2, 0), 0);
+    game.placeCard(new GridPos(0, 0), 0);
+
+    game.placeCard(new GridPos(2, 1), 0);
+    game.placeCard(new GridPos(0, 1), 0);
+
+    game.placeCard(new GridPos(2, 3), 0);
+    game.placeCard(new GridPos(0, 2), 0);
+
+    game.placeCard(new GridPos(2, 4), 1);
+    game.placeCard(new GridPos(0, 3), 0);
+    game.placeCard(new GridPos(4, 0), 0);
+
+    int eastVal = grid.getCell(new GridPos(2, 3)).getCardValueOf(Direction.WEST);
+    int currVal;
+
+    // make sure the adjacent value is Red before placing
+    assertTrue(grid.getCell(new GridPos(2, 3)).getOwnerName().equals("RED"));
+
+    // Place blue card in the middle empty slot to trigger battles
+    game.placeCard(new GridPos(2, 2), 3);
+    currVal = grid.getCell(new GridPos(2, 2)).getCardValueOf(Direction.EAST);
+
+    // make sure the current east if bigger than the right west val
+    assertTrue(currVal > eastVal);
+
+    // make sure the adjacent card gets flipped
+    assertTrue(grid.getCell(new GridPos(2, 3)).getOwnerName().equals("BLUE"));
+
+    // check to see that the flipped card has a value greater than the neighbor of the flipped card
+    int flippedEastVal = grid.getCell(new GridPos(2, 3)).getCardValueOf(Direction.EAST);
+    int flippedNeighborWestVal = grid.getCell(new GridPos(2, 4)).getCardValueOf(Direction.WEST);
+    assertTrue(flippedEastVal > flippedNeighborWestVal);
+
+    // Access grid cells to verify the outcome
+    Cell cellAt23 = grid.getCell(new GridPos(2, 3));
+    Cell cellAt24 = grid.getCell(new GridPos(2, 4));
+    assertEquals("BLUE", cellAt23.getOwnerName());
+    assertEquals("BLUE", cellAt24.getOwnerName());
   }
 
   @Test

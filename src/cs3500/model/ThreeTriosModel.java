@@ -99,7 +99,6 @@ public class ThreeTriosModel implements ThreeTrios {
     for (GridPos neighbor : neighborsList) {
       grid.flipCardCellTo(neighbor, turn);
     }
-
     // recursively calls battleStep on each neighbor
     for (GridPos neighbor : neighborsList) {
       this.battleStep(neighbor);
