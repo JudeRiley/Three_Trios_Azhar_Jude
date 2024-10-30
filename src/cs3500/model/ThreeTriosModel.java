@@ -2,9 +2,7 @@ package cs3500.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 import java.util.Random;
 
 public class ThreeTriosModel implements ThreeTrios {

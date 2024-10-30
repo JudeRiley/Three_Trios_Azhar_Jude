@@ -56,6 +56,10 @@ public class ThreeTriosModelTest {
 
   @Test
   public void testBattleStepChainBehavior() {
+    // Red is the weaker card and we set up the board like
+    // RR_RR, then once we place a stronger blue card the row
+    // should be BBBBB
+    // (The middle R's will be stronger than ending R's)
     game.placeCard(new GridPos(2, 0), 0);
     game.placeCard(new GridPos(0, 0), 0);
 
