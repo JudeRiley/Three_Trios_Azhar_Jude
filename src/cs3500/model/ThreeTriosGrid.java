@@ -71,14 +71,14 @@ public class ThreeTriosGrid implements Grid {
       try {
         targetPos = pos.getAdjacent(d);
       } catch (IllegalArgumentException e) {
-        // if invalid direction then we skip
+        // if out of bounds skip
         continue;
       }
 
       try {
         targetCell = grid(targetPos);
       } catch (IllegalArgumentException e) {
-        // if it's out of bounds then we skip
+        // if not card skip
         continue;
       }
 
