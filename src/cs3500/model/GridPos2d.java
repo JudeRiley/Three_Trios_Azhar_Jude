@@ -26,6 +26,7 @@ public class GridPos2d implements GridPos {
     return y;
   }
 
+  @Override
   public GridPos getAdjacent(Direction d) {
     switch (d) {
       case NORTH:

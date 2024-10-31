@@ -1,9 +1,5 @@
 package cs3500.model;
 
-import cs3500.model.config.GridConfigReader;
-import cs3500.model.config.CardConfigReader;
-import cs3500.view.ThreeTriosTextView;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +7,13 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import cs3500.model.config.CardConfigReader;
+import cs3500.model.config.GridConfigReader;
+import cs3500.view.ThreeTriosTextView;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * This class tests the ThreeTriosModel.
@@ -21,17 +23,19 @@ public class ThreeTriosModelTest {
   private ThreeTriosModel game;
   private ThreeTriosModel randGame;
   private Grid grid;
-  private List<Card> deck;
 
   /**
    * Sets up the deck and the grid configuration before each test.
+   *
    * @throws IOException when config is a bad file
    */
   @Before
   public void setUp() throws IOException {
     // Define the paths to the configuration files
-    String gridConfigPath = Paths.get("test", "cs3500", "testingConfigs", "board_connected_holes.txt").toString();
-    String cardConfigPath = Paths.get("test", "cs3500", "testingConfigs", "cards_weak_red.txt").toString();
+    String gridConfigPath = Paths.get("test", "cs3500",
+            "testingConfigs", "board_connected_holes.txt").toString();
+    String cardConfigPath = Paths.get("test", "cs3500",
+            "testingConfigs", "cards_weak_red.txt").toString();
 
     // Initialize the GridConfigReader and read the grid
     GridConfigReader gridConfigReader = new GridConfigReader(gridConfigPath);
@@ -39,7 +43,7 @@ public class ThreeTriosModelTest {
 
     // Initialize the CardConfigReader and read the deck
     CardConfigReader cardConfigReader = new CardConfigReader(cardConfigPath);
-    deck = cardConfigReader.readCards();
+    List<Card> deck = cardConfigReader.readCards();
 
     game = new ThreeTriosModel(deck, grid);
   }
@@ -123,7 +127,8 @@ public class ThreeTriosModelTest {
 
     while (!grid.isSaturated()) {
       Player currentPlayer = game.getTurn();
-      List<Card> hand = currentPlayer == Player.RED ? game.getHand(Player.RED) : game.getHand(Player.BLUE);
+      List<Card> hand =
+              currentPlayer == Player.RED ? game.getHand(Player.RED) : game.getHand(Player.BLUE);
 
       boolean cardPlaced = false;
       for (int row = 0; row < rows && !cardPlaced; row++) {

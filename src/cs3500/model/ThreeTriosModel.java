@@ -83,7 +83,7 @@ public class ThreeTriosModel implements ThreeTrios {
     if (redHand.size() != blueHand.size()) {
       throw new IllegalArgumentException("Both hands must be the same size.");
     }
-    if (!(redHand.size() * 2 >= grid.getNumCardCells() + 1)) {
+    if (redHand.size() * 2 < grid.getNumCardCells() + 1) {
       throw new IllegalArgumentException("Deck size must be at least equal to the "
               + "number of card cells in the grid plus one.");
     }
@@ -94,6 +94,7 @@ public class ThreeTriosModel implements ThreeTrios {
     this.turn = Player.RED;
   }
 
+  @Override
   public void placeCard(GridPos pos, int cardIdx) {
     Card cardToPlay;
     try {
@@ -105,7 +106,8 @@ public class ThreeTriosModel implements ThreeTrios {
           cardToPlay = blueHand.remove(cardIdx);
           break;
         default:
-          throw new IllegalStateException(this.turn + "is not a value of Player that can be handled!");
+          throw new IllegalStateException(this.turn
+                  + "is not a value of Player that can be handled!");
       }
     } catch (IndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Invalid card index!");
@@ -114,6 +116,7 @@ public class ThreeTriosModel implements ThreeTrios {
     this.turn = this.battleStep(pos);
   }
 
+  @Override
   public Player battleStep(GridPos pos) {
     List<GridPos> neighborsList;
 
@@ -133,6 +136,7 @@ public class ThreeTriosModel implements ThreeTrios {
     return this.turn.nextPlayer();
   }
 
+  @Override
   public Player getWinner() {
     if (!(this.grid.isSaturated() || (this.redHand.isEmpty() && this.blueHand.isEmpty()))) {
       throw new IllegalStateException("Game is still ongoing!");
@@ -156,6 +160,7 @@ public class ThreeTriosModel implements ThreeTrios {
     return this.grid.getCurrentGrid();
   }
 
+  @Override
   public List<Card> getHand(Player player) {
     List<Card> targetHand;
     switch (player) {

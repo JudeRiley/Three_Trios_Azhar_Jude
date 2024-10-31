@@ -1,5 +1,12 @@
 package cs3500.test;
 
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.List;
+
 import cs3500.model.Card;
 import cs3500.model.Cell;
 import cs3500.model.Grid;
@@ -7,15 +14,8 @@ import cs3500.model.GridPos2d;
 import cs3500.model.Player;
 import cs3500.model.ThreeTrios;
 import cs3500.model.ThreeTriosModel;
-import cs3500.model.config.GridConfigReader;
 import cs3500.model.config.CardConfigReader;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.List;
+import cs3500.model.config.GridConfigReader;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -32,13 +32,16 @@ public class ThreeTriosInterfaceTest {
 
   /**
    * Sets up the board and deck with the configuration files before the tests.
+   *
    * @throws IOException when the configuration files are invalid
    */
   @Before
   public void setUp() throws IOException {
     // Define the paths to the configuration files
-    String gridConfigPath = Paths.get("test", "cs3500", "testingConfigs", "board_no_holes.txt").toString();
-    String cardConfigPath = Paths.get("test", "cs3500", "testingConfigs", "cards_small.txt").toString();
+    String gridConfigPath = Paths.get("test", "cs3500",
+            "testingConfigs", "board_no_holes.txt").toString();
+    String cardConfigPath = Paths.get("test", "cs3500",
+            "testingConfigs", "cards_small.txt").toString();
 
     // Initialize the GridConfigReader and read the grid
     GridConfigReader gridConfigReader = new GridConfigReader(gridConfigPath);

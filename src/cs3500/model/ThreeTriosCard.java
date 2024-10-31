@@ -55,6 +55,7 @@ public class ThreeTriosCard implements Card {
     this.values = temp;
   }
 
+  @Override
   public int getValueOf(Direction d) {
     return values[d.ordinal()];
   }

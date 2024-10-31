@@ -23,6 +23,7 @@ public class ThreeTriosCell implements Cell {
     this.owner = null;
   }
 
+  @Override
   public void setCard(Card card, Player owner) {
     disallowHoleCells();
     argumentException(card);
@@ -34,6 +35,7 @@ public class ThreeTriosCell implements Cell {
     this.owner = owner;
   }
 
+  @Override
   public void setOwner(Player owner) {
     disallowHoleCells();
     disallowEmptyCells();
@@ -41,12 +43,14 @@ public class ThreeTriosCell implements Cell {
     this.owner = owner;
   }
 
+  @Override
   public String getOwnerName() {
     disallowHoleCells();
     disallowEmptyCells();
     return owner.toString();
   }
 
+  @Override
   public int getCardValueOf(Direction d) {
     disallowHoleCells();
     disallowEmptyCells();
@@ -54,10 +58,7 @@ public class ThreeTriosCell implements Cell {
     return this.card.getValueOf(d);
   }
 
-  //TODO : return zero instead of exceptions?
-  //Takes color into account
-  //Returns 0 if owners are the same ELSE:
-  //returns 0 if number is the same, -1 if it is less and 1 if it is more
+  @Override
   public int directionalCompareTo(Direction d, Cell other) {
     disallowHoleCells();
     disallowEmptyCells();
@@ -69,14 +70,17 @@ public class ThreeTriosCell implements Cell {
     return Integer.signum(this.getCardValueOf(d) - other.getCardValueOf(d.opposite()));
   }
 
+  @Override
   public boolean isFilled() {
     return this.isHole || this.card != null;
   }
 
+  @Override
   public boolean hasCard() {
     return this.card != null;
   }
 
+  @Override
   public boolean isCardCell() {
     return !this.isHole;
   }

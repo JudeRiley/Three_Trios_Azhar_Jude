@@ -58,6 +58,7 @@ public class ThreeTriosGrid implements Grid {
     this.grid = grid;
   }
 
+  @Override
   public int getNumCardCells() {
     int cardCellCount = 0;
     for (Cell[] cells : this.grid) {
@@ -73,10 +74,12 @@ public class ThreeTriosGrid implements Grid {
     return cardCellCount;
   }
 
+  @Override
   public void playCard(GridPos pos, Card card, Player owner) {
     gridCellRef(pos).setCard(card, owner);
   }
 
+  @Override
   public List<GridPos> getLosingNeighbors(GridPos pos) {
     List<GridPos> losingNeighbors = new ArrayList<>();
     Cell startCell = this.gridCellRef(pos);
@@ -110,10 +113,12 @@ public class ThreeTriosGrid implements Grid {
     return losingNeighbors;
   }
 
+  @Override
   public void flipCardCellTo(GridPos pos, Player owner) {
     this.gridCellRef(pos).setOwner(owner);
   }
 
+  @Override
   public boolean isSaturated() {
     for (Cell[] cells : this.grid) {
       for (Cell cell : cells) {
@@ -125,6 +130,7 @@ public class ThreeTriosGrid implements Grid {
     return true;
   }
 
+  @Override
   public int getScoreOf(Player player) {
     int score = 0;
     for (Cell[] cells : this.grid) {
@@ -137,6 +143,7 @@ public class ThreeTriosGrid implements Grid {
     return score;
   }
 
+  @Override
   public Cell[][] getCurrentGrid() {
     int rowLength = this.grid.length;
     int colLength = this.grid[0].length;
@@ -147,15 +154,16 @@ public class ThreeTriosGrid implements Grid {
     return ret;
   }
 
+  @Override
+  public Cell getCell(GridPos pos) {
+    return this.getCurrentGrid()[pos.getX()][pos.getY()];
+  }
+
   private Cell gridCellRef(GridPos pos) {
     try {
       return this.grid[pos.getX()][pos.getY()];
     } catch (ArrayIndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Given position is out of bounds!");
     }
-  }
-
-  public Cell getCell(GridPos pos) {
-    return this.getCurrentGrid()[pos.getX()][pos.getY()];
   }
 }
