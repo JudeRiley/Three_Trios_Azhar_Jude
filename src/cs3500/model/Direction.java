@@ -1,8 +1,18 @@
 package cs3500.model;
 
+/**
+ * An enum representing one of 4 directions.
+ * Used to reference the corresponding 4 values of a Card.
+ */
 public enum Direction {
   NORTH, SOUTH, EAST, WEST;
 
+  /**
+   * Returns the value that is opposite to the current direction value, according
+   * to a traditional compass.
+   *
+   * @return the opposite value.
+   */
   public Direction opposite() {
     switch (this) {
       case NORTH:

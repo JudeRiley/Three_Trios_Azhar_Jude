@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Represents a playable ThreeTrios game for 2 players.
+ */
 public class ThreeTriosModel implements ThreeTrios {
 
   private final Grid grid;
@@ -14,11 +17,18 @@ public class ThreeTriosModel implements ThreeTrios {
 
   // total number of cards needs to be AT LEAST grid.numberOfCardCells + 1
 
+  /**
+   * Constructs and starts a three trios game with a given deck and grid layout.
+   * it does not shuffle the cards but splits them evenly down the middle.
+   *
+   * @param deck a deck of cards to be split between the players evenly.
+   * @param grid a pre-determined grid layout.
+   */
   public ThreeTriosModel(List<Card> deck, Grid grid) {
     if (deck == null || grid == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
     }
-    if (!(deck.size() >= grid.getNumCardCells() + 1)) {
+    if (deck.size() < grid.getNumCardCells() + 1) {
       throw new IllegalArgumentException("Deck size must be at least equal to the "
               + "number of card cells in the grid plus one.");
     }
@@ -32,6 +42,14 @@ public class ThreeTriosModel implements ThreeTrios {
     this.turn = Player.RED;
   }
 
+  /**
+   * Constructs and starts a three trios game with a given deck and grid layout.
+   * it uses a given random seed to shuffle the deck.
+   *
+   * @param deck a deck of cards to be split between the players evenly.
+   * @param grid a pre-determined grid layout.
+   * @param rand a random seed.
+   */
   public ThreeTriosModel(List<Card> deck, Grid grid, Random rand) {
     if (deck == null || grid == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
@@ -39,7 +57,7 @@ public class ThreeTriosModel implements ThreeTrios {
     if (deck.size() % 2 != 0) {
       throw new IllegalArgumentException("Deck size must be even.");
     }
-    if (!(deck.size() >= grid.getNumCardCells() + 1)) {
+    if (deck.size() < grid.getNumCardCells() + 1) {
       throw new IllegalArgumentException("Deck size must be at least equal to the "
               + "number of card cells in the grid plus one.");
     }
@@ -51,6 +69,13 @@ public class ThreeTriosModel implements ThreeTrios {
     this.turn = Player.RED;
   }
 
+  /**
+   * Constructs and starts a three trios game with each players hands pre-determined.
+   *
+   * @param redHand  a pre-determined hand for the red player 1.
+   * @param blueHand a pre-determined hand for the blue player 2,
+   * @param grid     a pre-determined grid layout.
+   */
   public ThreeTriosModel(List<Card> redHand, List<Card> blueHand, Grid grid) {
     if (redHand == null || blueHand == null || grid == null) {
       throw new IllegalArgumentException("Arguments cannot be null");
@@ -80,12 +105,12 @@ public class ThreeTriosModel implements ThreeTrios {
           cardToPlay = blueHand.remove(cardIdx);
           break;
         default:
-          throw new IllegalStateException(turn + "is not a value of Player that can be handled!");
+          throw new IllegalStateException(this.turn + "is not a value of Player that can be handled!");
       }
     } catch (IndexOutOfBoundsException e) {
       throw new IllegalArgumentException("Invalid card index!");
     }
-    this.grid.playCard(pos, cardToPlay, turn);
+    this.grid.playCard(pos, cardToPlay, this.turn);
     this.turn = this.battleStep(pos);
   }
 
@@ -97,7 +122,7 @@ public class ThreeTriosModel implements ThreeTrios {
 
     // flips all of those neighbors
     for (GridPos neighbor : neighborsList) {
-      grid.flipCardCellTo(neighbor, turn);
+      this.grid.flipCardCellTo(neighbor, this.turn);
     }
     // recursively calls battleStep on each neighbor
     for (GridPos neighbor : neighborsList) {
@@ -105,7 +130,7 @@ public class ThreeTriosModel implements ThreeTrios {
     }
 
     // returns the next player. Only the return value of the first call to battleStep is used;
-    return turn.nextPlayer();
+    return this.turn.nextPlayer();
   }
 
   public Player getWinner() {
@@ -122,7 +147,6 @@ public class ThreeTriosModel implements ThreeTrios {
     }
   }
 
-  //Test to make sure that a call to getTurn() does to return a MUTABLE reference to turn
   public Player getTurn() {
     return this.turn;
   }

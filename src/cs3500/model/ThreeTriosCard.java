@@ -1,11 +1,21 @@
 package cs3500.model;
 
+/**
+ * Represents a named card in a game of Three Trios
+ * with four values corresponding to directions.
+ */
 public class ThreeTriosCard implements Card {
 
   //INVARIANT: values will always contain four integers between 1 and 10
   private final int[] values;
   private final String name;
 
+  /**
+   * Constructs a ThreeTriosCard with a name by parsing values from an array.
+   *
+   * @param name the name of the card as a string.
+   * @param values an array of values.
+   */
   public ThreeTriosCard(String name, int[] values) {
     if (name == null || values == null) {
       throw new IllegalArgumentException("Arguments cannot be null!");
@@ -22,11 +32,20 @@ public class ThreeTriosCard implements Card {
     this.values = values;
   }
 
-  public ThreeTriosCard(String name, int North, int South, int East, int West) {
+  /**
+   * Constructs a ThreeTriosCard with 4 individual values corresponding to directions.
+   *
+   * @param name the name of the card.
+   * @param north the north value.
+   * @param south the south value.
+   * @param east the east value.
+   * @param west the west value.
+   */
+  public ThreeTriosCard(String name, int north, int south, int east, int west) {
     if (name == null) {
       throw new IllegalArgumentException("Name cannot be null!");
     }
-    int[] temp = new int[]{North, South, East, West};
+    int[] temp = new int[]{north, south, east, west};
     for (int value : temp) {
       if (value <= 0 || value > 10) {
         throw new IllegalArgumentException("Values must be between 1 and 10!");

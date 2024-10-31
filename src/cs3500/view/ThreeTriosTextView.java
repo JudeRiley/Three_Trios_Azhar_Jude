@@ -7,10 +7,19 @@ import cs3500.model.Cell;
 import cs3500.model.Player;
 import cs3500.model.ThreeTrios;
 
+/**
+ * Represents a view of a three trios game as a block of text
+ * that displays the turn, the grid, and the current hand.
+ */
 public class ThreeTriosTextView {
 
   private final ThreeTrios model;
 
+  /**
+   * constructs a text view with the given three trios model.
+   *
+   * @param model a three trios game.
+   */
   public ThreeTriosTextView(ThreeTrios model) {
     if (model == null) {
       throw new IllegalArgumentException("Model cannot be null!");

@@ -4,10 +4,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Represents a Grid in a ThreeTrios game. It acts as a grid of Cells, that may each
+ * contain a card. It relies on GridPos to reference its contents.
+ */
 public class ThreeTriosGrid implements Grid {
 
   private final Cell[][] grid;
 
+  /**
+   * Constructs a grid with a given witch and height that is all
+   * playable card-cells.
+   *
+   * @param width the number of columns in the grid, the x-axis.
+   * @param height the number of rows in teh grid, the y-axis.
+   */
   public ThreeTriosGrid(int width, int height) {
     if ((width * height) % 2 == 0) {
       throw new IllegalArgumentException("All cells will be card cells, "
@@ -22,6 +33,11 @@ public class ThreeTriosGrid implements Grid {
     }
   }
 
+  /**
+   * Constructs a grid given a specific pre-determined layout of
+   * playable card-cells and hole cells.
+   * @param grid a pre-determined grid layout of hole-cells and card-cells.
+   */
   public ThreeTriosGrid(Cell[][] grid) {
     if (grid == null) {
       throw new IllegalArgumentException("Grid cannot be null!");
@@ -58,12 +74,12 @@ public class ThreeTriosGrid implements Grid {
   }
 
   public void playCard(GridPos pos, Card card, Player owner) {
-    grid(pos).setCard(card, owner);
+    gridCellRef(pos).setCard(card, owner);
   }
 
   public List<GridPos> getLosingNeighbors(GridPos pos) {
     List<GridPos> losingNeighbors = new ArrayList<>();
-    Cell startCell = this.grid(pos);
+    Cell startCell = this.gridCellRef(pos);
     GridPos targetPos;
     Cell targetCell;
 
@@ -76,9 +92,9 @@ public class ThreeTriosGrid implements Grid {
       }
 
       try {
-        targetCell = grid(targetPos);
+        targetCell = this.gridCellRef(targetPos);
       } catch (IllegalArgumentException e) {
-        // if not card skip
+        // if out of bounds skip
         continue;
       }
 
@@ -95,7 +111,7 @@ public class ThreeTriosGrid implements Grid {
   }
 
   public void flipCardCellTo(GridPos pos, Player owner) {
-    grid(pos).setOwner(owner);
+    this.gridCellRef(pos).setOwner(owner);
   }
 
   public boolean isSaturated() {
@@ -131,7 +147,7 @@ public class ThreeTriosGrid implements Grid {
     return ret;
   }
 
-  private Cell grid(GridPos pos) {
+  private Cell gridCellRef(GridPos pos) {
     try {
       return this.grid[pos.getX()][pos.getY()];
     } catch (ArrayIndexOutOfBoundsException e) {
@@ -139,14 +155,7 @@ public class ThreeTriosGrid implements Grid {
     }
   }
 
-  /**
-   * Returns the cell at the specified GridPos.
-   *
-   * @param pos the position of the cell to retrieve
-   * @return the Cell at the given position
-   * @throws IllegalArgumentException if the position is out of bounds
-   */
   public Cell getCell(GridPos pos) {
-    return grid(pos);
+    return this.getCurrentGrid()[pos.getX()][pos.getY()];
   }
 }

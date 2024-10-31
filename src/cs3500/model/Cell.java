@@ -8,10 +8,10 @@ public interface Cell {
   /**
    * Sets the card of the cell permanently.
    *
-   * @param card The card to be played
+   * @param card  The card to be played
    * @param owner The player that owns the card being played
-   * @exception IllegalArgumentException If this cell is a hole cell
-   * @exception IllegalArgumentException If this cell already has a card
+   * @throws IllegalArgumentException If this cell is a hole cell
+   * @throws IllegalArgumentException If this cell already has a card
    */
   public void setCard(Card card, Player owner);
 
@@ -40,7 +40,7 @@ public interface Cell {
   /**
    * Compares the direction of the current cell in the specified direction towards another cell.
    *
-   * @param d The direction specified
+   * @param d     The direction specified
    * @param other The other cell to compare to
    * @return 1 if this cell is bigger, 0 if they are equal, -1 if this is smaller
    */

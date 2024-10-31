@@ -3,7 +3,7 @@ package cs3500.test;
 import cs3500.model.Card;
 import cs3500.model.Cell;
 import cs3500.model.Grid;
-import cs3500.model.GridPos;
+import cs3500.model.GridPos2d;
 import cs3500.model.Player;
 import cs3500.model.ThreeTrios;
 import cs3500.model.ThreeTriosModel;
@@ -57,7 +57,7 @@ public class ThreeTriosInterfaceTest {
    */
   @Test
   public void testPlaceCard() {
-    GridPos pos = new GridPos(0, 0);
+    GridPos2d pos = new GridPos2d(0, 0);
     int cardIdx = 0;
 
     game.placeCard(pos, cardIdx);
@@ -77,7 +77,7 @@ public class ThreeTriosInterfaceTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testPlaceCardInvalidIndex() {
-    GridPos pos = new GridPos(0, 0);
+    GridPos2d pos = new GridPos2d(0, 0);
     int invalidCardIdx = 10;
     game.placeCard(pos, invalidCardIdx);
   }
@@ -88,7 +88,7 @@ public class ThreeTriosInterfaceTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void testPlaceCardOnOccupiedCell() {
-    GridPos pos = new GridPos(0, 0);
+    GridPos2d pos = new GridPos2d(0, 0);
     game.placeCard(pos, 0);
 
     // Repeated placement
@@ -100,8 +100,8 @@ public class ThreeTriosInterfaceTest {
    */
   @Test
   public void testBattleStep() {
-    GridPos posRed = new GridPos(0, 0);
-    GridPos posBlue = new GridPos(0, 1);
+    GridPos2d posRed = new GridPos2d(0, 0);
+    GridPos2d posBlue = new GridPos2d(0, 1);
 
     // Red places a card
     game.placeCard(posRed, 0);
@@ -141,7 +141,7 @@ public class ThreeTriosInterfaceTest {
       boolean cardPlaced = false;
       for (int row = 0; row < rows && !cardPlaced; row++) {
         for (int col = 0; col < cols && !cardPlaced; col++) {
-          GridPos pos = new GridPos(row, col);
+          GridPos2d pos = new GridPos2d(row, col);
           Cell cell = game.getCurrentGrid()[row][col];
           if (cell.isCardCell() && !cell.hasCard()) {
             game.placeCard(pos, 0);
@@ -162,7 +162,7 @@ public class ThreeTriosInterfaceTest {
   @Test
   public void testGetTurn() {
     assertEquals(Player.RED, game.getTurn());
-    game.placeCard(new GridPos(0, 0), 0);
+    game.placeCard(new GridPos2d(0, 0), 0);
     assertEquals(Player.BLUE, game.getTurn());
   }
 
@@ -190,7 +190,7 @@ public class ThreeTriosInterfaceTest {
     assertEquals(deckSize / 2, blueHand.size());
 
     // After Red places a card
-    game.placeCard(new GridPos(0, 0), 0);
+    game.placeCard(new GridPos2d(0, 0), 0);
     redHand = game.getHand(Player.RED);
     assertEquals(deckSize / 2 - 1, redHand.size());
   }

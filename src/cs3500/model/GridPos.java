@@ -1,35 +1,31 @@
 package cs3500.model;
 
-public class GridPos {
-  private final int x;
-  private final int y;
+/**
+ * Represents a position on a grid.
+ */
+public interface GridPos {
 
-  public GridPos(int x, int y) {
-    this.x = x;
-    this.y = y;
-  }
+  /**
+   * Returns the x-value of this grid position.
+   *
+   * @return an integer equalling the x-value.
+   */
+  public int getX();
 
-  public int getX() {
-    return x;
-  }
+  /**
+   * Returns the y-value of this grid position.
+   *
+   * @return an integer equalling the y-value.
+   */
+  public int getY();
 
-  public int getY() {
-    return y;
-  }
-
-  public GridPos getAdjacent(Direction d) {
-    switch (d) {
-      case NORTH:
-        return new GridPos(this.x, this.y - 1);
-      case SOUTH:
-        return new GridPos(this.x, this.y + 1);
-      case EAST:
-        return new GridPos(this.x + 1, this.y);
-      case WEST:
-        return new GridPos(this.x - 1, this.y);
-      default:
-        throw new IllegalArgumentException("Direction must be NORTH, SOUTH, EAST, or WEST!");
-    }
-  }
+  /**
+   * Returns the grid position that is one unit in the given direction
+   * away from this grid position.
+   *
+   * @param d The direction of the desired adjacent position.
+   * @return a new GridPos corresponding to the adjacent position.
+   */
+  public GridPos getAdjacent(Direction d);
 
 }

@@ -1,13 +1,26 @@
 package cs3500.model;
 
+/**
+ * Represents a cell in a Three Trios game. The cell can be a hole, meaning that a card cannot
+ * be played to it. The cell can also be empty, having not yet had a card played to it.
+ * In both of these cases, methods that rely on the card contained by the cell throw exceptions.
+ */
 public class ThreeTriosCell implements Cell {
 
   private final boolean isHole;
   private Card card;
+  //INVARIANT : this.owner will always be null if this.card is null.
   private Player owner;
 
+  /**
+   * Constructs a ThreeTrios cell with only the knowledge if it is a hole cell or not.
+   * If it is not a hole, the cell is initially empty.
+   * @param playable a boolean representing that is true if the cell is NOT a hole.
+   */
   public ThreeTriosCell(boolean playable) {
     this.isHole = !playable;
+    this.card = null;
+    this.owner = null;
   }
 
   public void setCard(Card card, Player owner) {
@@ -56,8 +69,6 @@ public class ThreeTriosCell implements Cell {
     return Integer.signum(this.getCardValueOf(d) - other.getCardValueOf(d.opposite()));
   }
 
-
-  //TODO : Consolidate into one function with some sort of switch case?
   public boolean isFilled() {
     return this.isHole || this.card != null;
   }

@@ -1,0 +1,15 @@
+Our Player enum represents an identifier for players of our game.
+In theory, this could be numbers, names, colors, anything to concisely define different players.
+In this case, it is colors. Currently only 2 different players are supported, red and blue.
+Player objects do not have to keep track of any information about
+gameplay that makes use of Players. All of this information is managed in the model.
+This includes, the players hand, whose turn it is, their score, the cards they own, etc.
+
+To control the model, either as a human player or an AI, all one should have to do is interact
+with the model when it is their turn. The model keeps track of the current turn, starting with RED
+and switching to the next turn at the end of the code that makes up a complete turn. Information
+passed into teh model such as teh index in a players hand of teh card to be played is taken in
+generically, and the appropriate hand is accessed depending on teh current turn.
+
+This design allows for player interactions to be simple, and for all functionality to distinguish
+and separate the players to be handled easily by a controller and eventually a GUI.

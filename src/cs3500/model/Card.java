@@ -1,7 +1,7 @@
 package cs3500.model;
 
 /**
- * A generic card with values that correspond to directions
+ * A generic card with values that correspond to directions.
  */
 public interface Card {
 

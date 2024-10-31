@@ -51,14 +51,14 @@ public class ThreeTriosModelTest {
   @Test
   public void testBattleStepInternal() {
     // Place a card for Red at a position
-    game.placeCard(new GridPos(2, 2), 0);
+    game.placeCard(new GridPos2d(2, 2), 0);
 
     // Place a card for Blue adjacent to Red's card to trigger a battle
-    game.placeCard(new GridPos(2, 3), 6);
+    game.placeCard(new GridPos2d(2, 3), 6);
 
     // Access grid cells to verify the outcome
-    Cell cellAt22 = grid.getCell(new GridPos(2, 2));
-    Cell cellAt23 = grid.getCell(new GridPos(2, 3));
+    Cell cellAt22 = grid.getCell(new GridPos2d(2, 2));
+    Cell cellAt23 = grid.getCell(new GridPos2d(2, 3));
 
     assertEquals("Blue should own cell at (2,3)", "BLUE", cellAt23.getOwnerName());
     assertEquals("Blue should have flipped Red's card at (2,2)", "BLUE", cellAt22.getOwnerName());
@@ -73,25 +73,25 @@ public class ThreeTriosModelTest {
     // RR_RR, then once we place a stronger blue card the row
     // should be BBBBB
     // (The middle R's will be stronger than ending R's)
-    game.placeCard(new GridPos(2, 0), 0);
-    game.placeCard(new GridPos(0, 0), 0);
+    game.placeCard(new GridPos2d(2, 0), 0);
+    game.placeCard(new GridPos2d(0, 0), 0);
 
-    game.placeCard(new GridPos(2, 1), 9);
-    game.placeCard(new GridPos(0, 1), 0);
+    game.placeCard(new GridPos2d(2, 1), 9);
+    game.placeCard(new GridPos2d(0, 1), 0);
 
-    game.placeCard(new GridPos(2, 3), 9);
-    game.placeCard(new GridPos(0, 2), 0);
+    game.placeCard(new GridPos2d(2, 3), 9);
+    game.placeCard(new GridPos2d(0, 2), 0);
 
-    game.placeCard(new GridPos(2, 4), 0);
+    game.placeCard(new GridPos2d(2, 4), 0);
     System.out.println(new ThreeTriosTextView(game));
 
-    game.placeCard(new GridPos(2, 2), 0);
-    System.out.println(grid.getCell(new GridPos(2, 1)).getCardValueOf(Direction.WEST));
+    game.placeCard(new GridPos2d(2, 2), 0);
+    System.out.println(grid.getCell(new GridPos2d(2, 1)).getCardValueOf(Direction.WEST));
     // should be RRRRR in middle row but is RBBBR
     System.out.println(new ThreeTriosTextView(game));
     // make sure the ends are blue
-    assertEquals(grid.getCell(new GridPos(2, 4)).getOwnerName(), "BLUE");
-    assertEquals(grid.getCell(new GridPos(2, 0)).getOwnerName(), "BLUE");
+    assertEquals(grid.getCell(new GridPos2d(2, 4)).getOwnerName(), "BLUE");
+    assertEquals(grid.getCell(new GridPos2d(2, 0)).getOwnerName(), "BLUE");
   }
 
   /**
@@ -100,8 +100,8 @@ public class ThreeTriosModelTest {
   @Test
   public void testGetScoreOf() {
     // Place cards and check scores
-    game.placeCard(new GridPos(0, 0), 0); // RED
-    game.placeCard(new GridPos(0, 3), 0); // BLUE
+    game.placeCard(new GridPos2d(0, 0), 0); // RED
+    game.placeCard(new GridPos2d(0, 3), 0); // BLUE
 
     int redScore = grid.getScoreOf(Player.RED);
     int blueScore = grid.getScoreOf(Player.BLUE);
@@ -128,7 +128,7 @@ public class ThreeTriosModelTest {
       boolean cardPlaced = false;
       for (int row = 0; row < rows && !cardPlaced; row++) {
         for (int col = 0; col < cols && !cardPlaced; col++) {
-          GridPos pos = new GridPos(row, col);
+          GridPos2d pos = new GridPos2d(row, col);
           Cell cell = grid.getCell(pos);
           if (cell.isCardCell() && !cell.hasCard()) {
             if (!hand.isEmpty()) {
@@ -153,7 +153,7 @@ public class ThreeTriosModelTest {
   @Test
   public void testFlipCardCellTo() {
     // Place a card for Red
-    GridPos pos = new GridPos(2, 2);
+    GridPos2d pos = new GridPos2d(2, 2);
     game.placeCard(pos, 0);
 
     // Flip the card to Blue
@@ -169,14 +169,14 @@ public class ThreeTriosModelTest {
    */
   @Test
   public void testGetLosingNeighbors() {
-    GridPos posRed = new GridPos(0, 0);
+    GridPos2d posRed = new GridPos2d(0, 0);
     game.placeCard(posRed, 0);
 
-    GridPos posBlue = new GridPos(2, 1);
+    GridPos2d posBlue = new GridPos2d(2, 1);
     game.placeCard(posBlue, 0);
 
     // Place a weaker card for Red
-    posRed = new GridPos(2, 2);
+    posRed = new GridPos2d(2, 2);
     game.placeCard(posRed, 0);
 
     // Get losing neighbors from Blue's position
