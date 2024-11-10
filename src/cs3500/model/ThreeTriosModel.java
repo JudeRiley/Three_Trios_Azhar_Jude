@@ -121,6 +121,7 @@ public class ThreeTriosModel implements ThreeTrios {
     List<GridPos> neighborsList;
 
     // gets a list of neighbors that need to be flipped
+    // gets a list of neighbor positions that need to be flipped
     neighborsList = new ArrayList<>(this.grid.getLosingNeighbors(pos));
 
     // flips all of those neighbors
