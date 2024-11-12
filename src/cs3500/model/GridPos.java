@@ -10,14 +10,14 @@ public interface GridPos {
    *
    * @return an integer equalling the x-value.
    */
-  public int getX();
+  int getX();
 
   /**
    * Returns the y-value of this grid position.
    *
    * @return an integer equalling the y-value.
    */
-  public int getY();
+  int getY();
 
   /**
    * Returns the grid position that is one unit in the given direction
@@ -26,6 +26,8 @@ public interface GridPos {
    * @param d The direction of the desired adjacent position.
    * @return a new GridPos corresponding to the adjacent position.
    */
-  public GridPos getAdjacent(Direction d);
+  GridPos getAdjacent(Direction d);
+
+  <T> T accessArray(T[][] arr2d);
 
 }

@@ -23,4 +23,13 @@ public enum Player {
         throw new IllegalArgumentException("Unsupported player!");
     }
   }
+
+  public static Player fromString(String str) {
+    for (Player p : Player.values()) {
+      if (p.toString().equals(str)) {
+        return p;
+      }
+    }
+    throw new IllegalArgumentException("Unsupported player!");
+  }
 }

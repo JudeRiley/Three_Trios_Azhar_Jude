@@ -122,7 +122,7 @@ public class ThreeTriosGrid implements Grid {
   public boolean isSaturated() {
     for (Cell[] cells : this.grid) {
       for (Cell cell : cells) {
-        if (!cell.isFilled()) {
+        if (cell.isOpenForPlay()) {
           return false;
         }
       }
@@ -148,15 +148,17 @@ public class ThreeTriosGrid implements Grid {
     int rowLength = this.grid.length;
     int colLength = this.grid[0].length;
     Cell[][] ret = new Cell[rowLength][colLength];
-    for (int x = 0; x < rowLength; x++) {
-      ret[x] = Arrays.copyOf(this.grid[x], colLength);
+    for (int row = 0; row < rowLength; row++) {
+      for (int col = 0; col < colLength; col++) {
+        ret[row][col] = new ThreeTriosCell(this.grid[row][col]);
+      }
     }
     return ret;
   }
 
   @Override
   public Cell getCell(GridPos pos) {
-    return this.getCurrentGrid()[pos.getX()][pos.getY()];
+    return new ThreeTriosCell(this.grid[pos.getX()][pos.getY()]);
   }
 
   private Cell gridCellRef(GridPos pos) {

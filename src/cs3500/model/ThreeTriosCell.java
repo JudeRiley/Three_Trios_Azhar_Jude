@@ -15,12 +15,32 @@ public class ThreeTriosCell implements Cell {
   /**
    * Constructs a ThreeTrios cell with only the knowledge if it is a hole cell or not.
    * If it is not a hole, the cell is initially empty.
+   *
    * @param playable a boolean representing that is true if the cell is NOT a hole.
    */
   public ThreeTriosCell(boolean playable) {
     this.isHole = !playable;
     this.card = null;
     this.owner = null;
+  }
+
+  public ThreeTriosCell(Cell toCopy) {
+    if (toCopy == null) {
+      throw new IllegalArgumentException("The Cell to be copied cannot be null!");
+    }
+
+    if (toCopy.isCardCell()) {
+      this.isHole = false;
+      if (toCopy.hasCard()) {
+        this.card = toCopy.getCardCopy();
+        this.owner = Player.fromString(toCopy.getOwnerName());
+      } else {
+        this.card = null;
+        this.owner = null;
+      }
+    } else {
+      this.isHole = true;
+    }
   }
 
   @Override
@@ -59,6 +79,13 @@ public class ThreeTriosCell implements Cell {
   }
 
   @Override
+  public Card getCardCopy() {
+    disallowEmptyCells();
+    disallowEmptyCells();
+    return new ThreeTriosCard(this.card);
+  }
+
+  @Override
   public int directionalCompareTo(Direction d, Cell other) {
     disallowHoleCells();
     disallowEmptyCells();
@@ -71,8 +98,8 @@ public class ThreeTriosCell implements Cell {
   }
 
   @Override
-  public boolean isFilled() {
-    return this.isHole || this.card != null;
+  public boolean isOpenForPlay() {
+    return this.isCardCell() && !this.hasCard();
   }
 
   @Override

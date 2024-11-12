@@ -42,4 +42,13 @@ public class GridPos2d implements GridPos {
     }
   }
 
+  @Override
+  public String toString() {
+    return "(" + x + ", " + y + ")";
+  }
+
+  @Override
+  public <T> T accessArray(T[][] arr2d) {
+    return arr2d[this.x][this.y];
+  }
 }
