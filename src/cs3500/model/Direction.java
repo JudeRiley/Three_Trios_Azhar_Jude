@@ -3,6 +3,7 @@ package cs3500.model;
 /**
  * An enum representing one of 4 directions.
  * Used to reference the corresponding 4 values of a Card.
+ * Ordered NORTH, SOUTH, EAST, WEST for iteration.
  */
 public enum Direction {
   NORTH, SOUTH, EAST, WEST;

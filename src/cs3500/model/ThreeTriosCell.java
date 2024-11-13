@@ -24,6 +24,11 @@ public class ThreeTriosCell implements Cell {
     this.owner = null;
   }
 
+  /**
+   * A copy constructor. Creates a new ThreeTriosCell with identical data.
+   *
+   * @param toCopy the ThreeTriosCell that will be copied.
+   */
   public ThreeTriosCell(Cell toCopy) {
     if (toCopy == null) {
       throw new IllegalArgumentException("The Cell to be copied cannot be null!");

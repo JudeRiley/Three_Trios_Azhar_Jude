@@ -33,13 +33,14 @@ public interface Cell {
    * Gets the value of the specified direction.
    *
    * @param d The direction to get the value of
-   * @return
+   * @return the int value at the given direction.
    */
   public int getCardValueOf(Direction d);
 
   /**
+   * Returns a copy of the card contained in this Cell.
    *
-   * @return
+   * @return a new Cell with identical data.
    */
   Card getCardCopy();
 

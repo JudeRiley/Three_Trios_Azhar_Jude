@@ -6,14 +6,20 @@ import cs3500.model.Move;
 import cs3500.model.Player;
 import cs3500.model.ReadOnlyThreeTrios;
 
+/**
+ * A complete strategy that attempts to choose a move with a given strategy, and if no move
+ * is chosen, it chooses a move using the first open space strategy.
+ */
 public class TacticOrFirstOpenSpaceStrategy implements ThreeTriosStrategy {
   private final ThreeTriosTactic tacticToTry;
+  private final FirstOpenSpaceStrategy fallback;
 
   public TacticOrFirstOpenSpaceStrategy(ThreeTriosTactic tacticToTry) {
     if (tacticToTry == null) {
       throw new IllegalArgumentException("Tactic cannot be null!");
     }
     this.tacticToTry = tacticToTry;
+    this.fallback = new FirstOpenSpaceStrategy();
   }
 
   @Override
@@ -21,8 +27,9 @@ public class TacticOrFirstOpenSpaceStrategy implements ThreeTriosStrategy {
     Optional<Move> tacticMove = tacticToTry.chooseMove(model, forWhom);
     if (tacticMove.isPresent()) {
       return tacticMove.get();
+    } else {
+      return fallback.chooseMove(model, forWhom);
     }
-    throw new IllegalStateException("There are no possible moves chosen by this strategy!");
   }
 
 }

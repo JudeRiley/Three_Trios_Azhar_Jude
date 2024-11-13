@@ -13,6 +13,16 @@ import cs3500.model.Player;
 import cs3500.model.ReadOnlyThreeTrios;
 import cs3500.model.ThreeTriosMove;
 
+/**
+ * A "tactic" (or partial strategy) that attempts to play in one of the four corners of the grid.
+ * It starts with the upper-left corner, and if the corner is not open for play, it tries again
+ * with the next corner in the clockwise direction. It chooses the card in the players hand that
+ * will be hardest to flip at the first open corner. It takes into account the exposed values and
+ * considers that in certain situations (bordered by an enemy card, a hole cell, or a losing ally)
+ * the cell will be impossible to flip from that side. There are other situations
+ * (bordered by a winning ally) where the cell will always be able to be flipped from this side
+ * (assuming that neighboring cell is flipped.)
+ */
 public class GoForCornersTactic implements ThreeTriosTactic{
 
   private Cell[][] grid;

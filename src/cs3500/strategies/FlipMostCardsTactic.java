@@ -19,6 +19,14 @@ import cs3500.model.ThreeTriosCard;
 import cs3500.model.ThreeTriosGrid;
 import cs3500.model.ThreeTriosMove;
 
+/**
+ * A "tactic" (or partial strategy) that chooses a position that will flip the most cards
+ * to the current Player given the best possible card. In the event of a tie,
+ * it chooses the uppermost-leftmost position. It chooses the first card in the players hand
+ * that will successfully flip the cards surrounding this chosen position, starting at index zero.
+ * If no card is successful, it will check the hand for cards that succeed at the next most
+ * desirable position.
+ */
 public class FlipMostCardsTactic implements ThreeTriosTactic {
 
   private Grid testGame;
@@ -71,7 +79,6 @@ public class FlipMostCardsTactic implements ThreeTriosTactic {
     }
     return retList;
   }
-
 
   class SortByFlipCount implements Comparator<GridPos> {
     @Override

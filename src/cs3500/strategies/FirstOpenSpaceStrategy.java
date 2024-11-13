@@ -7,6 +7,9 @@ import cs3500.model.Player;
 import cs3500.model.ReadOnlyThreeTrios;
 import cs3500.model.ThreeTriosMove;
 
+/**
+ * An infallible strategy that plays the first card in a players hand to the first open space
+ */
 public class FirstOpenSpaceStrategy implements ThreeTriosStrategy {
 
   @Override
@@ -20,7 +23,7 @@ public class FirstOpenSpaceStrategy implements ThreeTriosStrategy {
         }
       }
     }
-
+    //Something has gone wrong, likely the game is over or the model is in an invalid state.
     throw new IllegalStateException("There are no possible moves chosen by this strategy!");
   }
 

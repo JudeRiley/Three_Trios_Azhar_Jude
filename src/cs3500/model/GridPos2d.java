@@ -18,10 +18,12 @@ public class GridPos2d implements GridPos {
     this.col = col;
   }
 
+  @Override
   public int getRow() {
     return row;
   }
 
+  @Override
   public int getCol() {
     return col;
   }
@@ -42,12 +44,9 @@ public class GridPos2d implements GridPos {
     }
   }
 
-  public boolean containsNegatives() {
-    return this.row < 0 || this.col < 0;
-  }
-
+  @Override
   public boolean isInBoundsFor(int numRows, int rowLength) {
-    return !this.containsNegatives() && this.row < numRows && this.col < rowLength;
+    return (this.row > 0 && this.col > 0) && this.row < numRows && this.col < rowLength;
   }
 
   @Override

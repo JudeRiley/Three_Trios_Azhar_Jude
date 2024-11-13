@@ -24,6 +24,13 @@ public enum Player {
     }
   }
 
+  /**
+   * Creates an instance of this enum from a String corresponding to the name
+   * of the player identifier.
+   *
+   * @param str The name of the player identifier.
+   * @return The corresponding Player.
+   */
   public static Player fromString(String str) {
     for (Player p : Player.values()) {
       if (p.toString().equals(str)) {

@@ -51,8 +51,8 @@ public class TacticOrFirstOpenSpaceStrategyTest {
 
     // The move should be to one of the corners
     GridPos pos = selectedMove.getPosition();
-    int row = pos.getX();
-    int col = pos.getY();
+    int row = pos.getRow();
+    int col = pos.getCol();
 
     // Check if the position is one of the corners
     boolean isCorner = (row == 0 && col == 0) || (row == 0 && col == 2) ||
@@ -62,7 +62,7 @@ public class TacticOrFirstOpenSpaceStrategyTest {
 
     // The selected card should be the strongest card (index 1)
     int expectedCardIndex = 1; // Index of "StrongCard"
-    assertEquals("Expected the strongest card to be selected", expectedCardIndex, selectedMove.getCardIndex());
+    assertEquals("Expected the strongest card to be selected", expectedCardIndex, selectedMove.getCardIdxInHand());
 
     // Verifying method calls
     String logContent = log.toString();
@@ -111,7 +111,7 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     int expectedCardIndex = 0; // The fallback uses card at index 0
 
     assertEquals("Expected the move to be to the first open space (1,1)", expectedPosition, selectedMove.getPosition());
-    assertEquals("Expected the fallback to use card index 0", expectedCardIndex, selectedMove.getCardIndex());
+    assertEquals("Expected the fallback to use card index 0", expectedCardIndex, selectedMove.getCardIdxInHand());
 
     // Verifying method calls
     String logContent = log.toString();
@@ -157,7 +157,7 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     int expectedCardIndex = 1; // The strongest card
 
     assertEquals("Expected the move to be to the available corner (0,0)", expectedPosition, selectedMove.getPosition());
-    assertEquals("Expected the strongest card to be selected", expectedCardIndex, selectedMove.getCardIndex());
+    assertEquals("Expected the strongest card to be selected", expectedCardIndex, selectedMove.getCardIdxInHand());
 
     // Verifying method calls
     String logContent = log.toString();

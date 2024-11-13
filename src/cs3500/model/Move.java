@@ -13,5 +13,6 @@ public interface Move {
    * @return
    */
   int getCardIxdInHand();
+  int getCardIdxInHand();
 
 }

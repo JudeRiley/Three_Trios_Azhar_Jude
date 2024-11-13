@@ -15,8 +15,6 @@ public class ThreeTriosModel implements ThreeTrios {
   private final List<Card> redHand;
   private final List<Card> blueHand;
 
-  // total number of cards needs to be AT LEAST grid.numberOfCardCells + 1
-
   /**
    * Constructs and starts a three trios game with a given deck and grid layout.
    * it does not shuffle the cards but splits them evenly down the middle.
@@ -121,7 +119,6 @@ public class ThreeTriosModel implements ThreeTrios {
     // gets a list of losing neighbor positions, without considering owner
     List<GridPos> losingNeighbors = this.grid.getLosingNeighbors(pos);
 
-
     //flips the neighbors
     for (GridPos neighbor : losingNeighbors) {
       this.grid.flipCardCellTo(neighbor, this.turn);
@@ -147,6 +144,7 @@ public class ThreeTriosModel implements ThreeTrios {
     }
   }
 
+  @Override
   public Player getTurn() {
     return this.turn;
   }

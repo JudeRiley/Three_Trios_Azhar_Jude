@@ -55,6 +55,11 @@ public class ThreeTriosCard implements Card {
     this.values = temp;
   }
 
+  /**
+   * A copy constructor. Creates a new ThreeTriosCard with identical data.
+   *
+   * @param toCopy the ThreeTriosCard that will be copied.
+   */
   public ThreeTriosCard(Card toCopy) {
     if (toCopy == null) {
       throw new IllegalArgumentException("The Card to copy cannot be null!");

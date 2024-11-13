@@ -14,8 +14,9 @@ public interface Card {
   int getValueOf(Direction d);
 
   /**
+   * Returns the name identifier of the card.
    *
-   * @return
+   * @return the name as a String.
    */
   String getName();
 
