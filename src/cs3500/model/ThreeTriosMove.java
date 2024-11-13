@@ -22,11 +22,11 @@ public class ThreeTriosMove implements Move{
 
   @Override
   public GridPos getPosition() {
-    return new GridPos2d(pos.getRow(), pos.getCol());
+    return new GridPos2d(this.pos.getRow(), this.pos.getCol());
   }
 
   @Override
   public int getCardIdxInHand() {
-    return cardIdx;
+    return this.cardIdx;
   }
 }

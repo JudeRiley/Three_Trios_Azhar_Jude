@@ -46,7 +46,11 @@ public class GridPos2d implements GridPos {
 
   @Override
   public boolean isInBoundsFor(int numRows, int rowLength) {
-    return (this.row > 0 && this.col > 0) && this.row < numRows && this.col < rowLength;
+    return !this.containsNegatives() && this.row < numRows && this.col < rowLength;
+  }
+
+  private boolean containsNegatives(){
+    return this.row < 0 || this.col < 0;
   }
 
   @Override
