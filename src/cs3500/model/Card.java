@@ -13,4 +13,10 @@ public interface Card {
    */
   int getValueOf(Direction d);
 
+  /**
+   *
+   * @return
+   */
+  String getName();
+
 }

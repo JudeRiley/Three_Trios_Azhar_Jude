@@ -38,6 +38,12 @@ public interface Cell {
   public int getCardValueOf(Direction d);
 
   /**
+   *
+   * @return
+   */
+  Card getCardCopy();
+
+  /**
    * Compares the direction of the current cell in the specified direction towards another cell.
    *
    * @param d     The direction specified
@@ -47,11 +53,11 @@ public interface Cell {
   public int directionalCompareTo(Direction d, Cell other);
 
   /**
-   * Gets whether this cell is currently filled or not.
+   * Returns true if the cell is a card-cell and does not yet contain a card;
    *
-   * @return true if filled, false otherwise
+   * @return true if open for play, false otherwise;
    */
-  public boolean isFilled();
+  public boolean isOpenForPlay();
 
   /**
    * Gets if the current cell has a card or not.

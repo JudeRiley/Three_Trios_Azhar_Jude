@@ -1,7 +1,6 @@
 package cs3500.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public class ThreeTriosGrid implements Grid {
    * Constructs a grid with a given witch and height that is all
    * playable card-cells.
    *
-   * @param width the number of columns in the grid, the x-axis.
+   * @param width  the number of columns in the grid, the x-axis.
    * @param height the number of rows in teh grid, the y-axis.
    */
   public ThreeTriosGrid(int width, int height) {
@@ -36,6 +35,7 @@ public class ThreeTriosGrid implements Grid {
   /**
    * Constructs a grid given a specific pre-determined layout of
    * playable card-cells and hole cells.
+   *
    * @param grid a pre-determined grid layout of hole-cells and card-cells.
    */
   public ThreeTriosGrid(Cell[][] grid) {
@@ -82,35 +82,47 @@ public class ThreeTriosGrid implements Grid {
   @Override
   public List<GridPos> getLosingNeighbors(GridPos pos) {
     List<GridPos> losingNeighbors = new ArrayList<>();
-    Cell startCell = this.gridCellRef(pos);
-    GridPos targetPos;
+    GridPos posToAdd;
     Cell targetCell;
 
-    for (Direction d : Direction.values()) {
-      try {
-        targetPos = pos.getAdjacent(d);
-      } catch (IllegalArgumentException e) {
-        // if out of bounds skip
-        continue;
-      }
+    int[] retArr = new int[4];
 
-      try {
-        targetCell = this.gridCellRef(targetPos);
-      } catch (IllegalArgumentException e) {
-        // if out of bounds skip
-        continue;
-      }
+    for (Direction direction : Direction.values()) {
+      //may contain an out-of-bounds position at this point
+      posToAdd = pos.getAdjacent(direction);
 
-      try {
-        if (startCell.directionalCompareTo(d, targetCell) == 1) {
-          losingNeighbors.add(targetPos);
+      if (posToAdd.isInBoundsFor(this.grid.length, this.grid[0].length)) {
+        targetCell = this.gridCellRef(posToAdd);
+        //if targetCell has a card and loses numerically and is an enemy
+        if (targetCell.hasCard() && gridCellRef(pos).directionalCompareTo(direction, targetCell) == 1) {
+          retArr[direction.ordinal()] = targetCell.getCardValueOf(direction.opposite());
+          losingNeighbors.add(posToAdd);
         }
-      } catch (IllegalArgumentException e) {
-        // we continue in this case
+      }
+    }
+    return losingNeighbors;
+  }
+
+  @Override
+  public int[] getLosingSurroundingValues(GridPos pos) {
+    int[] retArr = new int[4];
+    GridPos posToAdd;
+    Cell targetCell;
+
+    for (Direction direction : Direction.values()) {
+      //may contain an out-of-bounds position at this point
+      posToAdd = pos.getAdjacent(direction);
+
+      if (posToAdd.isInBoundsFor(this.grid.length, this.grid[0].length)) {
+        targetCell = this.gridCellRef(posToAdd);
+        //if targetCell has a card and loses numerically and is an enemy
+        if (targetCell.hasCard() && gridCellRef(pos).directionalCompareTo(direction, targetCell) == 1) {
+          retArr[direction.ordinal()] = targetCell.getCardValueOf(direction.opposite());
+        }
       }
     }
 
-    return losingNeighbors;
+    return retArr;
   }
 
   @Override
@@ -122,7 +134,7 @@ public class ThreeTriosGrid implements Grid {
   public boolean isSaturated() {
     for (Cell[] cells : this.grid) {
       for (Cell cell : cells) {
-        if (!cell.isFilled()) {
+        if (cell.isOpenForPlay()) {
           return false;
         }
       }
@@ -148,21 +160,23 @@ public class ThreeTriosGrid implements Grid {
     int rowLength = this.grid.length;
     int colLength = this.grid[0].length;
     Cell[][] ret = new Cell[rowLength][colLength];
-    for (int x = 0; x < rowLength; x++) {
-      ret[x] = Arrays.copyOf(this.grid[x], colLength);
+    for (int row = 0; row < rowLength; row++) {
+      for (int col = 0; col < colLength; col++) {
+        ret[row][col] = new ThreeTriosCell(this.grid[row][col]);
+      }
     }
     return ret;
   }
 
   @Override
   public Cell getCell(GridPos pos) {
-    return this.getCurrentGrid()[pos.getX()][pos.getY()];
+    return new ThreeTriosCell(this.grid[pos.getRow()][pos.getCol()]);
   }
 
   private Cell gridCellRef(GridPos pos) {
     try {
-      return this.grid[pos.getX()][pos.getY()];
-    } catch (ArrayIndexOutOfBoundsException e) {
+      return pos.accessArray(this.grid);
+    } catch (IllegalArgumentException e) {
       throw new IllegalArgumentException("Given position is out of bounds!");
     }
   }

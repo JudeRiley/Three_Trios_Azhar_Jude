@@ -113,28 +113,23 @@ public class ThreeTriosModel implements ThreeTrios {
       throw new IllegalArgumentException("Invalid card index!");
     }
     this.grid.playCard(pos, cardToPlay, this.turn);
-    this.turn = this.battleStep(pos);
+    this.battleStep(pos);
+    this.turn = this.turn.nextPlayer();
   }
 
-  @Override
-  public Player battleStep(GridPos pos) {
-    List<GridPos> neighborsList;
+  private void battleStep(GridPos pos) {
+    // gets a list of losing neighbor positions, without considering owner
+    List<GridPos> losingNeighbors = this.grid.getLosingNeighbors(pos);
 
-    // gets a list of neighbors that need to be flipped
-    // gets a list of neighbor positions that need to be flipped
-    neighborsList = new ArrayList<>(this.grid.getLosingNeighbors(pos));
 
-    // flips all of those neighbors
-    for (GridPos neighbor : neighborsList) {
+    //flips the neighbors
+    for (GridPos neighbor : losingNeighbors) {
       this.grid.flipCardCellTo(neighbor, this.turn);
     }
     // recursively calls battleStep on each neighbor
-    for (GridPos neighbor : neighborsList) {
+    for (GridPos neighbor : losingNeighbors) {
       this.battleStep(neighbor);
     }
-
-    // returns the next player. Only the return value of the first call to battleStep is used;
-    return this.turn.nextPlayer();
   }
 
   @Override
