@@ -85,3 +85,6 @@ The **Configuration** component handles reading grid and card configurations fro
 
 **Positioning**
 - GridPos Class: Represents positions on the grid and provides methods to navigate to adjacent positions.
+
+## Changes made from Assignment 5
+- Refactored GridConfigReader so that method doesn't exceed 50 lines
