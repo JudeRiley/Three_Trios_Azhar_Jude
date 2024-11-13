@@ -1,23 +1,23 @@
 package cs3500.model;
 
 /**
- * Represents a position on a grid.
+ * Represents a position on a grid of rows and columns.
  */
 public interface GridPos {
 
   /**
-   * Returns the x-value of this grid position.
+   * Returns the vertical value of this grid position.
    *
-   * @return an integer equalling the x-value.
+   * @return an integer representing the row index.
    */
-  int getX();
+  int getRow();
 
   /**
-   * Returns the y-value of this grid position.
+   * Returns the horizontal value of this grid position.
    *
-   * @return an integer equalling the y-value.
+   * @return an integer representing the index within a row.
    */
-  int getY();
+  int getCol();
 
   /**
    * Returns the grid position that is one unit in the given direction
@@ -27,6 +27,10 @@ public interface GridPos {
    * @return a new GridPos corresponding to the adjacent position.
    */
   GridPos getAdjacent(Direction d);
+
+  boolean containsNegatives();
+
+  boolean isInBoundsFor(int numRows, int rowLength);
 
   <T> T accessArray(T[][] arr2d);
 

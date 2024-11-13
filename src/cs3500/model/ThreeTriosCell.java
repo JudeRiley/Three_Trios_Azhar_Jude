@@ -153,6 +153,9 @@ public class ThreeTriosCell implements Cell {
     if (this.isHole) {
       return "Hole";
     }
+    if (this.card == null) {
+      return "Empty";
+    }
     return this.getOwnerName() + " " + this.card.toString();
   }
 

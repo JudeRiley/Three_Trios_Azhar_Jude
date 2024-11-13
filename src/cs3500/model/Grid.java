@@ -26,6 +26,8 @@ public interface Grid {
    */
   List<GridPos> getLosingNeighbors(GridPos pos);
 
+  int[] getLosingSurroundingValues(GridPos pos);
+
   /**
    * Reassigns the owner of the card-cell at the given position to the given Player.
    *

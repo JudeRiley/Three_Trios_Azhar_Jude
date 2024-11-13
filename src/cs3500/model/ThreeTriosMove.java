@@ -1,7 +1,9 @@
 package cs3500.model;
 
 public class ThreeTriosMove implements Move{
-  GridPos pos;
+
+  private GridPos pos;
+  private int cardIdx;
 
   /**
    *
@@ -9,16 +11,17 @@ public class ThreeTriosMove implements Move{
    * @param cardIdx
    */
   public ThreeTriosMove(GridPos pos, int cardIdx) {
-
+    this.pos = pos;
+    this.cardIdx = cardIdx;
   }
 
   @Override
   public GridPos getPosition() {
-    return pos;
+    return new GridPos2d(pos.getRow(), pos.getCol());
   }
 
   @Override
   public int getCardIxdInHand() {
-    return 0;
+    return cardIdx;
   }
 }
