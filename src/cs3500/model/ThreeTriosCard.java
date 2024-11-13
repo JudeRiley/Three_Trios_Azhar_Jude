@@ -55,9 +55,24 @@ public class ThreeTriosCard implements Card {
     this.values = temp;
   }
 
+  public ThreeTriosCard(Card toCopy) {
+    if (toCopy == null) {
+      throw new IllegalArgumentException("The Card to copy cannot be null!");
+    }
+
+    this.name = toCopy.getName();
+    this.values = new int[]{toCopy.getValueOf(Direction.NORTH), toCopy.getValueOf(Direction.SOUTH),
+            toCopy.getValueOf(Direction.EAST), toCopy.getValueOf(Direction.WEST)};
+  }
+
   @Override
   public int getValueOf(Direction d) {
     return values[d.ordinal()];
+  }
+
+  @Override
+  public String getName() {
+    return name;
   }
 
   @Override

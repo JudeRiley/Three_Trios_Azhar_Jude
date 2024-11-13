@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import cs3500.model.config.CardConfigReader;
@@ -39,13 +40,20 @@ public class ThreeTriosModelTest {
 
     // Initialize the GridConfigReader and read the grid
     GridConfigReader gridConfigReader = new GridConfigReader(gridConfigPath);
-    grid = gridConfigReader.readGrid();
+    Cell[][] edit = gridConfigReader.readGrid().getCurrentGrid();
+    edit[1][2] = new ThreeTriosCell(true);
+    edit[1][1] = new ThreeTriosCell(true);
+    grid = new ThreeTriosGrid(edit);
+
 
     // Initialize the CardConfigReader and read the deck
     CardConfigReader cardConfigReader = new CardConfigReader(cardConfigPath);
     List<Card> deck = cardConfigReader.readCards();
+    List<Card> redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
+    List<Card> blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
+    blueHand.set(0, new ThreeTriosCard("test", 10, 5, 10, 10));
 
-    game = new ThreeTriosModel(deck, grid);
+    game = new ThreeTriosModel(redHand, blueHand, grid);
   }
 
   /**
@@ -77,21 +85,19 @@ public class ThreeTriosModelTest {
     // RR_RR, then once we place a stronger blue card the row
     // should be BBBBB
     // (The middle R's will be stronger than ending R's)
+    System.out.println(new ThreeTriosTextView(game));
     game.placeCard(new GridPos2d(2, 0), 0);
-    game.placeCard(new GridPos2d(0, 0), 0);
+    game.placeCard(new GridPos2d(1, 2), 0);
 
     game.placeCard(new GridPos2d(2, 1), 9);
     game.placeCard(new GridPos2d(0, 1), 0);
 
     game.placeCard(new GridPos2d(2, 3), 9);
-    game.placeCard(new GridPos2d(0, 2), 0);
+    game.placeCard(new GridPos2d(0, 0), 0);
 
     game.placeCard(new GridPos2d(2, 4), 0);
     System.out.println(new ThreeTriosTextView(game));
-
     game.placeCard(new GridPos2d(2, 2), 0);
-    System.out.println(grid.getCell(new GridPos2d(2, 1)).getCardValueOf(Direction.WEST));
-    // should be RRRRR in middle row but is RBBBR
     System.out.println(new ThreeTriosTextView(game));
     // make sure the ends are blue
     assertEquals(grid.getCell(new GridPos2d(2, 4)).getOwnerName(), "BLUE");
@@ -187,8 +193,8 @@ public class ThreeTriosModelTest {
     // Get losing neighbors from Blue's position
     List<GridPos> losingNeighbors = grid.getLosingNeighbors(posBlue);
     // Verify that Blue's card is in the list
-    assertTrue(losingNeighbors.get(0).getX() == 2);
-    assertTrue(losingNeighbors.get(0).getY() == 2);
+    assertTrue(losingNeighbors.get(0).getRow() == 2);
+    assertTrue(losingNeighbors.get(0).getCol() == 2);
   }
 }
 

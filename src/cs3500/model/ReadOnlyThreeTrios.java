@@ -9,7 +9,7 @@ import java.util.List;
 public interface ReadOnlyThreeTrios {
 
   /**
-   * Gets the current grid of the game.
+   * Gets the current grid of the game as a 2d array.
    *
    * @return a 2D array representing the current grid state
    */

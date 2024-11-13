@@ -18,13 +18,15 @@ public interface Grid {
   void playCard(GridPos pos, Card card, Player owner);
 
   /**
-   * Returns a list of the adjacent positions of the given position. Each neighbor position is only
+   * Returns a list of some adjacent positions of the given position. Each neighbor position is only
    * included in the list if it's card strictly loses to the card at the given position.
    *
    * @param pos A valid position on the grid
    * @return A list of adjacent positions containing losing cards.
    */
   List<GridPos> getLosingNeighbors(GridPos pos);
+
+  int[] getLosingSurroundingValues(GridPos pos);
 
   /**
    * Reassigns the owner of the card-cell at the given position to the given Player.
@@ -58,14 +60,14 @@ public interface Grid {
   public int getNumCardCells();
 
   /**
-   * Returns a copy of the grid state at the time the method is called.
+   * Returns a deeply copied of the grid state at the time the method is called.
    *
    * @return a new 2D array of Cells.
    */
   public Cell[][] getCurrentGrid();
 
   /**
-   * Returns the cell at the specified GridPos.
+   * Returns A Copy of the cell at the specified GridPos.
    *
    * @param pos the position of the cell to retrieve
    * @return the Cell at the given position
