@@ -1,0 +1,5 @@
+getCurrentGrid() called
+getHand(RED) called
+getCurrentGrid() called
+getHand(RED) called
+getTurn() called
