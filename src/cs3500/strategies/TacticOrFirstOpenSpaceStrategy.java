@@ -15,8 +15,11 @@ public class TacticOrFirstOpenSpaceStrategy implements ThreeTriosStrategy {
   private final FirstOpenSpaceStrategy fallback;
 
   /**
-   * Creates an object for this class.
-   * @param tacticToTry the tactic to try
+   * Creates a new strategy that first attempts the given tactic, and if that tactic fails,
+   * then it will play to the first open space. This essentially turns the given tactic into
+   * a simple complete strategy.
+   *
+   * @param tacticToTry the tactic to attempt before falling back on first open space.
    */
   public TacticOrFirstOpenSpaceStrategy(ThreeTriosTactic tacticToTry) {
     if (tacticToTry == null) {

@@ -88,3 +88,15 @@ The **Configuration** component handles reading grid and card configurations fro
 
 ## Changes made from Assignment 5
 - Refactored GridConfigReader so that method doesn't exceed 50 lines
+- Fixed the implementation of ThreeTriosModel.battleStep and Grid.getLosingNeighbors so that card flipping chains properly.
+- Changed GridPos to be defined by rows and columns rather than x and y positions.
+- Fixed GridPos.getAdjacent.
+- Added GridPos.isInBoundsFor and GridPos.accessArray Methods to simplify uses of grid positions in other classes.
+- Added Move interface.
+- Inverted Cell.isFilled and renamed the inverted method to Card.isOpenForPlay
+- Added GetName to Card Interface
+- Added Copy Constructors to Cell and Card implementations
+- Added FromString static method to Player enum
+
+## Extra Credit Attempts
+- Added the ability to chain strategies together with the ChainableStrategy class.
