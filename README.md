@@ -97,3 +97,6 @@ The **Configuration** component handles reading grid and card configurations fro
 - Added GetName to Card Interface
 - Added Copy Constructors to Cell and Card implementations
 - Added FromString static method to Player enum
+
+## Extra Credit
+- Added the ability to chain strategies together with the ChainableStrategy class.
