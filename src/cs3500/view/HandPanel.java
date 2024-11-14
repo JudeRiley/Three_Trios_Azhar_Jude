@@ -5,9 +5,15 @@ import cs3500.model.Card;
 import cs3500.model.Direction;
 import cs3500.model.Player;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.BasicStroke;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -18,7 +24,6 @@ import java.util.List;
 public class HandPanel extends JPanel {
   private final ReadOnlyThreeTrios model;
   private final Player player;
-  private int cardWidth;
   private int cardHeight;
   private int selectedCardIndex = -1;
 
@@ -65,7 +70,7 @@ public class HandPanel extends JPanel {
     List<Card> hand = model.getHand(player);
     int numCards = hand.size();
 
-    cardWidth = getWidth();
+    int cardWidth = getWidth();
 
     // Calculate cardHeight based on panel height and number of cards
     int availableHeight = getHeight();

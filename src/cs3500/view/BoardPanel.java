@@ -5,9 +5,14 @@ import cs3500.model.GridPos2d;
 import cs3500.model.ReadOnlyThreeTrios;
 import cs3500.model.Cell;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 

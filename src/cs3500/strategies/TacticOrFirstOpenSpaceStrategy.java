@@ -14,6 +14,10 @@ public class TacticOrFirstOpenSpaceStrategy implements ThreeTriosStrategy {
   private final ThreeTriosTactic tacticToTry;
   private final FirstOpenSpaceStrategy fallback;
 
+  /**
+   * Creates an object for this class.
+   * @param tacticToTry the tactic to try
+   */
   public TacticOrFirstOpenSpaceStrategy(ThreeTriosTactic tacticToTry) {
     if (tacticToTry == null) {
       throw new IllegalArgumentException("Tactic cannot be null!");

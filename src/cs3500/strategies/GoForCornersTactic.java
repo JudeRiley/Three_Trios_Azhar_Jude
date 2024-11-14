@@ -23,7 +23,7 @@ import cs3500.model.ThreeTriosMove;
  * (bordered by a winning ally) where the cell will always be able to be flipped from this side
  * (assuming that neighboring cell is flipped.)
  */
-public class GoForCornersTactic implements ThreeTriosTactic{
+public class GoForCornersTactic implements ThreeTriosTactic {
 
   private Cell[][] grid;
   private Player player;
@@ -68,15 +68,15 @@ public class GoForCornersTactic implements ThreeTriosTactic{
 
   private int chooseCardIdx(GridPos corner, Direction side1, Direction side2) {
     int bestCardIdx = 0;
-    int bestCardValue = SideScore(corner, 0, side1) + SideScore(corner, 0, side2);
+    int bestCardValue = sideScore(corner, 0, side1) + sideScore(corner, 0, side2);
 
     int side1Score;
     int side2Score;
 
     for (int cardIdx = 1; cardIdx < hand.size(); cardIdx++) {
 
-      side1Score = SideScore(corner, cardIdx, side1);
-      side2Score = SideScore(corner, cardIdx, side2);
+      side1Score = sideScore(corner, cardIdx, side1);
+      side2Score = sideScore(corner, cardIdx, side2);
 
       if (side1Score + side2Score > bestCardValue) {
         bestCardIdx = cardIdx;
@@ -87,26 +87,28 @@ public class GoForCornersTactic implements ThreeTriosTactic{
     return bestCardIdx;
   }
 
-
-  private int SideScore(GridPos corner, int cardIdx, Direction sideDirection) {
+  private int sideScore(GridPos corner, int cardIdx, Direction sideDirection) {
     Cell adjCell = corner.getAdjacent(sideDirection).accessArray(this.grid);
 
     //by default, this side is as hard to flip as its value designates
     int returnScore = hand.get(cardIdx).getValueOf(sideDirection);
 
-    if (adjCell.isCardCell() && adjCell.hasCard() && adjCell.getOwnerName().equals(player.toString()) && returnScore < adjCell.getCardValueOf(sideDirection.opposite())) {
-      //if the adjacent cell is an ally that wins from this side, it is always possible to flip the cell from this side
+    if (adjCell.isCardCell() && adjCell.hasCard() && adjCell.getOwnerName().equals(
+            player.toString()) && returnScore < adjCell.getCardValueOf(sideDirection.opposite())) {
+      //if the adjacent cell is an ally that wins from this side, it is always possible to flip the
+      //cell from this side
       returnScore = 0;
     } else {
       //If the adjacent Cell is a Hole, it is impossible to flip the cell from this side.
-      //If the adjacent Cell is owned by the other player, it is impossible to flip the cell from this side.
-      //If the adjacent cell is an ally that loses from this side, it is impossible to flip the cell from this side.
+      //If the adjacent Cell is owned by the other player, it is impossible to flip the cell from
+      //this side.
+      //If the adjacent cell is an ally that loses from this side, it is impossible to flip the
+      //cell from this side.
       returnScore = 10;
     }
 
     return returnScore;
   }
-
 
 
 }

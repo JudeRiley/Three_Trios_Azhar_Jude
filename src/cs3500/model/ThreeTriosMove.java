@@ -3,7 +3,7 @@ package cs3500.model;
 /**
  * The data that makes up one "move" (a player's action on their turn) in a ThreeTriosModel.
  */
-public class ThreeTriosMove implements Move{
+public class ThreeTriosMove implements Move {
 
   private final GridPos pos;
   private final int cardIdx;

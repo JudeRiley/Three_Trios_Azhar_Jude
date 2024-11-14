@@ -54,9 +54,9 @@ public interface Cell {
   public int directionalCompareTo(Direction d, Cell other);
 
   /**
-   * Returns true if the cell is a card-cell and does not yet contain a card;
+   * Returns true if the cell is a card-cell and does not yet contain a card.
    *
-   * @return true if open for play, false otherwise;
+   * @return true if open for play, false otherwise
    */
   public boolean isOpenForPlay();
 

@@ -1,6 +1,10 @@
 package cs3500;
 
-import cs3500.model.*;
+import cs3500.model.Grid;
+import cs3500.model.Card;
+import cs3500.model.ThreeTriosModel;
+import cs3500.model.GridPos2d;
+
 import cs3500.model.config.CardConfigReader;
 import cs3500.model.config.GridConfigReader;
 import cs3500.view.ThreeTriosView;
@@ -10,7 +14,15 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
+/**
+ * This is the driver class for the program.
+ */
 public final class ThreeTriosMain {
+  /**
+   * This is the main class that runs the program.
+   * @param args command line arguments
+   * @throws IOException when input invalid
+   */
   public static void main(String[] args) throws IOException {
     String gridConfigPath = Paths.get("test", "cs3500",
             "testingConfigs", "board_connected_holes.txt").toString();

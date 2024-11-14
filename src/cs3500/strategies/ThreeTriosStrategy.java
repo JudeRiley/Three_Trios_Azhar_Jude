@@ -18,8 +18,8 @@ public interface ThreeTriosStrategy {
    *
    * @param model the ThreeTriosModel for which a Move is chosen.
    * @param forWhom the Player to choose a Move for.
-   * @throws IllegalStateException the model is in an invalid state where a move cannot be chosen.
    * @return A "best" Move for this Player in this ThreeTriosModel.
+   * @throws IllegalStateException the model is in an invalid state where a move cannot be chosen.
    */
   Move chooseMove(ReadOnlyThreeTrios model, Player forWhom) throws IllegalStateException;
 }

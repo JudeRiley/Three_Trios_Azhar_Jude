@@ -46,8 +46,8 @@ public class CardConfigReader {
         }
         String[] tokens = line.split("\\s+");
         if (tokens.length != 5) {
-          throw new IllegalArgumentException("Invalid format at line " + lineNumber +
-                  ": expected 5 tokens, got " + tokens.length);
+          throw new IllegalArgumentException("Invalid format at line " + lineNumber
+                  + ": expected 5 tokens, got " + tokens.length);
         }
         String name = tokens[0];
         try {

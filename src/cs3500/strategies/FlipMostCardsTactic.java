@@ -57,12 +57,13 @@ public class FlipMostCardsTactic implements ThreeTriosTactic {
       for (int cardIdx = 0; cardIdx < hand.size(); cardIdx++) {
         int count = 0;
         for (Direction d : Direction.values()) {
-          if (hand.get(cardIdx).getValueOf(d) > testGame.getLosingSurroundingValues(openPositions.get(bestPosIdx))[d.ordinal()]) {
+          if (hand.get(cardIdx).getValueOf(d) > testGame.getLosingSurroundingValues(
+                  openPositions.get(bestPosIdx))[d.ordinal()]) {
             count++;
           }
         }
         if (count == 4) {
-          return Optional.of(new ThreeTriosMove(openPositions.get(bestPosIdx),cardIdx));
+          return Optional.of(new ThreeTriosMove(openPositions.get(bestPosIdx), cardIdx));
         }
       }
     }
@@ -83,7 +84,8 @@ public class FlipMostCardsTactic implements ThreeTriosTactic {
   class SortByFlipCount implements Comparator<GridPos> {
     @Override
     public int compare(GridPos o1, GridPos o2) {
-      int ret = Integer.compare(getLosingNeighborsStrings(o1).size(), getLosingNeighborsStrings(o2).size());
+      int ret = Integer.compare(getLosingNeighborsStrings(o1).size(),
+              getLosingNeighborsStrings(o2).size());
       if (ret == 0) {
         //if there is a tie, then the uppermost-leftmost wins
         ret = Integer.compare(o1.getRow() + o1.getCol(), o2.getRow() + o2.getCol());

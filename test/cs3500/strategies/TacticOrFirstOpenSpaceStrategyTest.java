@@ -1,13 +1,25 @@
 package cs3500.strategies;
 
-import cs3500.model.*;
-
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import cs3500.model.Card;
+import cs3500.model.Cell;
+import cs3500.model.GridPos;
+import cs3500.model.GridPos2d;
+import cs3500.model.MockReadOnlyThreeTrios;
+import cs3500.model.Move;
+import cs3500.model.Player;
+import cs3500.model.ThreeTriosCard;
+import cs3500.model.ThreeTriosCell;
+import cs3500.model.ThreeTriosMove;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Testing the TacticOrFirstOpenSpaceStrategyTest.  You can use any "tactic" inside of this class,
@@ -55,14 +67,15 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     int col = pos.getCol();
 
     // Check if the position is one of the corners
-    boolean isCorner = (row == 0 && col == 0) || (row == 0 && col == 2) ||
-            (row == 2 && col == 0) || (row == 2 && col == 2);
+    boolean isCorner = (row == 0 && col == 0) || (row == 0 && col == 2)
+            || (row == 2 && col == 0) || (row == 2 && col == 2);
 
     assertTrue("Expected the move to be to a corner position", isCorner);
 
     // The selected card should be the strongest card (index 1)
     int expectedCardIndex = 1; // Index of "StrongCard"
-    assertEquals("Expected the strongest card to be selected", expectedCardIndex, selectedMove.getCardIdxInHand());
+    assertEquals("Expected the strongest card to be selected", expectedCardIndex,
+            selectedMove.getCardIdxInHand());
 
     // Verifying method calls
     String logContent = log.toString();
@@ -110,8 +123,10 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     GridPos expectedPosition = new GridPos2d(1, 1); // The cell we cleared
     int expectedCardIndex = 0; // The fallback uses card at index 0
 
-    assertEquals("Expected the move to be to the first open space (1,1)", expectedPosition, selectedMove.getPosition());
-    assertEquals("Expected the fallback to use card index 0", expectedCardIndex, selectedMove.getCardIdxInHand());
+    assertEquals("Expected the move to be to the first open space (1,1)", expectedPosition,
+            selectedMove.getPosition());
+    assertEquals("Expected the fallback to use card index 0", expectedCardIndex,
+            selectedMove.getCardIdxInHand());
 
     // Verifying method calls
     String logContent = log.toString();
@@ -156,8 +171,10 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     GridPos expectedPosition = new GridPos2d(0, 0);
     int expectedCardIndex = 1; // The strongest card
 
-    assertEquals("Expected the move to be to the available corner (0,0)", expectedPosition, selectedMove.getPosition());
-    assertEquals("Expected the strongest card to be selected", expectedCardIndex, selectedMove.getCardIdxInHand());
+    assertEquals("Expected the move to be to the available corner (0,0)", expectedPosition,
+            selectedMove.getPosition());
+    assertEquals("Expected the strongest card to be selected", expectedCardIndex,
+            selectedMove.getCardIdxInHand());
 
     // Verifying method calls
     String logContent = log.toString();
@@ -232,7 +249,8 @@ public class TacticOrFirstOpenSpaceStrategyTest {
 
     // Verify that the move returned is the one from the tactic
     Move expectedMove = new ThreeTriosMove(new GridPos2d(1, 1), 0);
-    assertEquals("Expected the move from the tactic to be used", expectedMove, selectedMove);
+    assertEquals("Expected the move from the tactic to be used", expectedMove,
+            selectedMove);
 
     // Verifying method logs
     String logContent = log.toString();
@@ -255,8 +273,8 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     Player currentPlayer = Player.RED;
 
     // Create a hand with multiple cards
-    Card card1 = new ThreeTriosCard("Card1", 8, 8, 8, 8); // High values
-    Card card2 = new ThreeTriosCard("Card2", 3, 3, 3, 3); // Low values
+    Card card1 = new ThreeTriosCard("Card1", 8, 8, 8, 8);
+    Card card2 = new ThreeTriosCard("Card2", 3, 3, 3, 3);
     List<Card> mockHand = Arrays.asList(card1, card2);
 
     // Set up the mock model
@@ -276,7 +294,8 @@ public class TacticOrFirstOpenSpaceStrategyTest {
 
     // Verify that the move is as expected
     Move expectedMove = new ThreeTriosMove(new GridPos2d(1, 1), 0);
-    assertEquals("Expected the tactic to choose the move that flips the most cards", expectedMove, selectedMove);
+    assertEquals("Expected the tactic to choose the move that flips the most cards",
+            expectedMove, selectedMove);
 
     // Verifying method calls
     String logContent = log.toString();
@@ -336,7 +355,7 @@ public class TacticOrFirstOpenSpaceStrategyTest {
 
   private Cell[][] createFullMockGrid(int rows, int cols) {
     Cell[][] grid = new Cell[rows][cols];
-    Card occupiedCard = new ThreeTriosCard("OccupiedCard", 5, 5, 5, 5);
+    Card occupiedCard = new ThreeTriosCard("Occupied", 5, 5, 5, 5);
     for (int row = 0; row < rows; row++) {
       for (int col = 0; col < cols; col++) {
         grid[row][col] = new ThreeTriosCell(true); // Occupied by BLUE player
@@ -352,7 +371,7 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     Cell[][] grid = createEmptyGrid(rows, cols);
 
     // Place opponent's cards adjacent to empty positions
-    Card opponentCard = new ThreeTriosCard("OpponentCard", 2, 2, 2, 2);
+    Card opponentCard = new ThreeTriosCard("Opponent", 2, 2, 2, 2);
     grid[1][0] = new ThreeTriosCell(true);
     grid[0][1] = new ThreeTriosCell(true);
 
@@ -368,7 +387,7 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     Cell[][] grid = createEmptyGrid(rows, cols);
 
     // Place opponent's cards around multiple empty positions
-    Card opponentCard = new ThreeTriosCard("OpponentCard", 2, 2, 2, 2);
+    Card opponentCard = new ThreeTriosCard("Opponent", 2, 2, 2, 2);
     grid[1][0] = new ThreeTriosCell(true);
     grid[0][1] = new ThreeTriosCell(true);
     grid[1][2] = new ThreeTriosCell(true);

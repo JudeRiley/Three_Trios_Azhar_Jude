@@ -8,7 +8,7 @@ import cs3500.model.ReadOnlyThreeTrios;
 import cs3500.model.ThreeTriosMove;
 
 /**
- * An infallible strategy that plays the first card in a players hand to the first open space
+ * An infallible strategy that plays the first card in a players hand to the first open space.
  */
 public class FirstOpenSpaceStrategy implements ThreeTriosStrategy {
 

@@ -94,7 +94,8 @@ public class ThreeTriosGrid implements Grid {
       if (posToAdd.isInBoundsFor(this.grid.length, this.grid[0].length)) {
         targetCell = this.gridCellRef(posToAdd);
         //if targetCell has a card and loses numerically and is an enemy
-        if (targetCell.hasCard() && gridCellRef(pos).directionalCompareTo(direction, targetCell) == 1) {
+        if (targetCell.hasCard() && gridCellRef(pos).directionalCompareTo(direction, targetCell)
+                == 1) {
           retArr[direction.ordinal()] = targetCell.getCardValueOf(direction.opposite());
           losingNeighbors.add(posToAdd);
         }
@@ -116,7 +117,8 @@ public class ThreeTriosGrid implements Grid {
       if (posToAdd.isInBoundsFor(this.grid.length, this.grid[0].length)) {
         targetCell = this.gridCellRef(posToAdd);
         //if targetCell has a card and loses numerically and is an enemy
-        if (targetCell.hasCard() && gridCellRef(pos).directionalCompareTo(direction, targetCell) == 1) {
+        if (targetCell.hasCard() && gridCellRef(pos).directionalCompareTo(direction, targetCell)
+                == 1) {
           retArr[direction.ordinal()] = targetCell.getCardValueOf(direction.opposite());
         }
       }

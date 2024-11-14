@@ -3,9 +3,9 @@ package cs3500.view;
 import cs3500.model.Player;
 import cs3500.model.ReadOnlyThreeTrios;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
-import java.awt.*;
+import java.awt.BorderLayout;
 
 /**
  * ThreeTriosViewImpl is an implementation of the ThreeTriosView.
@@ -14,9 +14,6 @@ import java.awt.*;
  */
 public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
   private final ReadOnlyThreeTrios model;
-  private final BoardPanel boardPanel;
-  private final HandPanel redHandPanel;
-  private final HandPanel blueHandPanel;
 
   /**
    * Constructor that will initialize everything.
@@ -34,9 +31,9 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
     this.setLayout(new BorderLayout());
 
     // Initialize panels
-    boardPanel = new BoardPanel(model);
-    redHandPanel = new HandPanel(model, Player.RED);
-    blueHandPanel = new HandPanel(model, Player.BLUE);
+    BoardPanel boardPanel = new BoardPanel(model);
+    HandPanel redHandPanel = new HandPanel(model, Player.RED);
+    HandPanel blueHandPanel = new HandPanel(model, Player.BLUE);
 
     // Add panels to the frame
     this.add(redHandPanel, BorderLayout.WEST);
