@@ -4,16 +4,23 @@ import cs3500.model.Player;
 import cs3500.model.ReadOnlyThreeTrios;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ThreeTriosViewImpl is an implementation of the ThreeTriosView.
  * It shows the left side as the Red player's hand and the right side as the
  * Blue player's hand.  The middle is the board where you can place cards.
  */
-public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
+public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFeatures {
   private final ReadOnlyThreeTrios model;
+  private final List<ViewListener> listeners;
+  private HandPanel redHandPanel;
+  private HandPanel blueHandPanel;
+  private BoardPanel boardPanel;
 
   /**
    * Constructor that will initialize everything.
@@ -23,6 +30,7 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
   public ThreeTriosViewImpl(ReadOnlyThreeTrios model) {
     super("ThreeTrios Game");
     this.model = model;
+    this.listeners = new ArrayList<>();
 
     updateTitle();
 
@@ -31,9 +39,9 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
     this.setLayout(new BorderLayout());
 
     // Initialize panels
-    BoardPanel boardPanel = new BoardPanel(model);
-    HandPanel redHandPanel = new HandPanel(model, Player.RED);
-    HandPanel blueHandPanel = new HandPanel(model, Player.BLUE);
+    boardPanel = new BoardPanel(model);
+    redHandPanel = new HandPanel(model, Player.RED);
+    blueHandPanel = new HandPanel(model, Player.BLUE);
 
     // Add panels to the frame
     this.add(redHandPanel, BorderLayout.WEST);
@@ -43,6 +51,16 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
     // Pack and set visibility
     this.pack();
     this.setVisible(true);
+  }
+
+  @Override
+  public void addViewListener(ViewListener listener) {
+    listeners.add(listener);
+  }
+
+  @Override
+  public void removeViewListener(ViewListener listener) {
+    listeners.remove(listener);
   }
 
   /**
@@ -66,5 +84,56 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
   private void updateTitle() {
     Player currentPlayer = model.getTurn();
     this.setTitle("Current player: " + currentPlayer);
+  }
+
+  public void highlightSelectedCard(int cardIndex, Player player) {
+    if (player == Player.RED) {
+      redHandPanel.highlightCard(cardIndex);
+    } else {
+      blueHandPanel.highlightCard(cardIndex);
+    }
+  }
+
+  public void showError(String message) {
+    JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+  }
+
+  public void updateStatus(String status) {
+    // You can add a status bar or update the title
+    this.setTitle("Current player: " + model.getTurn() + " - " + status);
+  }
+
+  /**
+   * Enables or disables user input in the view components based on the player's turn.
+   *
+   * @param enabled true to enable input, false to disable
+   */
+  public void setInputEnabled(boolean enabled) {
+    Player currentPlayer = model.getTurn();
+
+    if (currentPlayer == Player.RED) {
+      redHandPanel.setEnabled(enabled);
+      blueHandPanel.setEnabled(false); // Always disable opponent's hand panel
+    } else if (currentPlayer == Player.BLUE) {
+      blueHandPanel.setEnabled(enabled);
+      redHandPanel.setEnabled(false);
+    }
+
+    // Enable or disable the board panel
+    boardPanel.setEnabled(enabled);
+
+    redHandPanel.repaint();
+    blueHandPanel.repaint();
+    boardPanel.repaint();
+  }
+
+  /**
+   * Displays a dialog box to inform the player that the game is over, showing the winner and the score.
+   *
+   * @param message The message to display to the user.
+   */
+  public void showGameOver(String message) {
+    JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    setInputEnabled(false);
   }
 }

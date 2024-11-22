@@ -8,12 +8,13 @@ import java.util.Random;
 /**
  * Represents a playable ThreeTrios game for 2 players.
  */
-public class ThreeTriosModel implements ThreeTrios {
+public class ThreeTriosModel implements ThreeTrios, ModelFeatures {
 
   private final Grid grid;
   private Player turn;
   private final List<Card> redHand;
   private final List<Card> blueHand;
+  private final List<ModelListener> listeners;
 
   /**
    * Constructs and starts a three trios game with a given deck and grid layout.
@@ -37,7 +38,7 @@ public class ThreeTriosModel implements ThreeTrios {
     this.redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
     this.blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
     this.grid = grid;
-    this.turn = Player.RED;
+    this.listeners = new ArrayList<>();
   }
 
   /**
@@ -64,7 +65,7 @@ public class ThreeTriosModel implements ThreeTrios {
     this.redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
     this.blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
     this.grid = grid;
-    this.turn = Player.RED;
+    this.listeners = new ArrayList<>();
   }
 
   /**
@@ -89,7 +90,34 @@ public class ThreeTriosModel implements ThreeTrios {
     this.redHand = redHand;
     this.blueHand = blueHand;
     this.grid = grid;
+    this.listeners = new ArrayList<>();
+  }
+
+  @Override
+  public void addModelListener(ModelListener listener) {
+    listeners.add(listener);
+  }
+
+  @Override
+  public void removeModelListener(ModelListener listener) {
+    listeners.remove(listener);
+  }
+
+  private void notifyTurnChanged() {
+    for (ModelListener listener : listeners) {
+      listener.onTurnChanged(this.turn);
+    }
+  }
+
+  private void notifyGameOver(Player winner) {
+    for (ModelListener listener : listeners) {
+      listener.onGameOver(winner);
+    }
+  }
+
+  public void startGame() {
     this.turn = Player.RED;
+    notifyTurnChanged();
   }
 
   @Override
@@ -113,6 +141,7 @@ public class ThreeTriosModel implements ThreeTrios {
     this.grid.playCard(pos, cardToPlay, this.turn);
     this.battleStep(pos);
     this.turn = this.turn.nextPlayer();
+    notifyTurnChanged();
   }
 
   private void battleStep(GridPos pos) {
@@ -136,10 +165,13 @@ public class ThreeTriosModel implements ThreeTrios {
     }
 
     if (this.grid.getScoreOf(Player.RED) > this.grid.getScoreOf(Player.BLUE)) {
+      notifyGameOver(Player.RED);
       return Player.RED;
     } else if (this.grid.getScoreOf(Player.RED) < this.grid.getScoreOf(Player.BLUE)) {
+      notifyGameOver(Player.BLUE);
       return Player.BLUE;
     } else { // if tie
+      notifyGameOver(null);
       return null;
     }
   }

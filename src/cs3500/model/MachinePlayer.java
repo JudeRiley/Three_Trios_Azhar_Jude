@@ -1,5 +1,6 @@
 package cs3500.model;
 
+import cs3500.controller.ThreeTriosController;
 import cs3500.strategies.ThreeTriosStrategy;
 
 public class MachinePlayer implements PlayerType {

@@ -47,6 +47,11 @@ public class HandPanel extends JPanel {
     });
   }
 
+  public void highlightCard(int index) {
+    this.selectedCardIndex = index;
+    repaint();
+  }
+
   /**
    * Gets the dimension of the card.
    *
