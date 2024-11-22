@@ -1,7 +1,11 @@
 package cs3500;
 
+import cs3500.controller.ThreeTriosController;
 import cs3500.model.Grid;
 import cs3500.model.Card;
+import cs3500.model.HumanPlayer;
+import cs3500.model.Player;
+import cs3500.model.PlayerType;
 import cs3500.model.ThreeTriosModel;
 import cs3500.model.GridPos2d;
 
@@ -36,21 +40,14 @@ public final class ThreeTriosMain {
     List<Card> deck = cardConfigReader.readCards();
 
     ThreeTriosModel model = new ThreeTriosModel(deck, grid);
-    ThreeTriosView view = new ThreeTriosViewImpl(model);
+    ThreeTriosViewImpl view1 = new ThreeTriosViewImpl(model);
+    ThreeTriosViewImpl view2 = new ThreeTriosViewImpl(model);
 
-    // Testing stuff to see the view
-    model.placeCard(new GridPos2d(2, 0), 0);
-    model.placeCard(new GridPos2d(0, 0), 0);
+    PlayerType player1 = new HumanPlayer(Player.RED);
+    PlayerType player2 = new HumanPlayer(Player.BLUE);
 
-    model.placeCard(new GridPos2d(2, 1), 9);
-    model.placeCard(new GridPos2d(0, 1), 0);
-
-    model.placeCard(new GridPos2d(2, 3), 9);
-    model.placeCard(new GridPos2d(0, 2), 0);
-
-    model.placeCard(new GridPos2d(2, 4), 0);
-
-    model.placeCard(new GridPos2d(2, 2), 0);
-    view.makeVisible();
+    ThreeTriosController controller1 = new ThreeTriosController(model, view1, player1);
+    ThreeTriosController controller2 = new ThreeTriosController(model, view2, player2);
+    model.startGame();
   }
 }

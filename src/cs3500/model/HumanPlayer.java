@@ -7,16 +7,13 @@ import cs3500.view.ThreeTriosView;
  */
 public class HumanPlayer implements PlayerType {
   private final Player playerColor;
-  private final ThreeTriosView view;
 
   /**
    * Constructor for the human player.
    * @param playerColor the color of the player
-   * @param view the view that the player uses
    */
-  public HumanPlayer(Player playerColor, ThreeTriosView view) {
+  public HumanPlayer(Player playerColor) {
     this.playerColor = playerColor;
-    this.view = view;
   }
 
   @Override

@@ -111,7 +111,7 @@ public class ThreeTriosModel implements ThreeTrios, ModelFeatures {
 
   private void notifyGameOver(Player winner) {
     for (ModelListener listener : listeners) {
-      listener.onGameOver(winner);
+      listener.onGameOver(winner, grid.getScoreOf(winner));
     }
   }
 
