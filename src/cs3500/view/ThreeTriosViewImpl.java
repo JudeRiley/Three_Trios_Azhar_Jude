@@ -122,7 +122,6 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFe
   }
 
   public void updateStatus(String status) {
-    // You can add a status bar or update the title
     this.setTitle("Current player: " + model.getTurn() + " - " + status);
   }
 
