@@ -23,6 +23,7 @@ public class BoardPanel extends JPanel {
   private final ReadOnlyThreeTrios model;
   private int cellWidth;
   private int cellHeight;
+  private BoardPanelListener listener;
 
   /**
    * The constructor for the BoardPanel.
@@ -33,6 +34,10 @@ public class BoardPanel extends JPanel {
     this.model = model;
     this.addMouseListener(new BoardMouseListener());
     this.setBackground(Color.BLACK);
+  }
+
+  public void setBoardPanelListener(BoardPanelListener listener) {
+    this.listener = listener;
   }
 
   /**
@@ -152,6 +157,9 @@ public class BoardPanel extends JPanel {
       // Validate positions
       Cell[][] grid = model.getCurrentGrid();
       if (row >= 0 && row < grid.length && col >= 0 && col < grid[0].length) {
+        if (listener != null) {
+          listener.positionSelected(row, col);
+        }
         GridPos2d pos = new GridPos2d(row, col);
         System.out.println("Grid cell clicked at: " + pos);
       } else {

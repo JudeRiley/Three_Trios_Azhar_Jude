@@ -26,6 +26,7 @@ public class HandPanel extends JPanel {
   private final Player player;
   private int cardHeight;
   private int selectedCardIndex = -1;
+  private HandPanelListener listener;
 
   /**
    * Constructs the hand panel.
@@ -45,6 +46,10 @@ public class HandPanel extends JPanel {
         repaint();
       }
     });
+  }
+
+  public void setHandPanelListener(HandPanelListener listener) {
+    this.listener = listener;
   }
 
   public void highlightCard(int index) {
@@ -172,6 +177,9 @@ public class HandPanel extends JPanel {
       List<Card> hand = model.getHand(player);
 
       if (index >= 0 && index < hand.size()) {
+        if (listener != null) {
+          listener.cardSelected(index);
+        }
         // Handle card selection/deselection
         if (selectedCardIndex == index) {
           // Deselect the card

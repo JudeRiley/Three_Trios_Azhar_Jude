@@ -43,6 +43,29 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFe
     redHandPanel = new HandPanel(model, Player.RED);
     blueHandPanel = new HandPanel(model, Player.BLUE);
 
+    // Set up listeners for hand panels
+    redHandPanel.setHandPanelListener(new HandPanelListener() {
+      @Override
+      public void cardSelected(int cardIndex) {
+        notifyCardSelected(cardIndex);
+      }
+    });
+
+    blueHandPanel.setHandPanelListener(new HandPanelListener() {
+      @Override
+      public void cardSelected(int cardIndex) {
+        notifyCardSelected(cardIndex);
+      }
+    });
+
+    // Set up listener for board panel
+    boardPanel.setBoardPanelListener(new BoardPanelListener() {
+      @Override
+      public void positionSelected(int row, int col) {
+        notifyPositionSelected(row, col);
+      }
+    });
+
     // Add panels to the frame
     this.add(redHandPanel, BorderLayout.WEST);
     this.add(boardPanel, BorderLayout.CENTER);
@@ -136,4 +159,17 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFe
     JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
     setInputEnabled(false);
   }
+
+  private void notifyCardSelected(int cardIndex) {
+    for (ViewListener listener : listeners) {
+      listener.onCardSelected(cardIndex);
+    }
+  }
+
+  private void notifyPositionSelected(int row, int col) {
+    for (ViewListener listener : listeners) {
+      listener.onPosSelected(row, col);
+    }
+  }
+
 }
