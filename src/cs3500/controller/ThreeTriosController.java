@@ -7,7 +7,6 @@ import cs3500.model.Move;
 import cs3500.model.Player;
 import cs3500.model.PlayerType;
 import cs3500.model.ThreeTriosModel;
-import cs3500.model.ThreeTriosMove;
 import cs3500.view.ThreeTriosViewImpl;
 import cs3500.view.ViewListener;
 
@@ -101,6 +100,8 @@ public class ThreeTriosController implements ViewListener, ModelListener {
     try {
       model.placeCard(new GridPos2d(row, col), selectedCardIndex);
       selectedCardIndex = null;
+      view.highlightSelectedCard(-1, player.getPlayerColor());
+      view.highlightSelectedCard(-1, player.getPlayerColor().nextPlayer());
       view.refresh();
     } catch (IndexOutOfBoundsException e) {
       view.showError("Invalid move: " + e.getMessage());
