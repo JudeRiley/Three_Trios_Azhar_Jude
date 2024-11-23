@@ -61,8 +61,8 @@ public class GridPos2d implements GridPos {
   @Override
   public <T> T accessArray(T[][] arr2d) {
     if (!this.isInBoundsFor(arr2d.length, arr2d[0].length)) {
-      throw new IllegalArgumentException("The given array does not contain a reference for this" +
-              " position.");
+      throw new IllegalArgumentException("The given array does not contain a reference for this"
+              + " position.");
     }
     return arr2d[this.row][this.col];
   }
