@@ -31,7 +31,7 @@ public final class ThreeTriosMain {
     String gridConfigPath = Paths.get("test", "cs3500",
             "testingConfigs", "board_connected_holes.txt").toString();
     String cardConfigPath = Paths.get("test", "cs3500",
-            "testingConfigs", "cards_weak_red.txt").toString();
+            "testingConfigs", "cards_large.txt").toString();
 
     GridConfigReader gridConfigReader = new GridConfigReader(gridConfigPath);
     Grid grid = gridConfigReader.readGrid();
