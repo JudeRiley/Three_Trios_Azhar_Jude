@@ -109,6 +109,12 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFe
     this.setTitle("Current player: " + currentPlayer);
   }
 
+  /**
+   * Highlights the selected card in the view.
+   *
+   * @param cardIndex index of the card selected
+   * @param player    player color
+   */
   public void highlightSelectedCard(int cardIndex, Player player) {
     if (player == Player.BLUE) {
       redHandPanel.highlightCard(cardIndex);
@@ -150,7 +156,8 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFe
   }
 
   /**
-   * Displays a dialog box to inform the player that the game is over, showing the winner and the score.
+   * Displays a dialog box to inform the player that the game is over, showing the winner and the
+   * score.
    *
    * @param message The message to display to the user.
    */

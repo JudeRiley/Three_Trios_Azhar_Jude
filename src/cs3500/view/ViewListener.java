@@ -1,7 +1,7 @@
 package cs3500.view;
 
 /**
- * ViewListener to receive events from the view
+ * ViewListener to receive events from the view.
  */
 public interface ViewListener {
 

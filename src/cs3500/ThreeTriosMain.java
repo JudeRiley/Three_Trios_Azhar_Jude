@@ -86,9 +86,11 @@ public final class ThreeTriosMain {
       case "human":
         return new HumanPlayer(playerColor);
       case "strategy1":
-        return new MachinePlayer(playerColor, new TacticOrFirstOpenSpaceStrategy(new FlipMostCardsTactic()));
+        return new MachinePlayer(playerColor, new TacticOrFirstOpenSpaceStrategy(
+                new FlipMostCardsTactic()));
       case "strategy2":
-        return new MachinePlayer(playerColor, new TacticOrFirstOpenSpaceStrategy(new GoForCornersTactic()));
+        return new MachinePlayer(playerColor, new TacticOrFirstOpenSpaceStrategy(
+                new GoForCornersTactic()));
       default:
         System.out.println("Unknown player type: " + playerType);
         System.out.println("Valid types are 'human', 'strategy1', 'strategy2'");

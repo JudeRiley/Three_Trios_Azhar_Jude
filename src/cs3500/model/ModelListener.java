@@ -1,8 +1,5 @@
 package cs3500.model;
 
-import cs3500.model.Player;
-import cs3500.model.ThreeTriosMove;
-
 /**
  * The interface for the model listener.
  */

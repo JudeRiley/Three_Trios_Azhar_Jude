@@ -10,6 +10,10 @@ import cs3500.model.ThreeTriosModel;
 import cs3500.view.ThreeTriosViewImpl;
 import cs3500.view.ViewListener;
 
+/**
+ * The controller will listen to the view and the model.  It will
+ * also be updating the view and model based on what the player has done.
+ */
 public class ThreeTriosController implements ViewListener, ModelListener {
   private final ThreeTriosModel model;
   private final ThreeTriosViewImpl view;
@@ -17,6 +21,12 @@ public class ThreeTriosController implements ViewListener, ModelListener {
   private boolean isMyTurn = false;
   private Integer selectedCardIndex = null;
 
+  /**
+   * Constructor for the controller.
+   * @param model model used
+   * @param view view used
+   * @param player player used
+   */
   public ThreeTriosController(ThreeTriosModel model, ThreeTriosViewImpl view, PlayerType player) {
     this.model = model;
     this.view = view;
@@ -114,6 +124,13 @@ public class ThreeTriosController implements ViewListener, ModelListener {
     view.updateStatus(title);
   }
 
+  /**
+   * This method will handle the machine players move and update the
+   * view and the model.  If the machine chooses an invalid coordinate,
+   * the view will show an error.
+   * @param machinePlayer current machine player
+   * @param move move used
+   */
   public void handleMachinePlayerMove(MachinePlayer machinePlayer, Move move) {
     if (isMyTurn && player.equals(machinePlayer)) {
       try {

@@ -1,7 +1,5 @@
 package cs3500.model;
 
-import cs3500.view.ThreeTriosView;
-
 /**
  * A player of human type.
  */
