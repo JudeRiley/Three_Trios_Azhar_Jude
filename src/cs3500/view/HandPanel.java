@@ -113,7 +113,7 @@ public class HandPanel extends JPanel {
       g2.drawRect(x, y, cardWidth, cardHeight);
 
       // Highlight selected card
-      if (i == selectedCardIndex) {
+      if (i == selectedCardIndex && selectedCardIndex != -1) {
         g2.setColor(Color.GRAY);
         g2.setStroke(new BasicStroke(5));
         g2.drawRect(x, y, cardWidth, cardHeight);
@@ -173,6 +173,9 @@ public class HandPanel extends JPanel {
   private class HandMouseListener extends MouseAdapter {
     @Override
     public void mouseClicked(MouseEvent e) {
+      if (!isEnabled()) {
+        return;
+      }
       int index = e.getY() / cardHeight;
       List<Card> hand = model.getHand(player);
 
@@ -200,4 +203,5 @@ public class HandPanel extends JPanel {
   private String getDisplayValue(int value) {
     return (value == 10) ? "A" : Integer.toString(value);
   }
+
 }

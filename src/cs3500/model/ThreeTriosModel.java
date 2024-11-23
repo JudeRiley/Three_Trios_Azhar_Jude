@@ -141,7 +141,11 @@ public class ThreeTriosModel implements ThreeTrios, ModelFeatures {
     this.grid.playCard(pos, cardToPlay, this.turn);
     this.battleStep(pos);
     this.turn = this.turn.nextPlayer();
-    notifyTurnChanged();
+    try {
+      getWinner();
+    } catch (IllegalStateException e) {
+      notifyTurnChanged();
+    }
   }
 
   private void battleStep(GridPos pos) {

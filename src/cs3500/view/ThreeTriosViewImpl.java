@@ -110,7 +110,7 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFe
   }
 
   public void highlightSelectedCard(int cardIndex, Player player) {
-    if (player == Player.RED) {
+    if (player == Player.BLUE) {
       redHandPanel.highlightCard(cardIndex);
     } else {
       blueHandPanel.highlightCard(cardIndex);
