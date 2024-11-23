@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="OOD_Azhar_Jude">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/submission.zip!/" />
+      <root url="jar://$PROJECT_DIR$/HW5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -18,34 +18,64 @@
 
 ## Quick Start
 
-Here's a simple example to get you started with the **ThreeTrios** game:
+To run the game go into terminal and type
+"java -jar hw7.jar [player1] [player2]", examples below.
 
+Example: java ThreeTriosMain 'player1' 'player2', in place of player1 and player2, you can do any
+combination of "human" "strategy1" "strategy2".  Strategy1 refers to flip most cards strategy and
+strategy2 refers to the go for corners strategy.
+
+Here's a snippet of the main class:
 ```java
-public class ThreeTriosGameDemo {
-    public static void main(String[] args) throws IOException {
-        // Initialize the grid from a configuration file
-        GridConfigReader gridReader = new GridConfigReader("path/to/your/grid_config.txt");
-        Grid grid = gridReader.readGrid();
-
-        // Initialize the deck from a configuration file
-        CardConfigReader cardReader = new CardConfigReader("path/to/your/card_config.txt");
-        List<Card> deck = cardReader.readCards();
-
-        // Create the game model
-        ThreeTrios game = new ThreeTriosModel(deck, grid);
-
-        // Place a card on the grid
-        game.placeCard(new GridPos(0, 0), 0); // Player RED places a card at position (0,0)
-
-        // Get the current turn
-        Player currentPlayer = game.getTurn();
-
-        // Display the current grid state
-        Cell[][] currentGrid = game.getCurrentGrid();
-
-        // Continue the game...
+public static void main(String[] args) throws IOException {
+    if (args.length != 2) {
+    System.out.println("Usage: java GameLauncher <player1> <player2>");
+    System.out.println("Where <playerX> is 'human', 'strategy1', or 'strategy2'");
+    return;
     }
-} 
+
+    String player1Type = args[0];
+    String player2Type = args[1];
+
+    String gridConfigPath = Paths.get("test", "cs3500",
+    "testingConfigs", "board_connected_holes.txt").toString();
+    String cardConfigPath = Paths.get("test", "cs3500",
+    "testingConfigs", "cards_large.txt").toString();
+
+    // Read configurations
+    GridConfigReader gridConfigReader = new GridConfigReader(gridConfigPath);
+    Grid grid = gridConfigReader.readGrid();
+
+    CardConfigReader cardConfigReader = new CardConfigReader(cardConfigPath);
+    List<Card> deck = cardConfigReader.readCards();
+
+    // Create the model
+    ThreeTriosModel model = new ThreeTriosModel(deck, grid);
+
+    // Create views for each player
+    ThreeTriosViewImpl view1 = new ThreeTriosViewImpl(model);
+    ThreeTriosViewImpl view2 = new ThreeTriosViewImpl(model);
+
+    // Create players based on command-line arguments
+    PlayerType player1 = createPlayer(player1Type, Player.RED);
+    PlayerType player2 = createPlayer(player2Type, Player.BLUE);
+
+    // Create controllers
+    ThreeTriosController controller1 = new ThreeTriosController(model, view1, player1);
+    ThreeTriosController controller2 = new ThreeTriosController(model, view2, player2);
+
+    // If players are MachinePlayers, set their controllers and models
+    if (player1 instanceof MachinePlayer) {
+    ((MachinePlayer) player1).setController(controller1);
+    ((MachinePlayer) player1).setModel(model);
+    }
+    if (player2 instanceof MachinePlayer) {
+    ((MachinePlayer) player2).setController(controller2);
+    ((MachinePlayer) player2).setModel(model);
+    }
+
+    model.startGame();
+    }
 ```
 ## How to Navigate the Codebase
 
@@ -97,6 +127,13 @@ The **Configuration** component handles reading grid and card configurations fro
 - Added GetName to Card Interface
 - Added Copy Constructors to Cell and Card implementations
 - Added FromString static method to Player enum
+
+## Changes for part 3
+- Created a MachinePlayer that implements PlayerType, it's purpose is to represent an AI player
+- Created a HumanPlayer that implements PlayerType, it represents a human player
+- Created a ThreeTriosController that controls the game and listens to the view and model
+- View now implements view features to follow the observer pattern
+- Model now implements model features to follow the observer pattern
 
 ## Extra Credit
 - Added the ability to chain strategies together with the ChainableStrategy class.
