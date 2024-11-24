@@ -5,6 +5,7 @@ import cs3500.model.ReadOnlyThreeTrios;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
@@ -176,6 +177,19 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFe
     for (ViewListener listener : listeners) {
       listener.onPosSelected(row, col);
     }
+  }
+
+  /**
+   * Used the bring the current players window to the front.
+   */
+  public void bringToFront() {
+    SwingUtilities.invokeLater(() -> {
+      setVisible(true);
+      toFront();
+      requestFocus();
+      setAlwaysOnTop(true);
+      setAlwaysOnTop(false);
+    });
   }
 
 }

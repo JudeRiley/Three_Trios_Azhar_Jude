@@ -49,8 +49,11 @@ public class ThreeTriosController implements ViewListener, ModelListener {
     updateViewTitle();
     view.setInputEnabled(isMyTurn);
 
-    if (isMyTurn && player instanceof MachinePlayer) {
-      player.performAction();
+    if (isMyTurn) {
+      view.bringToFront();
+      if (player instanceof MachinePlayer) {
+        player.performAction();
+      }
     }
   }
 
