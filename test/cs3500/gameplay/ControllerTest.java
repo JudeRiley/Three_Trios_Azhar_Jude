@@ -26,7 +26,7 @@ public class ControllerTest {
   }
 
   /**
-   * Makes sure that the Machine Player and move are processed correctly;
+   * Makes sure that the Machine Player and move are processed correctly.
    */
   @Test
   public void testHandleMachinePlayerMove() {
