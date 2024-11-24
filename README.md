@@ -21,7 +21,7 @@
 To run the game go into terminal and type
 "java -jar hw7.jar [player1] [player2]", examples below.
 
-Example: java ThreeTriosMain 'player1' 'player2', in place of player1 and player2, you can do any
+Example: java -jar hw7.jar 'player1' 'player2', in place of player1 and player2, you can do any
 combination of "human" "strategy1" "strategy2".  Strategy1 refers to flip most cards strategy and
 strategy2 refers to the go for corners strategy.
 
