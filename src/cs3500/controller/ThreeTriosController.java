@@ -5,7 +5,7 @@ import cs3500.model.MachinePlayer;
 import cs3500.model.Move;
 import cs3500.model.Player;
 import cs3500.model.PlayerType;
-import cs3500.model.ThreeTriosModel;
+import cs3500.model.ThreeTrios;
 import cs3500.view.ThreeTriosViewImpl;
 
 /**
@@ -13,7 +13,7 @@ import cs3500.view.ThreeTriosViewImpl;
  * also be updating the view and model based on what the player has done.
  */
 public class ThreeTriosController implements Controller {
-  private final ThreeTriosModel model;
+  private final ThreeTrios model;
   private final ThreeTriosViewImpl view;
   private final PlayerType player;
   private boolean isMyTurn = false;
@@ -25,7 +25,7 @@ public class ThreeTriosController implements Controller {
    * @param view view used
    * @param player player used
    */
-  public ThreeTriosController(ThreeTriosModel model, ThreeTriosViewImpl view, PlayerType player) {
+  public ThreeTriosController(ThreeTrios model, ThreeTriosViewImpl view, PlayerType player) {
     this.model = model;
     this.view = view;
     this.player = player;

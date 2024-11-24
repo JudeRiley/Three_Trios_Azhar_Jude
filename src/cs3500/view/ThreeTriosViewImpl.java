@@ -16,7 +16,7 @@ import java.util.List;
  * It shows the left side as the Red player's hand and the right side as the
  * Blue player's hand.  The middle is the board where you can place cards.
  */
-public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView, ViewFeatures {
+public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
   private final ReadOnlyThreeTrios model;
   private final List<ViewListener> listeners;
   private HandPanel redHandPanel;

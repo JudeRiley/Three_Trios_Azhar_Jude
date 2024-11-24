@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Represents a playable ThreeTrios game for 2 players.
  */
-public class ThreeTriosModel implements ThreeTrios, ModelFeatures {
+public class ThreeTriosModel implements ThreeTrios {
 
   private final Grid grid;
   private Player turn;

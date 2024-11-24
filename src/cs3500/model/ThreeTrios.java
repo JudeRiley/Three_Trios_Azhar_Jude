@@ -3,7 +3,7 @@ package cs3500.model;
 /**
  * Represents a rules-keeper for a game of ThreeTrios.
  */
-public interface ThreeTrios extends ReadOnlyThreeTrios {
+public interface ThreeTrios extends ReadOnlyThreeTrios, ModelFeatures {
 
   /**
    * Places the card at the given index in the player's hand whose turn it currently is

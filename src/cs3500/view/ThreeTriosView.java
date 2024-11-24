@@ -3,7 +3,7 @@ package cs3500.view;
 /**
  * The interface for the ThreeTriosView.
  */
-public interface ThreeTriosView {
+public interface ThreeTriosView extends ViewFeatures{
   /**
    * Makes the view visible.
    */
