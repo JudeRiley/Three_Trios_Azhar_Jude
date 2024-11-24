@@ -1,17 +1,17 @@
 package cs3500.model;
 
-import cs3500.controller.ThreeTriosController;
+import cs3500.controller.Controller;
 import cs3500.strategies.ThreeTriosStrategy;
 
 /**
  * The machine player is a type of player that is given
- * a strategy.  The machine player will follow the given
+ * a strategy. The machine player will follow the given
  * strategy accordingly.
  */
 public class MachinePlayer implements PlayerType {
   private final Player playerColor;
   private final ThreeTriosStrategy strategy;
-  private ThreeTriosController controller;
+  private Controller controller;
   private ReadOnlyThreeTrios model;
 
   /**
@@ -28,7 +28,7 @@ public class MachinePlayer implements PlayerType {
    * Sets the controller that the machine uses.
    * @param controller controller of machine
    */
-  public void setController(ThreeTriosController controller) {
+  public void setController(Controller controller) {
     this.controller = controller;
   }
 

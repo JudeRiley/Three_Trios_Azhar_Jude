@@ -1,5 +1,6 @@
 package cs3500;
 
+import cs3500.controller.Controller;
 import cs3500.controller.ThreeTriosController;
 import cs3500.model.Grid;
 import cs3500.model.Card;
@@ -64,8 +65,8 @@ public final class ThreeTriosMain {
     PlayerType player2 = createPlayer(player2Type, Player.BLUE);
 
     // Create controllers
-    ThreeTriosController controller1 = new ThreeTriosController(model, view1, player1);
-    ThreeTriosController controller2 = new ThreeTriosController(model, view2, player2);
+    Controller controller1 = new ThreeTriosController(model, view1, player1);
+    Controller controller2 = new ThreeTriosController(model, view2, player2);
 
     // If players are MachinePlayers, set their controllers and models
     if (player1 instanceof MachinePlayer) {

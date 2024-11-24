@@ -2,19 +2,17 @@ package cs3500.controller;
 
 import cs3500.model.GridPos2d;
 import cs3500.model.MachinePlayer;
-import cs3500.model.ModelListener;
 import cs3500.model.Move;
 import cs3500.model.Player;
 import cs3500.model.PlayerType;
 import cs3500.model.ThreeTriosModel;
 import cs3500.view.ThreeTriosViewImpl;
-import cs3500.view.ViewListener;
 
 /**
  * The controller will listen to the view and the model.  It will
  * also be updating the view and model based on what the player has done.
  */
-public class ThreeTriosController implements ViewListener, ModelListener {
+public class ThreeTriosController implements Controller {
   private final ThreeTriosModel model;
   private final ThreeTriosViewImpl view;
   private final PlayerType player;
@@ -127,13 +125,7 @@ public class ThreeTriosController implements ViewListener, ModelListener {
     view.updateStatus(title);
   }
 
-  /**
-   * This method will handle the machine players move and update the
-   * view and the model.  If the machine chooses an invalid coordinate,
-   * the view will show an error.
-   * @param machinePlayer current machine player
-   * @param move move used
-   */
+  @Override
   public void handleMachinePlayerMove(MachinePlayer machinePlayer, Move move) {
     if (isMyTurn && player.equals(machinePlayer)) {
       try {
