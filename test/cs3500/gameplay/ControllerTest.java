@@ -6,7 +6,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs3500.controller.ThreeTriosController;
 
 /**
  * Tests the functionality of the controller using Mocks for Players and Views.
