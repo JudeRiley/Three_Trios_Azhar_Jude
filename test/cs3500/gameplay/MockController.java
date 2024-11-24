@@ -20,9 +20,9 @@ public class MockController implements Controller {
    * and Machine Players.
    *
    * @param testInputs reference to a list that will contain objects passed into the controller.
-   * @param name a name for identification of this mock controller.
+   * @param name       a name for identification of this mock controller.
    */
-  public MockController (List<Object> testInputs, String name) {
+  public MockController(List<Object> testInputs, String name) {
     this.name = name;
     this.testInputs = testInputs;
   }
