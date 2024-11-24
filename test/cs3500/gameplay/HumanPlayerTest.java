@@ -7,7 +7,7 @@ import cs3500.model.HumanPlayer;
 import cs3500.model.Player;
 
 /**
- * Tests that a human player object performs all teh necessary actions for a mocked controller.
+ * Tests that a human player object performs all the necessary actions for a mocked controller.
  */
 public class HumanPlayerTest {
 
