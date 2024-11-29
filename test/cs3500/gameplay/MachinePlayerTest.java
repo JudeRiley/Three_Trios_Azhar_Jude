@@ -6,14 +6,14 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs3500.controller.Controller;
-import cs3500.model.GridPos2d;
-import cs3500.model.MachinePlayer;
-import cs3500.model.Move;
-import cs3500.model.Player;
-import cs3500.model.ReadOnlyThreeTrios;
-import cs3500.model.ThreeTriosMove;
-import cs3500.strategies.ThreeTriosStrategy;
+import cs3500.threetrios.controller.Controller;
+import cs3500.threetrios.model.GridPos2d;
+import cs3500.threetrios.model.MachinePlayer;
+import cs3500.threetrios.model.Move;
+import cs3500.threetrios.model.Player;
+import cs3500.threetrios.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.model.ThreeTriosMove;
+import cs3500.threetrios.strategies.ThreeTriosStrategy;
 
 /**
  * Tests that a machine player object performs all the necessary actions for a mocked controller

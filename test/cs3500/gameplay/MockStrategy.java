@@ -3,10 +3,10 @@ package cs3500.gameplay;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs3500.model.Move;
-import cs3500.model.Player;
-import cs3500.model.ReadOnlyThreeTrios;
-import cs3500.strategies.ThreeTriosStrategy;
+import cs3500.threetrios.model.Move;
+import cs3500.threetrios.model.Player;
+import cs3500.threetrios.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.strategies.ThreeTriosStrategy;
 
 /**
  * A mock of a complete Three Trios Strategy. It will return the Moves that are fed to it by

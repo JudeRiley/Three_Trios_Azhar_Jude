@@ -2,9 +2,9 @@ package cs3500.gameplay;
 
 import java.util.List;
 
-import cs3500.view.ThreeTriosView;
-import cs3500.view.ViewFeatures;
-import cs3500.view.ViewListener;
+import cs3500.threetrios.view.ThreeTriosView;
+import cs3500.threetrios.view.ViewFeatures;
+import cs3500.threetrios.view.ViewListener;
 
 /**
  * A mock of a ThreeTriosView to be used in testing the controller.
