@@ -24,10 +24,23 @@ public interface ThreeTriosView extends ViewFeatures {
    */
   void highlightSelectedCard(int cardIndex, Player player);
 
+  /**
+   * Handles showing an error whenever the view encounters an error.
+   * @param message error message
+   */
   void showError(String message);
 
+  /**
+   * Updates the status of the game which will be shown in the window panel.
+   * @param status game status
+   */
   void updateStatus(String status);
 
+  /**
+   * Enables the input of a view.  This makes sure the player cannot make
+   * a move while it is the other players turn.
+   * @param enabled enabled or not
+   */
   void setInputEnabled(boolean enabled);
 
   /**
@@ -39,7 +52,7 @@ public interface ThreeTriosView extends ViewFeatures {
   void showGameOver(String message);
 
   /**
-   * Used the bring the current players window to the front.
+   * Used to bring the current players window to the front.
    */
   void bringToFront();
 }
