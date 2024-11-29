@@ -6,7 +6,7 @@ import cs3500.threetrios.model.Move;
 import cs3500.threetrios.model.Player;
 import cs3500.threetrios.model.PlayerType;
 import cs3500.threetrios.model.ThreeTrios;
-import cs3500.threetrios.view.ThreeTriosViewImpl;
+import cs3500.threetrios.view.ThreeTriosView;
 
 /**
  * The controller will listen to the view and the model.  It will
@@ -14,7 +14,7 @@ import cs3500.threetrios.view.ThreeTriosViewImpl;
  */
 public class ThreeTriosController implements Controller {
   private final ThreeTrios model;
-  private final ThreeTriosViewImpl view;
+  private final ThreeTriosView view;
   private final PlayerType player;
   private boolean isMyTurn = false;
   private Integer selectedCardIndex = null;
@@ -25,7 +25,7 @@ public class ThreeTriosController implements Controller {
    * @param view view used
    * @param player player used
    */
-  public ThreeTriosController(ThreeTrios model, ThreeTriosViewImpl view, PlayerType player) {
+  public ThreeTriosController(ThreeTrios model, ThreeTriosView view, PlayerType player) {
     this.model = model;
     this.view = view;
     this.player = player;

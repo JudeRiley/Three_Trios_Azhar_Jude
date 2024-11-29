@@ -116,6 +116,7 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
    * @param cardIndex index of the card selected
    * @param player    player color
    */
+  @Override
   public void highlightSelectedCard(int cardIndex, Player player) {
     if (player == Player.BLUE) {
       redHandPanel.highlightCard(cardIndex);
@@ -124,10 +125,12 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
     }
   }
 
+  @Override
   public void showError(String message) {
     JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
   }
 
+  @Override
   public void updateStatus(String status) {
     this.setTitle("Current player: " + model.getTurn() + " - " + status);
   }
@@ -162,6 +165,7 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
    *
    * @param message The message to display to the user.
    */
+  @Override
   public void showGameOver(String message) {
     JOptionPane.showMessageDialog(this, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
     setInputEnabled(false);
@@ -182,6 +186,7 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
   /**
    * Used the bring the current players window to the front.
    */
+  @Override
   public void bringToFront() {
     SwingUtilities.invokeLater(() -> {
       setVisible(true);
