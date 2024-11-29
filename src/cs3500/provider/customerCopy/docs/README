@@ -1,0 +1,342 @@
+HOMEWORK 5
+--- PURPOSE AND OVERVIEW ---
+This is a representation of the game of Three Trios, based on the game Triple Triad. It is a two
+player card game where each player has their own hand of cards and plays to a shared grid. To play,
+a player plays a card from their hand to an available spot on the grid. This card then "battles" 
+with its neighboring cards, competing based on card number and direction. The losing card is flipped
+which means that it changes colors to the current player's color. Once all the card cells are full,
+the game is over and the player with the most cards of their color wins. Good luck!!!
+
+
+--- QUICK START ---
+To set up the game:
+    IGame game = new Game();
+    String gridPath = "docs" + File.separator + "TwoIsolatedCardGroups";
+    gridConfig = new File(gridPath);
+    String cardPath = "docs" + File.separator + "TenCardConfigFile";
+    cardsConfig = new File(cardPath);
+    
+To start the game:  
+    game.startGame(gridConfig, cardsConfig);
+    
+To play the game (repeat these three method calls each turn):
+     game.playCard(0, 0, 0); --> row and column index are 0 based
+     game.battle(0,0);       --> row and column index are 0 based
+     game.switchPlayer();
+  
+
+--- DESIGN: CLASSES AND INTERFACES ---
+CARD NUMBERS:
+    The enum CardNumber represents an attack value (ONE through TEN) on the card for Three Trios.
+    Each has a field that contains its corresponding integer value. The card with the value of A is 
+    converted to the enumeration attack value TEN, with integer value of 10.
+
+CARDS:
+    An ICard represents the behaviors of a card in the game of Three Trios. The Card class is an
+    instance of an ICard. A Card has 4 CardNumbers (north, south, east, west) and a
+    name (unique identifier). They do not keep track of color (red or blue) because those are
+    properties of the player, not the card.
+
+GRID:
+    The grid is in the Game class and it is made up of IBoardCells, being either a HoleCell or a
+    CardCell. The interface IBoardCell outlines the behaviors any cell on the grid should be able 
+    to perform. The abstract class ABoardCell is an abstract class. Its purpose is to remove
+    duplicate code (methods) between IBoardCell instances (HoleCell and CardCell). A CardCell's card
+    field will be null until a card is placed on that cell.
+    Every IBoardCell is able to:
+      - determine if it is a hole
+      - determine if it is empty
+      - determine if it is a card cell
+      - produce a string representation of itself
+
+    The relationship looks like this:
+                      +-----------------------+
+                      | interface IBoardCell  |
+                      +-----------------------+
+                      		     |
+                      +-----------------------+
+                      | Abstract ABoardCell   |
+                      +-----------------------+
+                       |              |
+                       |              |
+      +----------------+              +-------+
+      |                                       |
+ +------------------+                         |
+ | class CardCell   |                  +-------------------+
+ | ICard card       |                  | class HoleCell    |
+ +------------------+                  +-------------------+
+
+PLAYER:
+     An IPlayer represents the behaviors of a player in the game of Three Trios. The Player class is
+     an instance of an IPlayer. A Player has a color (either Red or Blue) which are enumerations
+     called PlayerColor. A Player also has 2 lists of cards: one is their current hand and one is a
+     list of all of the cards that they have (their current hand and any cards with their 
+     color on the grid,including any cards on the grid that have been flipped to their color) 
+     because a player should keep track of all of their cards, not just the cards in hand.
+
+GAME:
+    An IGame represents the behaviors of a the game of Three Trios. The Game class is an instance of
+    an IGame. The game is responsible for two players, one red and one blue, and keeps track of
+    which player is the current player. It also has a 2D array of IBoardCells that represent the
+    grid, and two booleans that help describe the state of the game:
+        - isGameOver describes whether the game is over or not
+        - isGameStarted describes whether the game is started or not
+
+VIEW:
+    An IGameView represents the view behavior of a game of Three Trios. The GameTextView is an
+    instance of this interface. Because it is a View, it only has two methods, a toString which uses
+    observations about the game to visually represent the current state of the game and includes the 
+    current player, the grid, and the current player's hand. The second method is render which 
+    appends the current state of the game to the View's log to output to the user. 
+    
+   
+
+--- DESIGN DECISIONS ---
+Assumptions:
+While we designed our code to be able to be easily adjusted for differing functionality
+down the line, our current design assumes the following restrictions for a Three Trios game:
+   - there must be an odd number of card cells on the grid
+   - each player's hand must have (n+1)/2 cards where n is the number of card cells on the grid
+   - there must be enough cards to fill each players hand so the number of cards must be greater 
+     than or equals to n+1 where n is the number of card cells on the grid
+   - a card cannot be placed on a card cell that contains a card or on a hole
+   - once a card is placed by a player, that card is removed from their hand
+   - there are no duplicate cards
+   - the grid is rectangular and its size cannot be changed once the game has started
+   - the grid starts out with no cards placed
+   - there are only 2 players: player red and player blue
+
+Relevant design choices:
+    - configuration files: if the grid or the cards file are not perfectly formated as described by 
+                          the assignment specifications, our model defaults the respective grid 
+                          and/or the cards that are faulty. 
+    - player interface: thinking ahead to future assignments, we made an interface for player which 
+                        can be easily implemented into an AI instance. 
+    - game grid: in the game class, we chose to represent the grid using a 2D array instead of an 
+                  ArrayList of ArrayLists because the dimensions of the grid are fixed once the 
+                  game is configured either with the grid files provided or with our default grid,
+                  and we don't want the user to be able to change this grid.
+    - enumerations: we enumerated the PlayerColor and the CardNumbers as those are both limited 
+                    values as a player can only be red or blue and a card number can only be 1-10,
+                    with A being 10 on the cards.
+    - game play: the play is divided into two separate phases and therefore, two corresponding 
+                 methods: battle and playCard. The playCard method is what places the card on the 
+                 grid to a specific row and column. The battle method flips the cards and changes
+                 their possession if necessary and recurses through the neighboring cards. These 
+                 methods are separate from each other and, like the switchPlayer method which 
+                 changes the current player to the other player, they are meant to be called by the 
+                 controller once the entire MVC is implemented. 
+        
+    
+HOMEWORK 6
+--- CHANGES FOR PART2 ---
+During this homework, the following changes were made to the existing code:
+    In IPlayer the following method was added:
+        - Optional<IMove> getMove : which returns the move that the player wants to play. For human
+                                    players, the optional will always be empty. For AI players,
+                                    the optional will contain the move that the strategy suggests.
+    The IGame interface was split into two separate interfaces: ReadOnlyThreeTrios and IGame.
+        - ReadOnlyThreeTrios contains the behaviors of the game that provide observations about the
+          game. These behaviors do not modify the state of the game but they provide insight into
+          the current game state.
+        - IGame contains the behaviors of the game that modify the state of the game and allow for
+          the game to be played by its users.
+    In ReadOnlyThreeTrios/IGame and Game the following methods were added:
+        - IBoardCell getCell : allows for observations to be made about a cell at the specified row
+                               and column including who owns the card (if there is one in that
+                               specific location on the grid) because this is needed for the
+                               strategies
+        - int flipCards : allows for observations to be made about the number of cards that can be
+                          flipped at the specified location by playing the specified card in the
+                          current player's card because this is needed for the strategies
+        - int getScore : allows for observations to be made about a specific player's score (the
+                        total number of cards they own) during the game because this is needed for
+                        the strategies and simplifies the flipCards method
+        - IGame copy : makes a copy of the game in its current state because this is needed for the
+                       strategies
+        - boolean isStarted : allows for observations about the game to be made, specifically
+                                whether the game has begun or not because this is needed for the
+                                strategies
+        - boolean isMoveLegal : allows for observations about the game, specifically about whether
+                                a player can play to a specific location because this is needed
+                                for the strategies
+        - boolean isValidRow : allows for observations about the game, specifically if the specified
+                               row is legal / an actual row in the game because it deduplicates code
+        - boolean isValidCol : allows for observations about the game, specifically if the specified
+                               column is legal / an actual column in the game because it
+                               deduplicates code
+    Other changes in Game:
+        - a private constructor was added that takes in all the fields of game to help replicate
+          the state of a game which is needed in the strategies
+        - the checks for whether the game has started and is not over were abstracted into private
+          helper methods to deduplicate code
+        - the method getWinner now returns an optional player with the winner in the case that there
+          is one, and an empty optional in the case that there is a tie between player red and
+          player blue
+
+--- ADDITIONS ---
+In the package model, we implemented a class called AIPlayer that extends Player and implements
+the IPlayer interface. It overrides one method, getMove, which returns the best move based on the
+context of the game and the strategy of the AIPlayer.
+
+In the package GUIView, we implemented our new view of the game with 3 interfaces and 3 new classes.
+The photos of the GUIView from different stages in the game can be found inside the docs folder. The
+photos are labeled according to the game state / what they show.
+- IGameFrame : is an interface for the JFrame that describes what the frame ought to be able to do.
+               Right now it is an empty interface as we see no need for any behaviors for the frame
+               yet, but it will be used in the future.
+- GameFrame : is our concrete class that implements our IGameFrame interface and represents the
+              JFrame for our view of Three Trios.
+- ICardPanel : is an interface for the JPanel that describes what our panel of ICards for each
+               player in Three Trios ought to be able to do. Right now it is small, with only one
+               method that is a helper for the temporary printing features we wanted our controller
+               to handle, but we see no need for any other behaviors for the panel, but might add
+               more in the future.
+- CardPanel : is our concrete class that implements our ICardPanel interface and represents the
+              JPanel for our view of the player’s cards in Three Trios. This class handles mouse
+              events, like mouseClicked and draws cards as well. Within this class, there is the
+              inner class CardDrawing, which handles the drawing of an ICard for our view. We use
+              this inner class within our CardPanel class to draw not one, but each card of the
+              player’s hand for both players in the game Three Trios.
+- IBoardPanel : is an interface for the JPanel that describes what the panel for the board of
+                IBoardCells ought to be capable to do. Right now it is an empty interface as we see
+                no need for any behaviors for the frame yet, but it will be used in the future.
+- BoardPanel : is our concrete class that implements IBoardPanel interface and represents the JPanel
+               for our view of the board/grid in Three Trios. This class handles mouse events,
+               like mouseClicked and draws the board cells, either being cardCell or holeCells on
+               the board in the game Three Trios.
+
+ThreeTrios : a placeholder class for our Homework 6. This class houses our main method
+             which allows us to instantiate the model, instantiate the view using that model, and
+             tell the view to get started.
+
+In the package strategies, we added 2 interfaces, 1 abstract class and 6 concrete classes.
+    - IMove : describes the behaviors that a move should have in the game of Three Trios. This is
+              used in combination with our strategies as it dictates what a move (which is what the
+              strategies provide) should and should not be capable of.
+    - Move : represents a move should have in the game of Three Trios. This is used in combination
+             with our strategies as it describes what card should be placed and where it should be
+             placed on the grid (0 based for grid coordinates and card index).
+    - IStrategy : describes the behaviors a strategy should have which include finding a move,
+                  finding the upper most left most position that is open, and making sure the
+                  game is in a valid state to be finding strategies (has started and is not over).
+    - AStrategy : an abstract class that serves to deduplicate code between strategies.
+    - CornerStrategy : this strategy checks all the corners. It selects the location by picking the
+                       available corner that is the most upper and left. Then, it decides which card
+                       is the hardest to flip in that corner by finding the card with the highest
+                       sum of exposed values based on that position. The tests for this strategy are
+                       in the CornerStratTest class and in the "corner-transcript.txt".
+    - MaxFlipsStrategy : this strategy looks at every location on the grid and every card in the
+                         current player's hand. It then selects the location and card combination
+                         that will flip the highest number of opponent cards. The tests for this
+                         strategy are in the MaxFlipsStratTest class and in the
+                         "strategy-transcript.txt".
+    If there is a tie for any strategy, the upperMost leftMost position is picked. If there is no
+    valid move for that strategy, the default move is the upper most left most position and the card
+    in the current player's hand at index 0.
+
+--- EXTRA CREDIT STRATEGIES ---
+    - LeastRiskStrategy : this strategy checks all the spots on the board with all the cards in
+                          the current player's hand. It picks the position and card by figuring out
+                          the least amount of opponent’s cards that have been placed on the grid and
+                          that can flip the chosen card in the chosen position. The tests for this
+                          strategy are in the LeastRiskStratTest class and in the
+                          "leastRisk-transcript.txt".
+    - MinimaxStrategy : this strategy uses the opponent's strategy to see where they are going to
+                        play and chooses that position as its location. Then, it picks the card
+                        that will flip the most cards in the chosen location. The tests for this
+                        strategy are in the MiniMaxStratTest class and in the
+                        "MiniMax-transcript.txt".
+    - HybridStrategy : this strategy combines two or more other strategies. It calculates the best
+                       move for each of these strategies and then selects the move with the upper
+                       most left most location. The tests for this strategy are in the
+                       HybridStratTest class and in the "hybrid-transcript.txt".
+
+    The relationship of all the strategies looks like this:
+                      +-----------------------+
+                      | interface IStrategy   |
+                      +-----------------------+
+                      		     |
+                      +-----------------------+
+                      | Abstract AStrategy    |
+                      +-----------------------+
+                       |  | |           |    |
+                       |  | |           |    |
+      +----------------+  | +----+      |    +---------------------+
+      |                   |      |      |                          |
+      |                   |      |      |                          +-------------------------+
+      |                   |      |      +---------------------+    | class LeastRiskStrategy |
+ +----------------------+ |      |                            |    +-------------------------+
+ | class HybridStrategy | | +----------------------+  +------------------------+
+ | IStrategy strategy1  | | | class CornerStrategy |  | class MaxFlipsStrategy |
+ | IStrategy strategy1  | | +----------------------+  +------------------------+
+ +----------------------+ |
+                          |
+                          +-----------------------+
+                          | class MinimaxStrategy |
+                          | IStrategy oppStrat    |
+                          +-----------------------+
+
+HOMEWORK 7
+--- CHANGES FOR PART3 ---
+During this homework, the following changes were made to the existing code:
+
+    - In the Controller class and IController interface, we got rid of playGame() which allowed
+      both the player's controllers to simultaneously play the game Three Trios at the same time.
+      Instead, we implemented features and listeners to tell the controllers to play their turn,
+      one at a time, ping-ponging between each player's controller. We will further expand on this
+      design for the features and listeners in the additions section for homework 7.
+
+    - In the guiview, we pulled the inner class CardDrawing up to its own class so that both the
+      CardPanel and BoardPanel could utilize this code that draws a single ICard. Without this,
+      we would have duplicate and repetitive code in the CardPanel and BoardPanel classes, so this
+      cleans that up.
+
+    - In the CardPanel and BoardPanel, we changed the classes from implementing the ICardPanel and
+       IBoardPanel interfaces (respectively) because they have the same behaviors, and thus can
+       implement the same interface that describes the same panel behaviors that they both use.
+
+    - In IThreeTriosGame, we added a method copy() to make an exact copy of the game for the
+      strategies to be able to use for picking the best location and card without mutating the
+      actual game. Due to this change, we also had to add the copy() methods to ICard and Player,
+      for the same reasons.
+
+    - In the Controller and respective IController, CardPanel, BoardPanel, and their respective
+      interface IPanel, we got rid of the method setCommandCallback(), which was used so that the
+      controller could print the selected card index and selected row and columns. Now, after
+      these are selected, the game is able to be played, so we took out this printing feature and
+      implementation.
+
+    - Player location: because the players are not a part of the model, we moved their location to
+      to be in their own package separate from the model, controller, and view (text and gui) as the
+      players are not a part of the MVC.
+
+    - We added a main method to configure our game and allow it to be ran. The method takes in
+      command line arguments that describe what players should be used to play the game. In terms of
+      these arguments they must be formed like so:
+      player strategy/ies(ONLY if AI player) player strategy/ies(ONLY if AI player)
+        - A configuration for 2 human players looks like this:
+                Human Human
+        - A configuration with 2 AI players where one uses the max flips strategy and one
+          uses corner strategies
+                AI Corner AI MaxFlips
+        - A configuration with 1 human player and 1 AI player that uses a Hybrid strategy containing
+          one Minimax strategy (with the opponent's strategy being Corner) and MaxFlips strategy:
+                AI Hybrid Minimax Corner MaxFlips Human
+
+
+--- ADDITIONS ---
+We added 4 new interfaces that are used for playing the game:
+    - PlayerActions: is in the players section. It represents the behaviors of a player that need to
+                     talk to the controller to tell it that the player has done something
+                     (ex. chosen a location to place a card).
+    - ModelStatus: is in the model. It notifies the controller that the state of the game has
+                   changed (ex. the player has switched).
+    - ModelListener: is in the controller. It listens to the model and allows the controller to
+                     delegate to the view and players based on what the model has told it.
+                     (ex. listens to the model and ends the game once the model tells it that the
+                          game is over).
+    - PlayerListener: is in the controller. It listens to the players and allows the controller to
+                      delegate to the view based on what the players have told it.
+                      (ex. listens to the player and tells the view to place a card once the player
+                       has told the controller that they have selected a card).
