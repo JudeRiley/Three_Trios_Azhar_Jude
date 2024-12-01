@@ -1,21 +1,21 @@
 package cs3500.threetrios;
 
-import cs3500.threetrios.controller.Controller;
-import cs3500.threetrios.controller.ThreeTriosController;
-import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.HumanPlayer;
-import cs3500.threetrios.model.MachinePlayer;
-import cs3500.threetrios.model.Player;
-import cs3500.threetrios.model.PlayerType;
-import cs3500.threetrios.model.ThreeTriosModel;
+import cs3500.threetrios.code.controller.Controller;
+import cs3500.threetrios.code.controller.ThreeTriosController;
+import cs3500.threetrios.code.model.Grid;
+import cs3500.threetrios.code.model.Card;
+import cs3500.threetrios.code.model.HumanPlayer;
+import cs3500.threetrios.code.model.MachinePlayer;
+import cs3500.threetrios.code.model.Player;
+import cs3500.threetrios.code.model.PlayerType;
+import cs3500.threetrios.code.model.ThreeTriosModel;
 
-import cs3500.threetrios.model.config.CardConfigReader;
-import cs3500.threetrios.model.config.GridConfigReader;
-import cs3500.threetrios.strategies.FlipMostCardsTactic;
-import cs3500.threetrios.strategies.GoForCornersTactic;
-import cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy;
-import cs3500.threetrios.view.ThreeTriosViewImpl;
+import cs3500.threetrios.code.model.config.CardConfigReader;
+import cs3500.threetrios.code.model.config.GridConfigReader;
+import cs3500.threetrios.code.strategies.FlipMostCardsTactic;
+import cs3500.threetrios.code.strategies.GoForCornersTactic;
+import cs3500.threetrios.code.strategies.TacticOrFirstOpenSpaceStrategy;
+import cs3500.threetrios.code.view.ThreeTriosViewImpl;
 
 import java.io.IOException;
 import java.nio.file.Paths;

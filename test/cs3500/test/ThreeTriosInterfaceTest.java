@@ -7,15 +7,15 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
-import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.Cell;
-import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.GridPos2d;
-import cs3500.threetrios.model.Player;
-import cs3500.threetrios.model.ThreeTrios;
-import cs3500.threetrios.model.ThreeTriosModel;
-import cs3500.threetrios.model.config.CardConfigReader;
-import cs3500.threetrios.model.config.GridConfigReader;
+import cs3500.threetrios.code.model.Card;
+import cs3500.threetrios.code.model.Cell;
+import cs3500.threetrios.code.model.Grid;
+import cs3500.threetrios.code.model.GridPos2d;
+import cs3500.threetrios.code.model.Player;
+import cs3500.threetrios.code.model.ThreeTrios;
+import cs3500.threetrios.code.model.ThreeTriosModel;
+import cs3500.threetrios.code.model.config.CardConfigReader;
+import cs3500.threetrios.code.model.config.GridConfigReader;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

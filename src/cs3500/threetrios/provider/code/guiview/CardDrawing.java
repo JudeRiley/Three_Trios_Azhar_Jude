@@ -7,10 +7,10 @@ import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
 
-import cs3500.threetrios.model.ICard;
-import cs3500.threetrios.model.PlayerColor;
-import cs3500.threetrios.model.ReadOnlyThreeTrios;
-import cs3500.threetrios.players.IPlayer;
+import cs3500.threetrios.provider.code.model.ICard;
+import cs3500.threetrios.provider.code.model.PlayerColor;
+import cs3500.threetrios.provider.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.provider.code.players.IPlayer;
 
 /**
  * Represents a class for drawing just one ICards on the CardPanel.

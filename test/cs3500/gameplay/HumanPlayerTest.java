@@ -3,8 +3,8 @@ package cs3500.gameplay;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cs3500.threetrios.model.HumanPlayer;
-import cs3500.threetrios.model.Player;
+import cs3500.threetrios.code.model.HumanPlayer;
+import cs3500.threetrios.code.model.Player;
 
 /**
  * Tests that a human player object performs all the necessary actions for a mocked controller.

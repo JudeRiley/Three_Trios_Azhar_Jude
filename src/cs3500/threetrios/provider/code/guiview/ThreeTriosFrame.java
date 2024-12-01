@@ -6,8 +6,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cs3500.threetrios.model.ReadOnlyThreeTrios;
-import cs3500.threetrios.players.IPlayer;
+import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.provider.code.players.IPlayer;
 
 /**
  * Describes what the frame of the view for the game Three Trios ought to be able to do.

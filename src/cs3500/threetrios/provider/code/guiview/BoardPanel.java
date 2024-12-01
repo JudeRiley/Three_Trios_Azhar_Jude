@@ -9,11 +9,11 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import cs3500.threetrios.model.CardCell;
-import cs3500.threetrios.model.ICard;
+import cs3500.threetrios.provider.code.model.CardCell;
+import cs3500.threetrios.provider.code.model.ICard;
 
-import cs3500.threetrios.model.ReadOnlyThreeTrios;
-import cs3500.threetrios.players.IPlayer;
+import cs3500.threetrios.provider.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.provider.code.players.IPlayer;
 
 /**
  * Represents the panel that holds the Three Trios board/grid and helps the user to view this

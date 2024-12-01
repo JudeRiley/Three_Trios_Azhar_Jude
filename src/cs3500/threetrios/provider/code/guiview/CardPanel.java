@@ -7,11 +7,11 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.CardNumber;
-import cs3500.threetrios.model.ICard;
-import cs3500.threetrios.model.ReadOnlyThreeTrios;
-import cs3500.threetrios.players.IPlayer;
+import cs3500.threetrios.provider.code.model.Card;
+import cs3500.threetrios.provider.code.model.CardNumber;
+import cs3500.threetrios.provider.code.model.ICard;
+import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.provider.code.players.IPlayer;
 
 
 /**

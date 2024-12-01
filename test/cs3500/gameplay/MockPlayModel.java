@@ -2,13 +2,13 @@ package cs3500.gameplay;
 
 import java.util.List;
 
-import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.Cell;
-import cs3500.threetrios.model.GridPos;
-import cs3500.threetrios.model.ModelFeatures;
-import cs3500.threetrios.model.ModelListener;
-import cs3500.threetrios.model.Player;
-import cs3500.threetrios.model.ThreeTrios;
+import cs3500.threetrios.code.model.Card;
+import cs3500.threetrios.code.model.Cell;
+import cs3500.threetrios.code.model.GridPos;
+import cs3500.threetrios.code.model.ModelFeatures;
+import cs3500.threetrios.code.model.ModelListener;
+import cs3500.threetrios.code.model.Player;
+import cs3500.threetrios.code.model.ThreeTrios;
 
 /**
  * A mock of a model that exists in order to be passed into objects that require a model for tests.

@@ -8,19 +8,19 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.Cell;
-import cs3500.threetrios.model.Grid;
-import cs3500.threetrios.model.GridPos;
-import cs3500.threetrios.model.GridPos2d;
-import cs3500.threetrios.model.Player;
-import cs3500.threetrios.model.ThreeTriosCard;
-import cs3500.threetrios.model.ThreeTriosCell;
-import cs3500.threetrios.model.ThreeTriosGrid;
-import cs3500.threetrios.model.ThreeTriosModel;
-import cs3500.threetrios.model.config.CardConfigReader;
-import cs3500.threetrios.model.config.GridConfigReader;
-import cs3500.threetrios.view.ThreeTriosTextView;
+import cs3500.threetrios.code.model.Card;
+import cs3500.threetrios.code.model.Cell;
+import cs3500.threetrios.code.model.Grid;
+import cs3500.threetrios.code.model.GridPos;
+import cs3500.threetrios.code.model.GridPos2d;
+import cs3500.threetrios.code.model.Player;
+import cs3500.threetrios.code.model.ThreeTriosCard;
+import cs3500.threetrios.code.model.ThreeTriosCell;
+import cs3500.threetrios.code.model.ThreeTriosGrid;
+import cs3500.threetrios.code.model.ThreeTriosModel;
+import cs3500.threetrios.code.model.config.CardConfigReader;
+import cs3500.threetrios.code.model.config.GridConfigReader;
+import cs3500.threetrios.code.view.ThreeTriosTextView;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -31,8 +31,8 @@ import static org.junit.Assert.assertTrue;
  */
 public class ThreeTriosModelTest {
 
-  private cs3500.threetrios.model.ThreeTriosModel game;
-  private cs3500.threetrios.model.ThreeTriosModel randGame;
+  private ThreeTriosModel game;
+  private ThreeTriosModel randGame;
   private Grid grid;
 
   /**
@@ -50,17 +50,17 @@ public class ThreeTriosModelTest {
 
     // Initialize the GridConfigReader and read the grid
     GridConfigReader gridConfigReader = new GridConfigReader(gridConfigPath);
-    cs3500.threetrios.model.Cell[][] edit = gridConfigReader.readGrid().getCurrentGrid();
-    edit[1][2] = new cs3500.threetrios.model.ThreeTriosCell(true);
+    Cell[][] edit = gridConfigReader.readGrid().getCurrentGrid();
+    edit[1][2] = new ThreeTriosCell(true);
     edit[1][1] = new ThreeTriosCell(true);
     grid = new ThreeTriosGrid(edit);
 
 
     // Initialize the CardConfigReader and read the deck
     CardConfigReader cardConfigReader = new CardConfigReader(cardConfigPath);
-    List<cs3500.threetrios.model.Card> deck = cardConfigReader.readCards();
-    List<cs3500.threetrios.model.Card> redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
-    List<cs3500.threetrios.model.Card> blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
+    List<Card> deck = cardConfigReader.readCards();
+    List<Card> redHand = new ArrayList<>(deck.subList(0, deck.size() / 2));
+    List<Card> blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
     blueHand.set(0, new ThreeTriosCard("test", 10, 5, 10, 10));
 
     game = new ThreeTriosModel(redHand, blueHand, grid);
@@ -73,14 +73,14 @@ public class ThreeTriosModelTest {
   @Test
   public void testBattleStepInternal() {
     // Place a card for Red at a position
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(2, 2), 0);
+    game.placeCard(new GridPos2d(2, 2), 0);
 
     // Place a card for Blue adjacent to Red's card to trigger a battle
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(2, 3), 6);
+    game.placeCard(new GridPos2d(2, 3), 6);
 
     // Access grid cells to verify the outcome
-    cs3500.threetrios.model.Cell cellAt22 = grid.getCell(new cs3500.threetrios.model.GridPos2d(2, 2));
-    cs3500.threetrios.model.Cell cellAt23 = grid.getCell(new cs3500.threetrios.model.GridPos2d(2, 3));
+    Cell cellAt22 = grid.getCell(new GridPos2d(2, 2));
+    Cell cellAt23 = grid.getCell(new GridPos2d(2, 3));
 
     assertEquals("Blue should own cell at (2,3)", "BLUE", cellAt23.getOwnerName());
     assertEquals("Blue should have flipped Red's card at (2,2)", "BLUE", cellAt22.getOwnerName());
@@ -96,22 +96,22 @@ public class ThreeTriosModelTest {
     // should be BBBBB
     // (The middle R's will be stronger than ending R's)
     System.out.println(new ThreeTriosTextView(game));
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(2, 0), 0);
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(1, 2), 0);
+    game.placeCard(new GridPos2d(2, 0), 0);
+    game.placeCard(new GridPos2d(1, 2), 0);
 
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(2, 1), 9);
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(0, 1), 0);
+    game.placeCard(new GridPos2d(2, 1), 9);
+    game.placeCard(new GridPos2d(0, 1), 0);
 
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(2, 3), 9);
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(0, 0), 0);
+    game.placeCard(new GridPos2d(2, 3), 9);
+    game.placeCard(new GridPos2d(0, 0), 0);
 
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(2, 4), 0);
+    game.placeCard(new GridPos2d(2, 4), 0);
     System.out.println(new ThreeTriosTextView(game));
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(2, 2), 0);
+    game.placeCard(new GridPos2d(2, 2), 0);
     System.out.println(new ThreeTriosTextView(game));
     // make sure the ends are blue
-    assertEquals(grid.getCell(new cs3500.threetrios.model.GridPos2d(2, 4)).getOwnerName(), "BLUE");
-    assertEquals(grid.getCell(new cs3500.threetrios.model.GridPos2d(2, 0)).getOwnerName(), "BLUE");
+    assertEquals(grid.getCell(new GridPos2d(2, 4)).getOwnerName(), "BLUE");
+    assertEquals(grid.getCell(new GridPos2d(2, 0)).getOwnerName(), "BLUE");
   }
 
   /**
@@ -120,11 +120,11 @@ public class ThreeTriosModelTest {
   @Test
   public void testGetScoreOf() {
     // Place cards and check scores
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(0, 0), 0); // RED
-    game.placeCard(new cs3500.threetrios.model.GridPos2d(0, 3), 0); // BLUE
+    game.placeCard(new GridPos2d(0, 0), 0); // RED
+    game.placeCard(new GridPos2d(0, 3), 0); // BLUE
 
-    int redScore = grid.getScoreOf(cs3500.threetrios.model.Player.RED);
-    int blueScore = grid.getScoreOf(cs3500.threetrios.model.Player.BLUE);
+    int redScore = grid.getScoreOf(Player.RED);
+    int blueScore = grid.getScoreOf(Player.BLUE);
 
     assertEquals(1, redScore);
     assertEquals(1, blueScore);
@@ -142,15 +142,15 @@ public class ThreeTriosModelTest {
     int cols = grid.getCurrentGrid()[0].length;
 
     while (!grid.isSaturated()) {
-      cs3500.threetrios.model.Player currentPlayer = game.getTurn();
+      Player currentPlayer = game.getTurn();
       List<Card> hand =
-              currentPlayer == cs3500.threetrios.model.Player.RED ? game.getHand(cs3500.threetrios.model.Player.RED) : game.getHand(cs3500.threetrios.model.Player.BLUE);
+              currentPlayer == Player.RED ? game.getHand(Player.RED) : game.getHand(Player.BLUE);
 
       boolean cardPlaced = false;
       for (int row = 0; row < rows && !cardPlaced; row++) {
         for (int col = 0; col < cols && !cardPlaced; col++) {
-          cs3500.threetrios.model.GridPos2d pos = new cs3500.threetrios.model.GridPos2d(row, col);
-          cs3500.threetrios.model.Cell cell = grid.getCell(pos);
+          GridPos2d pos = new GridPos2d(row, col);
+          Cell cell = grid.getCell(pos);
           if (cell.isCardCell() && !cell.hasCard()) {
             if (!hand.isEmpty()) {
               game.placeCard(pos, 0);
@@ -174,7 +174,7 @@ public class ThreeTriosModelTest {
   @Test
   public void testFlipCardCellTo() {
     // Place a card for Red
-    cs3500.threetrios.model.GridPos2d pos = new cs3500.threetrios.model.GridPos2d(2, 2);
+    GridPos2d pos = new GridPos2d(2, 2);
     game.placeCard(pos, 0);
 
     // Flip the card to Blue
@@ -190,10 +190,10 @@ public class ThreeTriosModelTest {
    */
   @Test
   public void testGetLosingNeighbors() {
-    cs3500.threetrios.model.GridPos2d posRed = new cs3500.threetrios.model.GridPos2d(0, 0);
+    GridPos2d posRed = new GridPos2d(0, 0);
     game.placeCard(posRed, 0);
 
-    cs3500.threetrios.model.GridPos2d posBlue = new cs3500.threetrios.model.GridPos2d(2, 1);
+    GridPos2d posBlue = new GridPos2d(2, 1);
     game.placeCard(posBlue, 0);
 
     // Place a weaker card for Red

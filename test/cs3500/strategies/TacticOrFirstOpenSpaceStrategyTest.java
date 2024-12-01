@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import cs3500.threetrios.model.Card;
-import cs3500.threetrios.model.Cell;
-import cs3500.threetrios.model.GridPos;
-import cs3500.threetrios.model.GridPos2d;
+import cs3500.threetrios.code.model.Card;
+import cs3500.threetrios.code.model.Cell;
+import cs3500.threetrios.code.model.GridPos;
+import cs3500.threetrios.code.model.GridPos2d;
 import cs3500.model.MockReadOnlyThreeTrios;
-import cs3500.threetrios.model.Move;
-import cs3500.threetrios.model.Player;
-import cs3500.threetrios.model.ThreeTriosCard;
-import cs3500.threetrios.model.ThreeTriosCell;
-import cs3500.threetrios.model.ThreeTriosMove;
-import cs3500.threetrios.strategies.FlipMostCardsTactic;
-import cs3500.threetrios.strategies.GoForCornersTactic;
-import cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy;
+import cs3500.threetrios.code.model.Move;
+import cs3500.threetrios.code.model.Player;
+import cs3500.threetrios.code.model.ThreeTriosCard;
+import cs3500.threetrios.code.model.ThreeTriosCell;
+import cs3500.threetrios.code.model.ThreeTriosMove;
+import cs3500.threetrios.code.strategies.FlipMostCardsTactic;
+import cs3500.threetrios.code.strategies.GoForCornersTactic;
+import cs3500.threetrios.code.strategies.TacticOrFirstOpenSpaceStrategy;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -56,10 +56,10 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     mockModel.setPlayerHand(mockHand);
 
     // Use GoForCornersTactic as the tactic
-    cs3500.threetrios.strategies.GoForCornersTactic tactic = new cs3500.threetrios.strategies.GoForCornersTactic();
+    GoForCornersTactic tactic = new GoForCornersTactic();
 
     // Create an instance of TacticOrFirstOpenSpaceStrategy with the tactic
-    cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy strategy = new cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy(tactic);
+    TacticOrFirstOpenSpaceStrategy strategy = new TacticOrFirstOpenSpaceStrategy(tactic);
 
     // Execute the strategy
     Move selectedMove = strategy.chooseMove(mockModel, currentPlayer);
@@ -114,10 +114,10 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     mockModel.setPlayerHand(mockHand);
 
     // Use GoForCornersTactic as the tactic
-    cs3500.threetrios.strategies.GoForCornersTactic tactic = new cs3500.threetrios.strategies.GoForCornersTactic();
+    GoForCornersTactic tactic = new GoForCornersTactic();
 
     // Create an instance of TacticOrFirstOpenSpaceStrategy with the tactic
-    cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy strategy = new cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy(tactic);
+    TacticOrFirstOpenSpaceStrategy strategy = new TacticOrFirstOpenSpaceStrategy(tactic);
 
     // Execute the strategy
     Move selectedMove = strategy.chooseMove(mockModel, currentPlayer);
@@ -162,10 +162,10 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     mockModel.setPlayerHand(mockHand);
 
     // Use GoForCornersTactic as the tactic
-    cs3500.threetrios.strategies.GoForCornersTactic tactic = new cs3500.threetrios.strategies.GoForCornersTactic();
+    GoForCornersTactic tactic = new GoForCornersTactic();
 
     // Create an instance of TacticOrFirstOpenSpaceStrategy with the tactic
-    cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy strategy = new cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy(tactic);
+    TacticOrFirstOpenSpaceStrategy strategy = new TacticOrFirstOpenSpaceStrategy(tactic);
 
     // Execute the strategy
     Move selectedMove = strategy.chooseMove(mockModel, currentPlayer);
@@ -208,10 +208,10 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     mockModel.setPlayerHand(mockHand);
 
     // Use GoForCornersTactic as the tactic
-    cs3500.threetrios.strategies.GoForCornersTactic tactic = new GoForCornersTactic();
+    GoForCornersTactic tactic = new GoForCornersTactic();
 
     // Create an instance of TacticOrFirstOpenSpaceStrategy with the tactic
-    cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy strategy = new cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy(tactic);
+    TacticOrFirstOpenSpaceStrategy strategy = new TacticOrFirstOpenSpaceStrategy(tactic);
 
     // Execute the strategy
     // Expected to throw an IllegalStateException because there are no moves
@@ -242,10 +242,10 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     mockModel.setPlayerHand(mockHand);
 
     // Use FlipMostCardsTactic as the tactic
-    cs3500.threetrios.strategies.FlipMostCardsTactic tactic = new cs3500.threetrios.strategies.FlipMostCardsTactic();
+    FlipMostCardsTactic tactic = new FlipMostCardsTactic();
 
     // Create an instance of TacticOrFirstOpenSpaceStrategy with the tactic
-    cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy strategy = new cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy(tactic);
+    TacticOrFirstOpenSpaceStrategy strategy = new TacticOrFirstOpenSpaceStrategy(tactic);
 
     // Execute the strategy
     Move selectedMove = strategy.chooseMove(mockModel, currentPlayer);
@@ -287,10 +287,10 @@ public class TacticOrFirstOpenSpaceStrategyTest {
     mockModel.setPlayerHand(mockHand);
 
     // Use FlipMostCardsTactic as the tactic
-    cs3500.threetrios.strategies.FlipMostCardsTactic tactic = new FlipMostCardsTactic();
+    FlipMostCardsTactic tactic = new FlipMostCardsTactic();
 
     // Create an instance of TacticOrFirstOpenSpaceStrategy with the tactic
-    cs3500.threetrios.strategies.TacticOrFirstOpenSpaceStrategy strategy = new TacticOrFirstOpenSpaceStrategy(tactic);
+    TacticOrFirstOpenSpaceStrategy strategy = new TacticOrFirstOpenSpaceStrategy(tactic);
 
     // Execute the strategy
     Move selectedMove = strategy.chooseMove(mockModel, currentPlayer);

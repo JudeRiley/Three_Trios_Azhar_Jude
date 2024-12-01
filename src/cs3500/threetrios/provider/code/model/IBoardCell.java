@@ -2,7 +2,7 @@ package cs3500.threetrios.provider.code.model;
 
 import java.util.List;
 
-import cs3500.threetrios.players.IPlayer;
+import cs3500.threetrios.provider.code.players.IPlayer;
 
 /**
  * Represents an interface for board cell in the Three Trios game, being extended to the abstract

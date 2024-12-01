@@ -1,6 +1,6 @@
 package cs3500.threetrios.provider.code.players;
 
-import cs3500.threetrios.controller.Controller;
+import cs3500.threetrios.code.controller.Controller;
 import cs3500.threetrios.model.IThreeTriosGame;
 
 /**

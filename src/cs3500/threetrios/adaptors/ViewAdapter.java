@@ -1,36 +1,28 @@
-package cs3500.gameplay;
-
-import java.util.List;
+package cs3500.threetrios.adaptors;
 
 import cs3500.threetrios.code.model.Player;
 import cs3500.threetrios.code.view.ThreeTriosView;
 import cs3500.threetrios.code.view.ViewListener;
+import cs3500.threetrios.provider.code.guiview.ThreeTriosFrame;
 
-/**
- * A mock of a ThreeTriosView to be used in testing the controller.
- * Adds proof of functionality to a log.
- */
-public class MockView implements ThreeTriosView {
+public class ViewAdapter implements ThreeTriosView {
 
-  private final List<Object> log;
+  private final ThreeTriosFrame providerView;
 
-  /**
-   * Constructs a mock of a view that adds proof of functionality to a log.
-   *
-   * @param log a list of objects that will be added to in order to prove functionality.
-   */
-  public MockView(List<Object> log) {
-    this.log = log;
+
+  public ViewAdapter(ThreeTriosFrame providerView) {
+    this.providerView = providerView;
   }
+
 
   @Override
   public void makeVisible() {
-    log.add("makeVisible");
+    // Unnecessary for adapting
   }
 
   @Override
   public void refresh() {
-    log.add("refresh");
+    providerView.updateView();
   }
 
   @Override
@@ -65,11 +57,11 @@ public class MockView implements ThreeTriosView {
 
   @Override
   public void addViewListener(ViewListener listener) {
-    log.add(listener);
+
   }
 
   @Override
   public void removeViewListener(ViewListener listener) {
-    log.add("removed listener" + listener);
+
   }
 }

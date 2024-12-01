@@ -2,10 +2,10 @@ package cs3500.gameplay;
 
 import java.util.List;
 
-import cs3500.threetrios.controller.Controller;
-import cs3500.threetrios.model.MachinePlayer;
-import cs3500.threetrios.model.Move;
-import cs3500.threetrios.model.Player;
+import cs3500.threetrios.code.controller.Controller;
+import cs3500.threetrios.code.model.Move;
+import cs3500.threetrios.code.model.Player;
+import cs3500.threetrios.code.model.PlayerType;
 
 /**
  * A mock of a Controller for a ThreeTrios game used for testing Human and Machine Players.
@@ -28,7 +28,7 @@ public class MockController implements Controller {
   }
 
   @Override
-  public void handleMachinePlayerMove(MachinePlayer machinePlayer, Move move) {
+  public void handleMachinePlayerMove(PlayerType machinePlayer, Move move) {
     testInputs.add(name);
     testInputs.add(machinePlayer);
     testInputs.add(move);

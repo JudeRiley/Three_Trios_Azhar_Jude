@@ -2,7 +2,7 @@ package cs3500.threetrios.provider.code.model;
 
 import java.util.Optional;
 
-import cs3500.threetrios.players.IPlayer;
+import cs3500.threetrios.provider.code.players.IPlayer;
 
 /**
  * Represents an interface for the game Three Trios. This interface shows the observations of the

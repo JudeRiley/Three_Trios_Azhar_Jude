@@ -1,7 +1,7 @@
 package cs3500.threetrios.provider.code.guiview;
 
 
-import cs3500.threetrios.players.IPlayer;
+import cs3500.threetrios.provider.code.players.IPlayer;
 
 
 /**

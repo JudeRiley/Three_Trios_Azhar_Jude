@@ -1,6 +1,6 @@
 package cs3500.threetrios.provider.code.model;
 
-import cs3500.threetrios.controller.Controller;
+import cs3500.threetrios.code.controller.Controller;
 
 /**
  * Represents the interface for managing and notifying listeners about changes in the model's
