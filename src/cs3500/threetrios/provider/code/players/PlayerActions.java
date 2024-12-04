@@ -1,7 +1,7 @@
 package cs3500.threetrios.provider.code.players;
 
-import cs3500.threetrios.code.controller.Controller;
-import cs3500.threetrios.model.IThreeTriosGame;
+import cs3500.threetrios.provider.code.controller.IController;
+import cs3500.threetrios.provider.code.model.IThreeTriosGame;
 
 /**
  * Represents the interface for the actions that a player (human or AI) can perform in the Three
@@ -17,7 +17,7 @@ public interface PlayerActions {
    *
    * @param controller the controller that will listen for player action notifications
    */
-  void addControllerListener(Controller controller);
+  void addControllerListener(IController controller);
 
   /**
    * Notifies the game and controller that the player has chosen a move, represented by the given
