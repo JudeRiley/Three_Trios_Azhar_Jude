@@ -1,0 +1,11 @@
+This assignment was an interesting experience, but I can't say I particularly enjoyed it.
+It was pretty cool to see the provided code eventually work without existing project,
+but the process of adapting it was more frustrating than rewarding.  We had to spend some
+time fixing our own code for the customers, and resolving conflicts between our code and the
+providers.  I guess this did teach us about bridging gaps in software design and working
+with someone else's code so that is nice that we now have the experience.  One of the more
+tedious parts was restructuring the code to fit the provider's assumptions, like updating
+our controller interface and such.
+
+That said, the assignment did highlight the importance of modularity and writing well
+documented code, so I think this was overall a valuable learning experience.

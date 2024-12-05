@@ -1,0 +1,19 @@
+The provider's code was well-structured and functional.  They did a good job on ensuring
+modularity a clarity with each of the classes.  The interfaces were mostly good however,
+there were some weaknesses that made integration challenging.  The GUI components are tightly
+coupled with the model, relying directly on the ReadOnlyThreeTrios interface and its methods.
+The tight coupling makes the GUI less adaptable to different implementations of the model.
+
+While we were adapting the code, connecting the provider's view and the existing game logic
+was also a challenge.  An adapter had to be made to translate the existing model into the
+ReadOnlyThreeTrios interface required by the provider's views.  The controller also needed
+updates to handle GUI events to translate into model actions.  This was all just pretty
+complicated to handle.
+
+To improve the adaptability and usability, the provider's code could benefit from further
+decoupling the GUI from the model.  Maybe having something that handles the interactions
+between the two would make the GUI more reusable and independent.  Also abstracting
+event-handling logic into separate classes could allow for more flexibility.
+
+The provider's code was overall good, just a little bit of changes could possibly make it
+perfect.
