@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import cs3500.threetrios.code.model.Move;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 
 /**
  * A complete strategy that first attempts to choose a move with the given tactic. If that fails
@@ -30,7 +30,7 @@ public class ChainableStrategy implements ThreeTriosStrategy {
   }
 
   @Override
-  public Move chooseMove(ReadOnlyThreeTrios model, Player forWhom) throws IllegalStateException {
+  public Move chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) throws IllegalStateException {
     Optional<Move> tacticMove = this.tacticToTry.chooseMove(model, forWhom);
     if (tacticMove.isPresent()) {
       return tacticMove.get();

@@ -6,7 +6,7 @@ import java.util.Optional;
 import cs3500.threetrios.provider.code.model.ICard;
 import cs3500.threetrios.provider.code.model.IThreeTriosGame;
 import cs3500.threetrios.provider.code.model.PlayerColor;
-import cs3500.threetrios.provider.code.strategies.IMove;
+import cs3500.threetrios.adaptors.IMove;
 
 /**
  * Represents an interface for a player in the game Three Trios. This interface shows the

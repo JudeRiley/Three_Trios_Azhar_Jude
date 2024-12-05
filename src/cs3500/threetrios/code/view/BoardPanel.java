@@ -1,7 +1,7 @@
 package cs3500.threetrios.code.view;
 
 import cs3500.threetrios.code.model.Direction;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.model.Cell;
 
 import javax.swing.JPanel;
@@ -19,7 +19,7 @@ import java.awt.event.MouseEvent;
  * The BoardPanel displays the board in the middle of the window.
  */
 public class BoardPanel extends JPanel {
-  private final ReadOnlyThreeTrios model;
+  private final ReadOnlyThreeTriosModel model;
   private int cellWidth;
   private int cellHeight;
   private BoardPanelListener listener;
@@ -29,7 +29,7 @@ public class BoardPanel extends JPanel {
    *
    * @param model a ReadOnlyThreeTrios model
    */
-  public BoardPanel(ReadOnlyThreeTrios model) {
+  public BoardPanel(ReadOnlyThreeTriosModel model) {
     this.model = model;
     this.addMouseListener(new BoardMouseListener());
     this.setBackground(Color.BLACK);

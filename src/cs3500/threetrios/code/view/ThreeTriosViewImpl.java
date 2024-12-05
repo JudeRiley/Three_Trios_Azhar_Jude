@@ -1,7 +1,7 @@
 package cs3500.threetrios.code.view;
 
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -17,7 +17,7 @@ import java.util.List;
  * Blue player's hand.  The middle is the board where you can place cards.
  */
 public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
-  private final ReadOnlyThreeTrios model;
+  private final ReadOnlyThreeTriosModel model;
   private final List<ViewListener> listeners;
   private HandPanel redHandPanel;
   private HandPanel blueHandPanel;
@@ -28,7 +28,7 @@ public class ThreeTriosViewImpl extends JFrame implements ThreeTriosView {
    *
    * @param model the read only model
    */
-  public ThreeTriosViewImpl(ReadOnlyThreeTrios model) {
+  public ThreeTriosViewImpl(ReadOnlyThreeTriosModel model) {
     super("ThreeTrios Game");
     this.model = model;
     this.listeners = new ArrayList<>();

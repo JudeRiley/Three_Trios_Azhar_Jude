@@ -1,19 +1,27 @@
-package cs3500.threetrios.provider.code.model;
+package cs3500.threetrios.adaptors;
 
 import java.util.List;
 
+import cs3500.threetrios.code.model.Cell;
+import cs3500.threetrios.provider.code.model.IBoardCell;
+import cs3500.threetrios.provider.code.model.ICard;
 import cs3500.threetrios.provider.code.players.IPlayer;
 
 /**
- * Represents an interface for board cell in the Three Trios game, being extended to the abstract
- * board cell class for later implementation of holes and card cells. Used an interface to
- * describe the behaviors of the holes and/or cells. This belongs to the model as it is an
- * essential part of the Three Trios game and is necessary for game play. Because we need
- * board cells in our game, this interface should be part of the model.
- * These Board Cells are essential to having a board to play the game and, and thus belong
- * in the model package.
+ * Adapts our original Cell behavior to work for the IBoardCell interface.
  */
-public interface IBoardCell {
+public class CellAdapter implements IBoardCell {
+
+  private final Cell ourCell;
+
+  /**
+   * Constructs an instance of IBoardCell that makes use of our Cell functionality.
+   *
+   * @param cell a Cell object from the original three trios model.
+   */
+  public CellAdapter(Cell cell) {
+    this.ourCell = cell;
+  }
 
   /**
    * A method to determine if a given IBoardCell is an instance of the HoleCell class for
@@ -21,14 +29,20 @@ public interface IBoardCell {
    *
    * @return true if it is a HoleCell and false if it isn't (ie is a CardCell).
    */
-  boolean isAHole();
+  @Override
+  public boolean isAHole() {
+    return !ourCell.isCardCell();
+  }
 
   /**
    * A method to determine if the given IBoardCell is empty.
    *
-   * @return true if the cell is a HoleCell, true if it's a CardCell
+   * @return true if the cell is a HoleCell, true if it's a CardCell.
    */
-  boolean isEmpty();
+  @Override
+  public boolean isEmpty() {
+    return ourCell.isOpenForPlay();
+  }
 
   /**
    * A method to determine if the given IBoardCell is of the CardCell class or the HoleCell
@@ -36,7 +50,10 @@ public interface IBoardCell {
    *
    * @return true if it is a CardCell and false if not (ie is a HoleCell).
    */
-  boolean isCardCell();
+  @Override
+  public boolean isCardCell() {
+    return ourCell.isCardCell();
+  }
 
   /**
    * A method to visualize the board cells, with different implementations in each of the
@@ -48,13 +65,16 @@ public interface IBoardCell {
    * @param other       represents which player is not currently playing in the Three Trios game.
    * @return a string of the proper textual view of each board cell.
    */
-  String toString(List<ICard> getCurCards, IPlayer curr, IPlayer other);
+  @Override
+  public String toString(List<ICard> getCurCards, IPlayer curr, IPlayer other) {
+    return "";
+  }
 
-  /** Makes a copy of this cell and it's contents.
-   *
-   * @return the copied cell
-   */
-  IBoardCell copy();
+  @Override
+  public IBoardCell copy() {
+    // This is not used by the view and is not necessary to adapt.
+    return null;
+  }
 
   /**
    * A helper for accessing the card in the CardCell at that time.
@@ -62,5 +82,8 @@ public interface IBoardCell {
    * @return the card in the CardCell.
    * @throws IllegalStateException if the cell is a hole or the cell is empty, ie the card is null.
    */
-  ICard getCard();
+  @Override
+  public ICard getCard() {
+    return new CardAdapter(ourCell.getCardCopy());
+  }
 }

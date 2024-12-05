@@ -2,7 +2,7 @@ package cs3500.threetrios.code.strategies;
 
 import cs3500.threetrios.code.model.Move;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 
 /**
  * A complete strategy. One that should always be able to choose a move in a game of ThreeTrios,
@@ -21,5 +21,5 @@ public interface ThreeTriosStrategy {
    * @return A "best" Move for this Player in this ThreeTriosModel.
    * @throws IllegalStateException the model is in an invalid state where a move cannot be chosen.
    */
-  Move chooseMove(ReadOnlyThreeTrios model, Player forWhom) throws IllegalStateException;
+  Move chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) throws IllegalStateException;
 }

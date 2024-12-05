@@ -11,7 +11,7 @@ import cs3500.threetrios.code.model.GridPos2d;
 import cs3500.threetrios.code.model.MachinePlayer;
 import cs3500.threetrios.code.model.Move;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.model.ThreeTriosMove;
 import cs3500.threetrios.code.strategies.ThreeTriosStrategy;
 
@@ -28,7 +28,7 @@ public class MachinePlayerTest {
   private Move move1;
   private Move move2;
   private Move move3;
-  private ReadOnlyThreeTrios mockModel;
+  private ReadOnlyThreeTriosModel mockModel;
   private Controller redController;
   private Controller blueController;
 

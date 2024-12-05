@@ -6,7 +6,7 @@ import cs3500.threetrios.provider.code.players.IPlayer;
 
 /**
  * Represents an interface for the game Three Trios. This interface shows the observations of the
- * game. This interface is extended by the IGame interface which also contains behaviors that mutate
+ * game. This intrface is extended by the IGame interface which also contains behaviors that mutate
  * the model. Because we need a game to play, this interface should be part of the model.
  */
 public interface ReadOnlyThreeTrios {

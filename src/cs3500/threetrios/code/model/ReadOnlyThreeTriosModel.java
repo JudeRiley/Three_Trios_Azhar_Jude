@@ -6,7 +6,7 @@ import java.util.List;
  * Read-only interface for the ThreeTrios game model.
  * Provides methods to observe the state of the game without modifying it.
  */
-public interface ReadOnlyThreeTrios {
+public interface ReadOnlyThreeTriosModel {
 
   /**
    * Gets the current grid of the game as a 2d array.

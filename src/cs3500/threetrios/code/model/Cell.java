@@ -51,27 +51,27 @@ public interface Cell {
    * @param other The other cell to compare to
    * @return 1 if this cell is bigger, 0 if they are equal, -1 if this is smaller
    */
-  public int directionalCompareTo(Direction d, Cell other);
+  int directionalCompareTo(Direction d, Cell other);
 
   /**
    * Returns true if the cell is a card-cell and does not yet contain a card.
    *
    * @return true if open for play, false otherwise
    */
-  public boolean isOpenForPlay();
+  boolean isOpenForPlay();
 
   /**
    * Gets if the current cell has a card or not.
    *
    * @return true if it has a card, false otherwise
    */
-  public boolean hasCard();
+  boolean hasCard();
 
   /**
    * Gets if the cell is a card cell or not.
    *
    * @return true if it is a card cell, false otherwise
    */
-  public boolean isCardCell();
+  boolean isCardCell();
 
 }

@@ -24,12 +24,11 @@ public class CardDrawing extends Path2D.Double {
 
   /** The constructor for a CardDrawing.
    *
-   * @param card represents the ICard we are trying to draw
    * @param cardX represents the x position of the card where we want to draw it
    * @param cardY represents the y position of the card where we want to draw it
    * @param model represents the model that we are interacting with
    */
-  public CardDrawing(ICard card, int cardX, int cardY, ReadOnlyThreeTrios model) {
+  public CardDrawing(int cardX, int cardY, ReadOnlyThreeTrios model) {
     this.cardX = cardX;
     this.cardY = cardY;
     this.model = model;

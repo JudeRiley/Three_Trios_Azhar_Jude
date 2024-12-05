@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import cs3500.threetrios.provider.code.model.CardCell;
 import cs3500.threetrios.provider.code.model.ICard;
 
 import cs3500.threetrios.provider.code.model.ReadOnlyThreeTrios;
@@ -66,9 +65,13 @@ public class BoardPanel extends JPanel implements IPanel {
           g2d.fillRect(x, y, cellWidth, cellHeight);
         }
         if (model.getGrid()[row][col].isCardCell()) {
-          if (!model.getGrid()[row][col].isEmpty()) { // draws a card
-            ICard cardToDraw = ((CardCell) model.getGrid()[row][col]).getCard();
-            CardDrawing card = new CardDrawing(cardToDraw, x, y, model);
+          if (!model.getGrid()[row][col].isEmpty()) {
+
+            // draws a card
+            // ICard cardToDraw = ((CardCell) model.getGrid()[row][col]).getCard();
+            ICard cardToDraw = model.getGrid()[row][col].getCard();
+
+            CardDrawing card = new CardDrawing(x, y, model);
 
             IPlayer cardOwner;
             if (model.getCurrentPlayer().getAllPlayerCards().contains(cardToDraw)) {

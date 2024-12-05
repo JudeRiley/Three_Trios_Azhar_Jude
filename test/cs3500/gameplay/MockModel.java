@@ -5,13 +5,13 @@ import java.util.List;
 import cs3500.threetrios.code.model.Card;
 import cs3500.threetrios.code.model.Cell;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 
 /**
  * A mock of a model that exists in order to be passed into objects that require a model for tests.
  * Contains default functionality because it is read only.
  */
-public class MockModel implements ReadOnlyThreeTrios {
+public class MockModel implements ReadOnlyThreeTriosModel {
 
   /**
    * Constructs a new mock of a ReadOnlyThreeTrios model and prints to the console to confirm

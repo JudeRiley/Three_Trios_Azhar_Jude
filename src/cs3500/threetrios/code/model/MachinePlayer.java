@@ -12,7 +12,7 @@ public class MachinePlayer implements PlayerType {
   private final Player playerColor;
   private final ThreeTriosStrategy strategy;
   private Controller controller;
-  private ReadOnlyThreeTrios model;
+  private ReadOnlyThreeTriosModel model;
 
   /**
    * The constructor for the machine player.
@@ -36,7 +36,7 @@ public class MachinePlayer implements PlayerType {
    * Sets the model that the machine uses.
    * @param model model of the machine
    */
-  public void setModel(ReadOnlyThreeTrios model) {
+  public void setModel(ReadOnlyThreeTriosModel model) {
     this.model = model;
   }
 

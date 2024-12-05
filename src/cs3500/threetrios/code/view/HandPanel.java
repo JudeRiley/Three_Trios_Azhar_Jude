@@ -1,6 +1,6 @@
 package cs3500.threetrios.code.view;
 
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.model.Card;
 import cs3500.threetrios.code.model.Direction;
 import cs3500.threetrios.code.model.Player;
@@ -22,7 +22,7 @@ import java.util.List;
  * The hand panel will display the cards of each players hands.
  */
 public class HandPanel extends JPanel {
-  private final ReadOnlyThreeTrios model;
+  private final ReadOnlyThreeTriosModel model;
   private final Player player;
   private int cardHeight;
   private int selectedCardIndex = -1;
@@ -34,7 +34,7 @@ public class HandPanel extends JPanel {
    * @param model  The read only model
    * @param player The current player
    */
-  public HandPanel(ReadOnlyThreeTrios model, Player player) {
+  public HandPanel(ReadOnlyThreeTriosModel model, Player player) {
     this.model = model;
     this.player = player;
     this.addMouseListener(new HandMouseListener());

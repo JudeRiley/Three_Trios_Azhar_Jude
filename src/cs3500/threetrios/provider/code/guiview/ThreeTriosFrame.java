@@ -6,7 +6,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.provider.code.model.ReadOnlyThreeTrios;
 import cs3500.threetrios.provider.code.players.IPlayer;
 
 /**

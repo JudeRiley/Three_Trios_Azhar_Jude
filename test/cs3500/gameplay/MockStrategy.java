@@ -5,7 +5,7 @@ import java.util.List;
 
 import cs3500.threetrios.code.model.Move;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.strategies.ThreeTriosStrategy;
 
 /**
@@ -33,7 +33,7 @@ public class MockStrategy implements ThreeTriosStrategy {
 
 
   @Override
-  public Move chooseMove(ReadOnlyThreeTrios model, Player forWhom) throws IllegalStateException {
+  public Move chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) throws IllegalStateException {
     System.out.println("The chooseMove method of this MockStrategy has been called.");
     testInputs.add(model);
     testInputs.add(forWhom);

@@ -4,7 +4,7 @@ import cs3500.threetrios.code.model.Cell;
 import cs3500.threetrios.code.model.GridPos2d;
 import cs3500.threetrios.code.model.Move;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.model.ThreeTriosMove;
 
 /**
@@ -13,7 +13,7 @@ import cs3500.threetrios.code.model.ThreeTriosMove;
 public class FirstOpenSpaceStrategy implements ThreeTriosStrategy {
 
   @Override
-  public Move chooseMove(ReadOnlyThreeTrios model, Player forWhom) throws IllegalStateException {
+  public Move chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) throws IllegalStateException {
     Cell[][] grid = model.getCurrentGrid();
 
     for (int row = 0; row < grid.length; row++) {

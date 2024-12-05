@@ -14,7 +14,7 @@ import cs3500.threetrios.code.model.GridPos;
 import cs3500.threetrios.code.model.GridPos2d;
 import cs3500.threetrios.code.model.Move;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.model.ThreeTriosCard;
 import cs3500.threetrios.code.model.ThreeTriosGrid;
 import cs3500.threetrios.code.model.ThreeTriosMove;
@@ -32,7 +32,7 @@ public class FlipMostCardsTactic implements ThreeTriosTactic {
   private Grid testGame;
 
   @Override
-  public Optional<Move> chooseMove(ReadOnlyThreeTrios model, Player forWhom) {
+  public Optional<Move> chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) {
     Cell[][] grid = model.getCurrentGrid();
     this.testGame = new ThreeTriosGrid(grid);
     List<Card> hand = model.getHand(forWhom);

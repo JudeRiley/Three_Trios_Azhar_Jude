@@ -7,10 +7,8 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 
-import cs3500.threetrios.provider.code.model.Card;
-import cs3500.threetrios.provider.code.model.CardNumber;
 import cs3500.threetrios.provider.code.model.ICard;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.provider.code.model.ReadOnlyThreeTrios;
 import cs3500.threetrios.provider.code.players.IPlayer;
 
 
@@ -25,7 +23,6 @@ public class CardPanel extends JPanel implements IPanel {
   private int cardHeight;
   private int cardWidth;
   private ICard selectedCard;
-  private final ICard defaultCard;
   private boolean interactive;
 
   /**
@@ -38,11 +35,7 @@ public class CardPanel extends JPanel implements IPanel {
     this.model = model;
     addMouseListener(new PanelListener());
     this.player = player;
-    this.defaultCard = new Card(CardNumber.ONE, CardNumber.ONE, CardNumber.ONE,
-            CardNumber.ONE, "non-selected");
-    if (this.selectedCard == null) {
-      this.selectedCard = defaultCard;
-    }
+    this.selectedCard = null;
     this.interactive = false;
   }
 
@@ -54,7 +47,7 @@ public class CardPanel extends JPanel implements IPanel {
 
   @Override
   public void reset() {
-    this.selectedCard = this.defaultCard;
+    this.selectedCard = null;
   }
 
   @Override
@@ -78,7 +71,7 @@ public class CardPanel extends JPanel implements IPanel {
 
     for (int cardIdx = 0; cardIdx < this.player.getHand().size(); cardIdx++) {
       ICard cardToDraw = this.player.getHand().get(cardIdx);
-      CardDrawing card = new CardDrawing(cardToDraw, 0, (cardIdx * cardHeight), model);
+      CardDrawing card = new CardDrawing(0, (cardIdx * cardHeight), model);
 
       card.selected = cardToDraw.equals(this.selectedCard);
       card.drawCard(g2d, cardToDraw, cardWidth, cardHeight, player);
@@ -110,13 +103,13 @@ public class CardPanel extends JPanel implements IPanel {
             ICard currentSelectedCard = player.getHand().get(cardIdx);
 
 
-            if (selectedCard.equals(currentSelectedCard)) {
-              selectedCard = defaultCard;
+            if (currentSelectedCard.equals(selectedCard)) {
+              selectedCard = null;
               player.notifyPlayerDeselectedCard();
             } else {
               selectedCard = currentSelectedCard;
             }
-            if (!selectedCard.equals(defaultCard)) {
+            if (selectedCard != null) {
               player.notifyPlayersChoseACard(cardIdx);
             }
           }

@@ -1,6 +1,7 @@
 package cs3500.threetrios.adaptors;
 
 import cs3500.threetrios.code.model.Player;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.view.ThreeTriosView;
 import cs3500.threetrios.code.view.ViewListener;
 import cs3500.threetrios.provider.code.guiview.ThreeTriosFrame;
@@ -15,8 +16,24 @@ public class ViewAdapter implements ThreeTriosView {
 
   private final ThreeTriosFrame providerView;
 
+  /**
+   * Constructs an instance of our view using an instance of the provider's view
+   *
+   * @param providerView An instance of the providers view.
+   */
   public ViewAdapter(ThreeTriosFrame providerView) {
     this.providerView = providerView;
+  }
+
+  /**
+   * Constructs and instance of our view given our Read Only model that functions based off
+   * of an instance of the provider's view.
+   *
+   * @param ourModel An instance of our own ReadOnlyThreeTriosModel to be adapted.
+   */
+  public ViewAdapter(ReadOnlyThreeTriosModel ourModel) {
+
+    this.providerView = new ThreeTriosFrame(new ModelAdapter(ourModel));
   }
 
   @Override
@@ -62,7 +79,7 @@ public class ViewAdapter implements ThreeTriosView {
 
   @Override
   public void addViewListener(ViewListener listener) {
-    // Cannot be adapted without modifying customer code.
+    // Cannot be adapted without modifying provider code.
     // This is because we cannot reach the necessary components,
     // leftPanel, rightPanel, and boardPanel, as there are no
     // public methods or accessors to retrieve the panels or

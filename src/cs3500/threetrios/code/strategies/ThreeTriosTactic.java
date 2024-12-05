@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import cs3500.threetrios.code.model.Move;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 
 /**
  * A tactic is a part of a larger strategy. It is incomplete. It attempts to choose a move
@@ -23,5 +23,5 @@ public interface ThreeTriosTactic {
    * @param forWhom the Player to choose a Move for.
    * @return A "best" Move for this Player in this ThreeTriosModel or an empty Optional.
    */
-  Optional<Move> chooseMove(ReadOnlyThreeTrios model, Player forWhom);
+  Optional<Move> chooseMove(ReadOnlyThreeTriosModel model, Player forWhom);
 }

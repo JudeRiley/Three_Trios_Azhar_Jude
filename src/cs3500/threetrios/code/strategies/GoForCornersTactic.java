@@ -10,7 +10,7 @@ import cs3500.threetrios.code.model.GridPos;
 import cs3500.threetrios.code.model.GridPos2d;
 import cs3500.threetrios.code.model.Move;
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTrios;
+import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.model.ThreeTriosMove;
 
 /**
@@ -30,7 +30,7 @@ public class GoForCornersTactic implements ThreeTriosTactic {
   private List<Card> hand;
 
   @Override
-  public Optional<Move> chooseMove(ReadOnlyThreeTrios model, Player forWhom) {
+  public Optional<Move> chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) {
     this.grid = model.getCurrentGrid();
     this.player = forWhom;
     this.hand = model.getHand(this.player);
