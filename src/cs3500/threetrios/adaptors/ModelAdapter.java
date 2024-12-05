@@ -22,7 +22,7 @@ public class ModelAdapter implements ReadOnlyThreeTrios {
    * Constructs an instance of the providers read only model that runs off of the functionality
    * of out model.
    *
-   * @param ourModel
+   * @param ourModel the model we use
    */
   public ModelAdapter(ReadOnlyThreeTriosModel ourModel) {
     this.ourModel = ourModel;

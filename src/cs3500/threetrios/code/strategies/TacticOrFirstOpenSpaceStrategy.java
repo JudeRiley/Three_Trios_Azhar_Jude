@@ -18,6 +18,7 @@ public class TacticOrFirstOpenSpaceStrategy implements ThreeTriosStrategy {
    * Creates a new strategy that first attempts the given tactic, and if that tactic fails,
    * then it will play to the first open space. This essentially turns the given tactic into
    * a simple complete strategy.
+   *
    * @param tacticToTry the tactic to attempt before falling back on first open space.
    */
   public TacticOrFirstOpenSpaceStrategy(ThreeTriosTactic tacticToTry) {
@@ -29,12 +30,12 @@ public class TacticOrFirstOpenSpaceStrategy implements ThreeTriosStrategy {
   }
 
   @Override
-  public Move chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) throws IllegalStateException {
-    Optional<Move> tacticMove = tacticToTry.chooseMove(model, forWhom);
+  public Move chooseMove(ReadOnlyThreeTriosModel model, Player fr) throws IllegalStateException {
+    Optional<Move> tacticMove = tacticToTry.chooseMove(model, fr);
     if (tacticMove.isPresent()) {
       return tacticMove.get();
     } else {
-      return fallback.chooseMove(model, forWhom);
+      return fallback.chooseMove(model, fr);
     }
   }
 

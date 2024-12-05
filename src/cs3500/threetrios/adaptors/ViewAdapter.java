@@ -1,10 +1,8 @@
 package cs3500.threetrios.adaptors;
 
 import cs3500.threetrios.code.model.Player;
-import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.view.ThreeTriosView;
 import cs3500.threetrios.code.view.ViewListener;
-import cs3500.threetrios.provider.code.guiview.IThreeTriosFrame;
 import cs3500.threetrios.provider.code.guiview.ThreeTriosFrame;
 
 import javax.swing.JOptionPane;
@@ -18,7 +16,7 @@ public class ViewAdapter implements ThreeTriosView {
   private final ThreeTriosFrame providerView;
 
   /**
-   * Constructs an instance of our view using an instance of the provider's view
+   * Constructs an instance of our view using an instance of the provider's view.
    *
    * @param providerView An instance of the providers view.
    */
@@ -58,7 +56,8 @@ public class ViewAdapter implements ThreeTriosView {
 
   @Override
   public void showGameOver(String message) {
-    JOptionPane.showMessageDialog(providerView, message, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+    JOptionPane.showMessageDialog(providerView, message, "Game Over",
+            JOptionPane.INFORMATION_MESSAGE);
   }
 
   @Override

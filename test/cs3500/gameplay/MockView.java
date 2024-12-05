@@ -35,32 +35,32 @@ public class MockView implements ThreeTriosView {
 
   @Override
   public void highlightSelectedCard(int cardIndex, Player player) {
-
+    // na
   }
 
   @Override
   public void showError(String message) {
-
+    // na
   }
 
   @Override
   public void updateStatus(String status) {
-
+    // na
   }
 
   @Override
   public void setInputEnabled(boolean enabled) {
-
+    // na
   }
 
   @Override
   public void showGameOver(String message) {
-
+    // na
   }
 
   @Override
   public void bringToFront() {
-
+    // na
   }
 
   @Override

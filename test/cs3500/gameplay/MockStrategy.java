@@ -33,10 +33,10 @@ public class MockStrategy implements ThreeTriosStrategy {
 
 
   @Override
-  public Move chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) throws IllegalStateException {
+  public Move chooseMove(ReadOnlyThreeTriosModel model, Player fr) throws IllegalStateException {
     System.out.println("The chooseMove method of this MockStrategy has been called.");
     testInputs.add(model);
-    testInputs.add(forWhom);
+    testInputs.add(fr);
 
     if (moves.isEmpty()) {
       moves = new ArrayList<>(reference);

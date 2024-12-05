@@ -15,9 +15,9 @@ public class CardAdapter implements ICard {
 
   /**
    * Constructs an instance of ICard that makes use of the functionality of our original
-   * Card interface;
+   * Card interface.
    *
-   * @param card an original Card object.
+   * @param card an original Card object
    */
   public CardAdapter(Card card) {
     this.card = card;
@@ -76,6 +76,11 @@ public class CardAdapter implements ICard {
       return this.toString().equals(obj.toString());
     }
     return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return this.card.hashCode();
   }
 
   @Override

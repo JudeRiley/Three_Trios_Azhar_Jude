@@ -30,12 +30,12 @@ public class ChainableStrategy implements ThreeTriosStrategy {
   }
 
   @Override
-  public Move chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) throws IllegalStateException {
-    Optional<Move> tacticMove = this.tacticToTry.chooseMove(model, forWhom);
+  public Move chooseMove(ReadOnlyThreeTriosModel model, Player fr) throws IllegalStateException {
+    Optional<Move> tacticMove = this.tacticToTry.chooseMove(model, fr);
     if (tacticMove.isPresent()) {
       return tacticMove.get();
     } else {
-      return this.fallbackStrategy.chooseMove(model, forWhom);
+      return this.fallbackStrategy.chooseMove(model, fr);
     }
   }
 }

@@ -13,10 +13,20 @@ import cs3500.threetrios.provider.code.model.IThreeTriosGame;
 import cs3500.threetrios.provider.code.model.PlayerColor;
 import cs3500.threetrios.provider.code.players.IPlayer;
 
+/**
+ * This is the player adapter class that uses the provider player to work with
+ * our model.
+ */
 public class PlayerAdapter implements IPlayer {
   private final Player ourColor;
   private final ReadOnlyThreeTriosModel ourModel;
 
+  /**
+   * The constructor for the player adapter.
+   *
+   * @param ourColor the color the local player is
+   * @param ourModel the local model
+   */
   public PlayerAdapter(Player ourColor, ReadOnlyThreeTriosModel ourModel) {
     if (ourColor == null) {
       throw new IllegalArgumentException("Player can't be null!");
@@ -63,8 +73,7 @@ public class PlayerAdapter implements IPlayer {
    * in the grid that have the same color as this IPlayer's PlayerColor, which changes through
    * battling and flipping of the cards during the game of Three Trios.
    *
-   * @return the list of ICards that make up the IPlayer's hand and any ICard on the grid that
-   * has the same color as the IPlayer's PlayerColor.
+   * @return the list of ICards that make up the IPlayer's hand and any ICard on the grid
    */
   @Override
   public List<ICard> getAllPlayerCards() {
@@ -80,7 +89,7 @@ public class PlayerAdapter implements IPlayer {
    */
   @Override
   public void setHand(List<ICard> hand) {
-
+    // na
   }
 
   /**
@@ -106,7 +115,7 @@ public class PlayerAdapter implements IPlayer {
    */
   @Override
   public void addToAllCards(ICard card) {
-
+    // na
   }
 
   /**
@@ -119,7 +128,7 @@ public class PlayerAdapter implements IPlayer {
    */
   @Override
   public void removeCardFromAllPlayerCards(ICard otherCard) {
-
+    // na
   }
 
   /**

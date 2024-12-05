@@ -13,7 +13,7 @@ import cs3500.threetrios.code.model.ThreeTriosMove;
 public class FirstOpenSpaceStrategy implements ThreeTriosStrategy {
 
   @Override
-  public Move chooseMove(ReadOnlyThreeTriosModel model, Player forWhom) throws IllegalStateException {
+  public Move chooseMove(ReadOnlyThreeTriosModel model, Player fr) throws IllegalStateException {
     Cell[][] grid = model.getCurrentGrid();
 
     for (int row = 0; row < grid.length; row++) {
