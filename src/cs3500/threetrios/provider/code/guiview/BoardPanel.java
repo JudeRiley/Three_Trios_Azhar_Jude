@@ -129,6 +129,7 @@ public class BoardPanel extends JPanel implements IPanel {
     @Override
     public void mouseClicked(MouseEvent event) {
       if (interactive) {
+        System.out.println("clicked");
         for (int rowIdx = 0; rowIdx < model.getGrid().length; rowIdx++) {
           for (int colIdx = 0; colIdx < model.getGrid()[0].length; colIdx++) {
 

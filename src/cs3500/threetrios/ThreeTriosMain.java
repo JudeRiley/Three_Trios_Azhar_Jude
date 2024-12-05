@@ -1,5 +1,7 @@
 package cs3500.threetrios;
 
+import cs3500.threetrios.adaptors.ModelAdapter;
+import cs3500.threetrios.adaptors.ViewAdapter;
 import cs3500.threetrios.code.controller.Controller;
 import cs3500.threetrios.code.controller.ThreeTriosController;
 import cs3500.threetrios.code.model.Grid;
@@ -15,7 +17,9 @@ import cs3500.threetrios.code.model.config.GridConfigReader;
 import cs3500.threetrios.code.strategies.FlipMostCardsTactic;
 import cs3500.threetrios.code.strategies.GoForCornersTactic;
 import cs3500.threetrios.code.strategies.TacticOrFirstOpenSpaceStrategy;
+import cs3500.threetrios.code.view.ThreeTriosView;
 import cs3500.threetrios.code.view.ThreeTriosViewImpl;
+import cs3500.threetrios.provider.code.guiview.ThreeTriosFrame;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -55,10 +59,13 @@ public final class ThreeTriosMain {
 
     // Create the model
     ThreeTriosModel model = new ThreeTriosModel(deck, grid);
+    System.out.println(model.getTurn());
 
     // Create views for each player
-    ThreeTriosViewImpl view1 = new ThreeTriosViewImpl(model);
-    ThreeTriosViewImpl view2 = new ThreeTriosViewImpl(model);
+    ThreeTriosView view1 = new ThreeTriosViewImpl(model);
+
+    ThreeTriosFrame provider = new ThreeTriosFrame(new ModelAdapter(model));
+    ThreeTriosView view2 = new ViewAdapter(provider);
 
     // Create players based on command-line arguments
     PlayerType player1 = createPlayer(player1Type, Player.RED);

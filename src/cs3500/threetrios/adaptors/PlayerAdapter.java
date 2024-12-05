@@ -14,10 +14,13 @@ import cs3500.threetrios.provider.code.model.PlayerColor;
 import cs3500.threetrios.provider.code.players.IPlayer;
 
 public class PlayerAdapter implements IPlayer {
-  private Player ourColor;
-  private ReadOnlyThreeTriosModel ourModel;
+  private final Player ourColor;
+  private final ReadOnlyThreeTriosModel ourModel;
 
   public PlayerAdapter(Player ourColor, ReadOnlyThreeTriosModel ourModel) {
+    if (ourColor == null) {
+      throw new IllegalArgumentException("Player can't be null!");
+    }
     this.ourColor = ourColor;
     this.ourModel = ourModel;
   }
@@ -140,75 +143,45 @@ public class PlayerAdapter implements IPlayer {
     return null;
   }
 
-  /**
-   * Adds a listener (a controller) that will receive notifications about the player's actions.
-   * This method allows the controller to listen for player actions and react accordingly.
-   *
-   * @param controller the controller that will listen for player action notifications
-   */
   @Override
   public void addControllerListener(IController controller) {
-
+    // There is no way for us to access the appropriate listeners to achieve this functionality.
+    // The providers code handles Observers and listeners in a very different way to our code,
+    // obscuring them from the user's view.
   }
 
-  /**
-   * Notifies the game and controller that the player has chosen a move, represented by the given
-   * card index and position on the board (row and column). This action allows the game logic to
-   * process the player's move and update the game state.
-   *
-   * @param cardIdx the index of the card the player selected for the move
-   * @param row     the row where the player wants to make the move
-   * @param col     the column where the player wants to make the move
-   */
   @Override
   public void notifyPlayersChoseAMove(int cardIdx, int row, int col) {
-
+    // There is no way for us to access the appropriate listeners to achieve this functionality.
+    // The providers code handles Observers and listeners in a very different way to our code,
+    // obscuring them from the user's view.
   }
 
-  /**
-   * Notifies the game and controller that the player has chosen a card. This method is used when
-   * the player selects a card from their hand in the card panel to later place and battle on the
-   * board.
-   *
-   * @param cardIdx the index of the card that the player selected
-   */
   @Override
   public void notifyPlayersChoseACard(int cardIdx) {
-
+    // There is no way for us to access the appropriate listeners to achieve this functionality.
+    // The providers code handles Observers and listeners in a very different way to our code,
+    // obscuring them from the user's view.
   }
 
-  /**
-   * Notifies the game and controller that the player has chosen a position on the board, from the
-   * board panel.
-   * This action involves selecting a row and column to place or move a card.
-   *
-   * @param selectedRow the row where the player wants to place or move a card
-   * @param selectedCol the column where the player wants to place or move a card
-   */
   @Override
   public void notifyPlayersChoseAPosn(int selectedRow, int selectedCol) {
-
+    // There is no way for us to access the appropriate listeners to achieve this functionality.
+    // The providers code handles Observers and listeners in a very different way to our code,
+    // obscuring them from the user's view.
   }
 
-  /**
-   * Notifies the game and controller that the player has deselected a card. This may happen
-   * when the player changes their mind about a card they previously selected or want to select
-   * another card.
-   */
   @Override
   public void notifyPlayerDeselectedCard() {
-
+    // There is no way for us to access the appropriate listeners to achieve this functionality.
+    // The providers code handles Observers and listeners in a very different way to our code,
+    // obscuring them from the user's view.
   }
 
-  /**
-   * Notifies the player that it is their turn to play in the game. This method is called when
-   * the game state changes, and it becomes this player's turn to make a move. It allows the player
-   * to perform actions like selecting a card and placing a card.
-   *
-   * @param model the game model, which provides the current state of the game
-   */
   @Override
   public void youTurn(IThreeTriosGame model) {
-
+    // There is no way for us to access the appropriate listeners to achieve this functionality.
+    // The providers code handles Observers and listeners in a very different way to our code,
+    // obscuring them from the user's view.
   }
 }

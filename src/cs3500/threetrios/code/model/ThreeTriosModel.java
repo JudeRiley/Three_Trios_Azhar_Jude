@@ -39,6 +39,7 @@ public class ThreeTriosModel implements ThreeTrios {
     this.blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
     this.grid = grid;
     this.listeners = new ArrayList<>();
+    this.turn = Player.RED;
   }
 
   /**
@@ -66,6 +67,7 @@ public class ThreeTriosModel implements ThreeTrios {
     this.blueHand = new ArrayList<>(deck.subList(deck.size() / 2, deck.size()));
     this.grid = grid;
     this.listeners = new ArrayList<>();
+    this.turn = Player.RED;
   }
 
   /**
@@ -91,6 +93,7 @@ public class ThreeTriosModel implements ThreeTrios {
     this.blueHand = blueHand;
     this.grid = grid;
     this.listeners = new ArrayList<>();
+    this.turn = Player.RED;
   }
 
   @Override

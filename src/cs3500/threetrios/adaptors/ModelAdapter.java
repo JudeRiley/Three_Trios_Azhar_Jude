@@ -3,6 +3,7 @@ package cs3500.threetrios.adaptors;
 import java.util.Optional;
 
 import cs3500.threetrios.code.model.Cell;
+import cs3500.threetrios.code.model.Player;
 import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.provider.code.model.IBoardCell;
 import cs3500.threetrios.provider.code.model.ICard;
@@ -100,7 +101,7 @@ public class ModelAdapter implements ReadOnlyThreeTrios {
    */
   @Override
   public IPlayer otherPlayer() {
-    return new PlayerAdapter(ourModel.getTurn().nextPlayer(), ourModel);
+    return new PlayerAdapter(Player.BLUE, ourModel);
   }
 
   @Override

@@ -4,6 +4,7 @@ import cs3500.threetrios.code.model.Player;
 import cs3500.threetrios.code.model.ReadOnlyThreeTriosModel;
 import cs3500.threetrios.code.view.ThreeTriosView;
 import cs3500.threetrios.code.view.ViewListener;
+import cs3500.threetrios.provider.code.guiview.IThreeTriosFrame;
 import cs3500.threetrios.provider.code.guiview.ThreeTriosFrame;
 
 import javax.swing.JOptionPane;
@@ -23,17 +24,6 @@ public class ViewAdapter implements ThreeTriosView {
    */
   public ViewAdapter(ThreeTriosFrame providerView) {
     this.providerView = providerView;
-  }
-
-  /**
-   * Constructs and instance of our view given our Read Only model that functions based off
-   * of an instance of the provider's view.
-   *
-   * @param ourModel An instance of our own ReadOnlyThreeTriosModel to be adapted.
-   */
-  public ViewAdapter(ReadOnlyThreeTriosModel ourModel) {
-
-    this.providerView = new ThreeTriosFrame(new ModelAdapter(ourModel));
   }
 
   @Override
